@@ -9,27 +9,22 @@ export function getStaticPaths() {
   }));
 }
 
-const { service } = Astro.props;
-const formattedPrice = new Intl.NumberFormat('en-IN').format(service.price);
+const service = Astro.props.service;
+const price = new Intl.NumberFormat('en-IN').format(service.price);
 ---
 
-<Base title={service.name + ' | Spa in Kalyani Nagar, Pune'}>
+<Base title={service.name}>
   <section class="page">
-    <small>{service.category} · {service.duration}</small>
+    <small>{service.category} - {service.duration}</small>
     <h1>{service.name}</h1>
     <p>{service.description}</p>
-    <h2>Starting at ₹{formattedPrice}</h2>
-    <a class="btn" href={'/booking/?service=' + service.slug}>Request this treatment ↗</a>
+    <h2>Starting at Rs. {price}</h2>
+    <a class="btn" href="/booking/">Request this treatment</a>
   </section>
   <main>
     <h2>Your Elite experience</h2>
-    <p>
-      Our team will discuss your preferences, pressure level and comfort
-      considerations before the session. All treatments are professional,
-      non-sexual wellness services for adults, with consent, appropriate
-      draping and clear boundaries.
-    </p>
+    <p>Our team will discuss your preferences, pressure level and comfort considerations before the session. All treatments are professional, non-sexual wellness services for adults, with consent, appropriate draping and clear boundaries.</p>
     <p>Final rate and appointment availability are confirmed on WhatsApp.</p>
-    <a class="btn" href="/booking/">Continue to booking ↗</a>
+    <a class="btn" href="/booking/">Continue to booking</a>
   </main>
 </Base>
