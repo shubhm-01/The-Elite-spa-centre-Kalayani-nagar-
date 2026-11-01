@@ -1,25 +1,26 @@
 ---
 import Base from '../../layouts/Base.astro';
-const imgs = [
-  ['https://images.pexels.com/photos/5240675/pexels-photo-5240675.jpeg?w=1280', 'Professional relaxing back massage'],
-  ['https://images.pexels.com/photos/36593691/pexels-photo-36593691.jpeg?w=1280', 'Hot stone massage treatment'],
-  ['https://images.pexels.com/photos/6628700/pexels-photo-6628700.jpeg?w=1280', 'Foot massage session'],
-  ['https://images.pexels.com/photos/8021144/pexels-photo-8021144.jpeg?w=1280', 'Foot spa and reflexology'],
-  ['https://images.pexels.com/photos/7795767/pexels-photo-7795767.jpeg?w=1280', 'Aromatherapy oil collection'],
-  ['https://images.pexels.com/photos/6724305/pexels-photo-6724305.jpeg?w=1280', 'Spa skincare and wellness essentials'],
-  ['https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1280&q=85', 'Facial skincare ritual'],
-  ['https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1280&q=85', 'Body care products']
-];
+import { S } from '../../data/catalog.js';
 ---
 <Base
   title="Spa Gallery Pune"
-  description="Explore a gallery of massage, spa, skincare and wellness imagery from The Elite Spa Centre in Kalyani Nagar, Pune."
+  description="Explore treatment-specific massage, body-care, facial and wellness imagery for The Elite Spa Centre in Kalyani Nagar, Pune."
 >
   <section class="page">
     <small>A GLIMPSE OF THE EXPERIENCE</small>
     <h1>The art of <i>unwinding.</i></h1>
   </section>
   <main id="main-content" class="gallery">
-    {imgs.map(([src, alt]) => <img src={src} alt={alt} loading="lazy" />)}
+    {S.map((service) => (
+      <figure class="gallery-item">
+        <img src={service.image} alt={service.name + ' representative treatment photograph'} loading="lazy" />
+        <figcaption>
+          <strong>{service.name}</strong>
+          <span>{service.duration} · {service.category}</span>
+          <a href={'/services/' + service.slug + '/'}>View treatment ↗</a>
+        </figcaption>
+      </figure>
+    ))}
   </main>
+  <p class="media-note">These are illustrative stock photographs sourced from Pexels, not photographs of the spa premises or its staff.</p>
 </Base>

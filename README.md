@@ -21,3 +21,10 @@ Astro + React multi-page spa website for Cloudflare Pages. Node.js 22 is configu
 ## Before enabling online booking or sales
 
 A real booking system needs confirmed working hours, staff/room capacity, appointment duration and buffer rules, cancellation policy, and an appointment-management backend. Online payments and order fulfilment need a payment provider account, business verification, settlement details, taxes, shipping/return policies, inventory ownership and secure server-side integration.
+
+
+## Service media
+
+- Service cards and the gallery use distinct, treatment-matched Pexels stock photographs. They are illustrative assets and are not photos of this specific spa location.
+- Selected service pages include embedded Pexels stock video previews; each preview links to its original creator page. Pexels identifies these stock assets as free to use under its licence: https://www.pexels.com/license/.
+- The Cloudflare Pages Content Security Policy allows the Pexels media CDN so videos can play on the site.
