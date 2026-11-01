@@ -73,7 +73,7 @@ export default function Booking({ service = 'Spa appointment' }) {
       <label htmlFor="booking-name">Name</label>
       <input id="booking-name" name="name" autoComplete="name" maxLength={80} required value={values.name} onChange={update} />
       <label htmlFor="booking-phone">Mobile number</label>
-      <input id="booking-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" maxLength={15} pattern="(?:\+?91[ -]?)?[6-9][0-9]{9}" title="Enter a valid 10-digit Indian mobile number, with or without +91." required value={values.phone} onChange={update} />
+      <input id="booking-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" maxLength={15} pattern="(?:\+?91[\s-]?)?[6-9](?:[\s-]?[0-9]){9}" title="Enter a valid 10-digit Indian mobile number, with or without +91." required value={values.phone} onChange={update} />
       <label htmlFor="booking-date">Preferred date</label>
       <input id="booking-date" name="date" type="date" min={today || undefined} required value={values.date} onChange={update} />
       <label htmlFor="booking-time">Preferred time</label>
