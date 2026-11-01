@@ -5,14 +5,18 @@ const groups = [...new Set(P.map((product) => product.category))];
 ---
 <Base
   title="Spa Products Shop Pune"
-  description="Browse massage oils, essential oils, aromatherapy, bath and body care, skincare and wellness accessories from The Elite Spa Centre in Pune. Enquire about stock and current pricing on WhatsApp."
+  description="Browse 49 massage oils, essential oils, aromatherapy, bath and body care, skincare and wellness accessories from The Elite Spa Centre in Pune. Enquire about stock and current pricing on WhatsApp."
 >
   <section class="page">
     <small>THE ELITE WELLNESS SHOP</small>
     <h1>Bring the ritual <i>home.</i></h1>
     <p>Massage oils, essential oils, aromatherapy, skincare, bath &amp; body, tools and gift sets.</p>
+    <p class="shop-hero-note">{P.length} products to explore · Build a basket and send your enquiry directly to our team.</p>
   </section>
   <main id="main-content">
+    <nav class="shop-collections" aria-label="Shop categories">
+      {groups.map((group) => <a href={'#' + group.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>{group}</a>)}
+    </nav>
     <div class="shop-top">
       <p class="notice">Prices shown are indicative; actual brand, size, stock, delivery and final price are confirmed before payment. Product photographs are representative category imagery, not confirmed pack shots.</p>
       <label class="shop-search" for="shop-search-input">Search products
@@ -29,7 +33,7 @@ const groups = [...new Set(P.map((product) => product.category))];
       <div id="cart-items" class="cart-items" aria-live="polite"></div>
     </div>
     {groups.map((group) => (
-      <section class="shop-group">
+      <section class="shop-group" id={group.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
         <h2>{group}</h2>
         <div class="cards">
           {P.filter((product) => product.category === group).map((product) => (

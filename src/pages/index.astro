@@ -1,10 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import { S, P } from '../data/catalog.js';
+import { OFFERS } from '../data/offers.js';
 ---
 <Base
-  title="Luxury Spa & Massage in Kalyani Nagar"
-  description="Discover massage, restorative spa rituals and wellness experiences at The Elite Spa Centre in Kalyani Nagar, Pune. Explore treatments, offers and wellness products."
+  title="Luxury Spa, Massage & Wellness Shop in Kalyani Nagar"
+  description="Discover spa treatments, suggested ritual bundles and a wellness shop at The Elite Spa Centre in Kalyani Nagar, Pune."
 >
   <section class="hero hero-video">
     <video class="hero-film" autoplay muted loop playsinline poster="https://images.pexels.com/photos/5240675/pexels-photo-5240675.jpeg?w=1800" aria-hidden="true">
@@ -14,46 +15,87 @@ import { S, P } from '../data/catalog.js';
     <div class="hero-copy">
       <small>KALYANI NAGAR · PUNE</small>
       <h1>Make space<br />for <i>yourself.</i></h1>
-      <p>Massage, restorative rituals and everyday luxury. Your pause in the heart of Pune.</p>
+      <p>Massage, restorative rituals and a wellness shop for the moments you want to keep for yourself.</p>
       <a class="btn" href="/booking/">Reserve your escape ↗</a>
       <a class="btn outline" href="/services/">Explore treatments</a>
       <p class="hours">OPEN DAILY · 07:00 AM — 02:00 AM</p>
     </div>
+  </section>
+  <section class="home-commerce" aria-label="Shop and special offers">
+    <a class="commerce-feature commerce-shop" href="/shop/" style={'--commerce-image: url(' + P[12].image + ')'}>
+      <div class="commerce-copy">
+        <small>THE ELITE WELLNESS SHOP · {P.length} PRODUCTS</small>
+        <h2>Bring the ritual <i>home.</i></h2>
+        <p>Massage oils, aromatherapy, skin care, bath &amp; body essentials and gift sets.</p>
+        <span class="commerce-link">EXPLORE THE SHOP ↗</span>
+      </div>
+    </a>
+    <a class="commerce-feature commerce-offers" href="/offers/" style={'--commerce-image: url(' + OFFERS[0].image + ')'}>
+      <div class="commerce-copy">
+        <small>THE ELITE PRIVILEGE · 5 SUGGESTED BUNDLES</small>
+        <h2>More ritual.<br /><i>Less spend.</i></h2>
+        <p>Discover the {OFFERS[0].title} package at ₹{OFFERS[0].offerPrice.toLocaleString('en-IN')}.</p>
+        <span class="commerce-link">VIEW OFFERS ↗</span>
+      </div>
+    </a>
   </section>
   <main id="main-content">
     <section>
       <small>THE TREATMENT EDIT</small>
       <h2>Find your <i>ritual.</i></h2>
       <div class="cards">
-        {S.slice(0, 6).map((service) => (
+        {S.slice(0, 9).map((service) => (
           <a class="card" href={'/services/' + service.slug + '/'}>
-            <img class="card-image" src={service.image} alt={service.name + ' spa treatment'} loading="lazy" />
+            <img class="card-image" src={service.image} alt={service.name + ' treatment visual'} loading="lazy" />
             <h3>{service.name}</h3>
             <p>{service.duration} · From ₹{service.price.toLocaleString('en-IN')}</p>
           </a>
         ))}
       </div>
-      <p><a href="/services/">VIEW ALL SERVICES ↗</a></p>
+      <p><a class="text-link" href="/services/">VIEW ALL {S.length} TREATMENTS ↗</a></p>
     </section>
-    <section class="banner">
-      <small>FIRST VISIT · INTRODUCTORY PACKAGES</small>
-      <h2>A little something <i>special.</i></h2>
-      <p>Explore introductory rates and seasonal offers. Terms and eligibility apply.</p>
-      <a class="btn" href="/offers/">Explore offers ↗</a>
-    </section>
-    <section>
-      <small>THE WELLNESS SHOP</small>
-      <h2>Bring the ritual <i>home.</i></h2>
-      <div class="cards">
-        {P.slice(0, 6).map((product) => (
-          <article class="card">
-            <img class="card-image" src={product.image} alt={product.name + ' representative product photo'} loading="lazy" />
-            <h3>{product.name}</h3>
-            <p>₹{product.price.toLocaleString('en-IN')} · Indicative</p>
-          </article>
+    <section class="home-offer-preview">
+      <div class="section-heading">
+        <div><small>THE ELITE PRIVILEGE</small><h2>Offers worth <i>slowing down for.</i></h2></div>
+        <a class="text-link" href="/offers/">ALL OFFERS ↗</a>
+      </div>
+      <div class="offer-preview-grid">
+        {OFFERS.slice(0, 3).map((offer) => (
+          <a class="offer-preview" href="/offers/">
+            <img src={offer.image} alt={offer.title + ' package visual'} loading="lazy" />
+            <div>
+              <small>{offer.eyebrow}</small>
+              <h3>{offer.title}</h3>
+              <b>₹{offer.offerPrice.toLocaleString('en-IN')}</b>
+              <span>View package ↗</span>
+            </div>
+          </a>
         ))}
       </div>
-      <a class="btn" href="/shop/">Shop all wellness products ↗</a>
+      <p class="small-print">Suggested package prices are subject to confirmation by the centre before booking.</p>
+    </section>
+    <section class="home-shop-preview">
+      <div class="section-heading">
+        <div><small>SHOP THE SELF-CARE EDIT</small><h2>Little luxuries for <i>every day.</i></h2></div>
+        <a class="text-link" href="/shop/">SHOP ALL {P.length} PRODUCTS ↗</a>
+      </div>
+      <div class="cards">
+        {P.slice(0, 6).map((product) => (
+          <a class="card product-card" href="/shop/">
+            <img class="card-image product-image" src={product.image} alt={product.name + ' representative product visual'} loading="lazy" />
+            <h3>{product.name}</h3>
+            <p>₹{product.price.toLocaleString('en-IN')} · Indicative</p>
+            <span class="text-link">ENQUIRE IN SHOP ↗</span>
+          </a>
+        ))}
+      </div>
+      <p class="shop-trust-line">Browse the range, build an enquiry cart and send your selection to our team on WhatsApp.</p>
+    </section>
+    <section class="banner">
+      <small>YOUR NEXT MOMENT OF CALM</small>
+      <h2>Make time for <i>you.</i></h2>
+      <p>Explore treatments, ask about a suggested bundle or browse wellness essentials for home.</p>
+      <a class="btn" href="/booking/">Plan your visit ↗</a>
     </section>
   </main>
 </Base>

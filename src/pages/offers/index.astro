@@ -1,30 +1,42 @@
 ---
 import Base from '../../layouts/Base.astro';
-const offers = [
-  ['First Visit Welcome', 'Packages from ₹999', 'Introductory packages for new guests.'],
-  ['Online Enquiry Specials', 'Selected sessions from ₹599', 'Selected express rituals at introductory rates.'],
-  ['Couple Spa Packages', 'From ₹2,999', 'Shared relaxation for two, subject to availability.'],
-  ['Wellness Membership', 'Ask for a custom plan', 'Multi-session packages and gift vouchers.']
-];
+import { OFFERS } from '../../data/offers.js';
 ---
 <Base
-  title="Spa Offers Pune"
-  description="View current offer categories and introductory spa packages at The Elite Spa Centre, Kalyani Nagar, Pune. Confirm eligibility, dates and final price before booking."
+  title="Spa Packages & Wellness Shop Offers Pune"
+  description="Explore suggested spa ritual bundles and an at-home wellness kit from The Elite Spa Centre in Kalyani Nagar, Pune. Ask the centre to confirm package availability and final pricing."
 >
   <section class="page">
     <small>THE ELITE PRIVILEGE</small>
-    <h1>Little luxuries.<br /><i>Lovely offers.</i></h1>
-    <p>Promotional rates are illustrative starting prices, not an unconditional discount.</p>
+    <h1>Little luxuries.<br /><i>Lovely bundles.</i></h1>
+    <p>Thoughtful combinations for spa days and self-care at home.</p>
   </section>
-  <main id="main-content" class="cards">
-    {offers.map((offer) => (
-      <article class="card">
-        <small>{offer[0]}</small>
-        <h2>{offer[1]}</h2>
-        <p>{offer[2]}</p>
-        <a href={'https://wa.me/919199561258?text=' + encodeURIComponent('Please share current terms for ' + offer[0])}>ASK FOR DETAILS ↗</a>
-      </article>
-    ))}
+  <main id="main-content">
+    <div class="offers-intro">
+      <div><small>FIVE WAYS TO MAKE IT YOURS</small><h2>Choose your <i>kind of calm.</i></h2></div>
+      <p>Each package combines existing catalogue services or products. The package prices below are suggested launch prices; the centre must confirm the final offer, availability, eligibility and terms before booking or payment.</p>
+    </div>
+    <div class="offers-grid">
+      {OFFERS.map((offer) => (
+        <article class="offer-card">
+          <div class="offer-image-wrap">
+            <img src={offer.image} alt={offer.title + ' package visual'} loading="lazy" />
+            <span class="offer-save">SAVE ₹{offer.savings.toLocaleString('en-IN')}</span>
+          </div>
+          <div class="offer-body">
+            <small>{offer.eyebrow}</small>
+            <h2>{offer.title}</h2>
+            <p>{offer.description}</p>
+            <ul>{offer.items.map((item) => <li>{item}</li>)}</ul>
+            <div class="offer-price-row">
+              <div><span class="offer-was">₹{offer.regularPrice.toLocaleString('en-IN')}</span><strong>₹{offer.offerPrice.toLocaleString('en-IN')}</strong></div>
+              <span class="offer-price-note">Suggested<br />bundle price</span>
+            </div>
+            <a class="btn offer-enquire" href={'https://wa.me/919199561258?text=' + encodeURIComponent('Hello The Elite Spa Centre, please confirm availability and final terms for the ' + offer.title + ' (' + offer.code + ') suggested at ₹' + offer.offerPrice + '. Items: ' + offer.items.join(', ') + '.')}>ENQUIRE ABOUT THIS OFFER ↗</a>
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="notice offers-notice">Offer prices are proposals based on the current indicative catalogue prices, not confirmed discounts. The centre must approve promotional rates, validity dates, service availability, product stock and any exclusions before accepting an offer. Enquiries are not confirmed bookings or paid orders.</p>
   </main>
-  <main><p class="notice">40% online-booking and 50% first-visit promotions are not advertised as active until the business confirms eligibility, dates, selected services and terms.</p></main>
 </Base>

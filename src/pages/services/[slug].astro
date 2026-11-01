@@ -25,9 +25,9 @@ const bookingHref = '/booking/?service=' + encodeURIComponent(service.slug);
           <small>SEE A TREATMENT PREVIEW</small>
           <video controls playsinline preload="none" poster={service.videoPoster} aria-label={service.name + ' treatment preview'}>
             <source src={service.video} type="video/mp4" />
-            Your browser does not support embedded video. <a href={service.videoPage}>Watch the preview on Pexels</a>.
+            Your browser does not support embedded video.
           </video>
-          <p class="media-credit">Video by {service.videoCredit} on <a href={service.videoPage} target="_blank" rel="noopener noreferrer">Pexels ↗</a></p>
+          <p class="media-caption">A visual preview of the treatment style.</p>
         </div>
       ) : null}
       <h2>Starting at ₹{price}</h2>
@@ -40,5 +40,5 @@ const bookingHref = '/booking/?service=' + encodeURIComponent(service.slug);
     <p>Final rate and appointment availability are confirmed on WhatsApp.</p>
     <a class="btn" href={bookingHref}>Continue to booking</a>
   </main>
-  <p class="media-note">The photograph and any video shown on this page are illustrative Pexels stock media, not footage of this specific spa or its staff.</p>
+  <p class="media-note">Treatment visuals are illustrative. Please confirm the exact service setup, products and availability with the centre.</p>
 </Base>
