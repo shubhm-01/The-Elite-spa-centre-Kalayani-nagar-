@@ -9,6 +9,7 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const pageTitle = title + ' | ' + B.name;
+const metaDescription = description.length > 160 ? description.slice(0, 157).trimEnd() + '…' : description;
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'DaySpa',
@@ -32,7 +33,7 @@ const structuredData = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#18241d" />
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -40,12 +41,12 @@ const structuredData = {
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={B.name} />
     <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="en_IN" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={metaDescription} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
