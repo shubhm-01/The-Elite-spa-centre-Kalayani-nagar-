@@ -1,0 +1,4 @@
+---
+import Base from '../../layouts/Base.astro';import {P} from '../../data/catalog.js';
+---
+<Base title="Spa Products Shop Pune"><section class="page"><small>THE ELITE WELLNESS SHOP</small><h1>Bring the ritual <i>home.</i></h1><p>Explore massage oils, bath soaks, body care and spa essentials.</p></section><main><p class="notice">Prices below are indicative market references, not confirmed Elite Spa Centre stock or selling prices. Brand, size, availability, delivery and final price will be confirmed on WhatsApp.</p><div class="cards">{P.map(p=><article class="card"><div class="product-art">SPA<br/>ESSENTIALS</div><h3>{p.name}</h3><b>₹{p.price.toLocaleString('en-IN')}</b><p>{p.category} · Indicative price</p><a class="btn" href={'https://wa.me/919199561258?text='+encodeURIComponent('Please confirm availability and final price for '+p.name)}>Enquire on WhatsApp ↗</a></article>)}</div></main></Base>
