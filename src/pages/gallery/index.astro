@@ -1,4 +1,12 @@
 ---
-import Base from '../../layouts/Base.astro';const imgs=['photo-1540555700478-4be289fbecef','photo-1600334129128-685c5582fd35','photo-1544161515-4ab6ce6db874','photo-1608571423902-eed4a5ad8108','photo-1519823551278-64ac92734fb1','photo-1540555700478-4be289fbecef'];
+import Base from '../../layouts/Base.astro';
+const imgs=[
+['https://images.pexels.com/photos/5240675/pexels-photo-5240675.jpeg?w=1280','Relaxing spa massage'],
+['https://images.pexels.com/photos/7795767/pexels-photo-7795767.jpeg?w=1280','Aromatherapy massage oils'],
+['https://images.pexels.com/photos/6724305/pexels-photo-6724305.jpeg?w=1280','Spa skincare and wellness essentials'],
+['https://images.pexels.com/photos/5240675/pexels-photo-5240675.jpeg?w=1280','Professional back massage'],
+['https://images.pexels.com/photos/7795767/pexels-photo-7795767.jpeg?w=1280','Botanical oils and spa ritual'],
+['https://images.pexels.com/photos/6724305/pexels-photo-6724305.jpeg?w=1280','Skincare treatment essentials']
+];
 ---
-<Base title="Spa Gallery Pune"><section class="page"><small>A GLIMPSE OF THE EXPERIENCE</small><h1>The art of <i>unwinding.</i></h1></section><main class="gallery">{imgs.map((id,i)=><img src={'https://images.unsplash.com/'+id+'?w=1000&q=80'} alt="Illustrative spa and wellness stock photography" loading="lazy"/>)}</main><main><p class="notice">Gallery photographs are illustrative stock imagery and may not depict the actual premises, staff, rooms or products.</p></main></Base>
+<Base title="Spa Gallery Pune"><section class="page"><small>A GLIMPSE OF THE EXPERIENCE</small><h1>The art of <i>unwinding.</i></h1></section><main class="gallery">{imgs.map(([src,alt])=><img src={src} alt={alt} loading="lazy"/>)}</main></Base>
