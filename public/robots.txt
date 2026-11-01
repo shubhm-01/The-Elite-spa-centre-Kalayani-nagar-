@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://the-elite-spa-centre.pages.dev/sitemap.xml
