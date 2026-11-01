@@ -1,3 +1,11 @@
 # The Elite Spa Centre — Pune
 
-Premium multi-page spa and wellness website built with Astro, React and Tailwind CSS for Cloudflare Pages.
+Astro + React multi-page spa website for Cloudflare Pages.
+
+## Local development
+
+- `npm install`
+- `npm run dev`
+- `npm run build`
+
+WhatsApp-first appointment requests and product enquiries. All listed services are professional, non-sexual wellness treatments for adults.
