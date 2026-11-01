@@ -1,0 +1,4 @@
+---
+import Base from '../../layouts/Base.astro';import {S} from '../../data/catalog.js';import Booking from '../../components/Booking.jsx';export function getStaticPaths(){return S.map(service=>({params:{slug:service.slug},props:{service}}))}const {service}=Astro.props;
+---
+<Base title={service.name+' Kalyani Nagar'}><section class="page"><small>{service.category} · {service.duration}</small><h1>{service.name}</h1><p>{service.description}</p><h2>Starting at ₹{service.price.toLocaleString('en-IN')}</h2></section><main class="split"><div><h2>Your Elite experience</h2><p>Our team will discuss your preferences, pressure level and comfort considerations before the session. Adult-only professional wellness, with consent, draping and clear boundaries.</p><p>Final rate and appointment availability are confirmed on WhatsApp.</p></div><Booking client:load service={service.name}/></main></Base>
