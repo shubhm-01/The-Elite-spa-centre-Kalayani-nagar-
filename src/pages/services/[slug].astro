@@ -1,4 +1,35 @@
 ---
-import Base from '../../layouts/Base.astro';import {S} from '../../data/catalog.js';import Booking from '../../components/Booking.jsx';export function getStaticPaths(){return S.map(service=>({params:{slug:service.slug},props:{service}}))}const {service}=Astro.props;
+import Base from '../../layouts/Base.astro';
+import { S } from '../../data/catalog.js';
+
+export function getStaticPaths() {
+  return S.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const formattedPrice = new Intl.NumberFormat('en-IN').format(service.price);
 ---
-<Base title={service.name+' Kalyani Nagar'}><section class="page"><small>{service.category} · {service.duration}</small><h1>{service.name}</h1><p>{service.description}</p><h2>Starting at ₹{service.price.toLocaleString('en-IN')}</h2></section><main class="split"><div><h2>Your Elite experience</h2><p>Our team will discuss your preferences, pressure level and comfort considerations before the session. Adult-only professional wellness, with consent, draping and clear boundaries.</p><p>Final rate and appointment availability are confirmed on WhatsApp.</p></div><Booking client:load service={service.name}/></main></Base>
+
+<Base title={service.name + ' | Spa in Kalyani Nagar, Pune'}>
+  <section class="page">
+    <small>{service.category} · {service.duration}</small>
+    <h1>{service.name}</h1>
+    <p>{service.description}</p>
+    <h2>Starting at ₹{formattedPrice}</h2>
+    <a class="btn" href={'/booking/?service=' + service.slug}>Request this treatment ↗</a>
+  </section>
+  <main>
+    <h2>Your Elite experience</h2>
+    <p>
+      Our team will discuss your preferences, pressure level and comfort
+      considerations before the session. All treatments are professional,
+      non-sexual wellness services for adults, with consent, appropriate
+      draping and clear boundaries.
+    </p>
+    <p>Final rate and appointment availability are confirmed on WhatsApp.</p>
+    <a class="btn" href="/booking/">Continue to booking ↗</a>
+  </main>
+</Base>
