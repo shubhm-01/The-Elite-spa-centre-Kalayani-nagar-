@@ -1,4 +1,82 @@
 ---
-import '../styles.css';import {B} from '../data/catalog.js';const {title='Luxury Spa & Wellness in Kalyani Nagar, Pune'}=Astro.props;const canonical=new URL(Astro.url.pathname,Astro.site);
+import '../styles.css';
+import { B } from '../data/catalog.js';
+
+const {
+  title = 'Luxury Spa & Wellness in Kalyani Nagar, Pune',
+  description = 'Explore professional massage, spa and wellness experiences at The Elite Spa Centre in Kalyani Nagar, Pune. Enquire by phone or WhatsApp.'
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const pageTitle = title + ' | ' + B.name;
+const metaDescription = description.length > 160 ? description.slice(0, 157).trimEnd() + '…' : description;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'DaySpa',
+  name: B.name,
+  telephone: B.phone,
+  url: Astro.site,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: B.address,
+    addressLocality: 'Pune',
+    addressRegion: 'Maharashtra',
+    postalCode: '411014',
+    addressCountry: 'IN'
+  },
+  openingHours: 'Mo-Su 07:00-02:00',
+  hasMap: B.maps
+};
 ---
-<html lang="en-IN"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>{title} | {B.name}</title><meta name="description" content="Massage, spa and wellness experiences in Kalyani Nagar, Pune."/><link rel="canonical" href={canonical}/><script type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'DaySpa','name':B.name,'telephone':B.phone,'address':{'@type':'PostalAddress','streetAddress':B.address,'addressLocality':'Pune','addressRegion':'Maharashtra','postalCode':'411014','addressCountry':'IN'},'openingHours':'Mo-Su 07:00-02:00','hasMap':B.maps})}/></head><body><header><a class="brand" href="/">✧ THE ELITE <small>SPA CENTRE</small></a><nav><a href="/">Home</a><a href="/services/">Services</a><a href="/offers/">Offers</a><a href="/shop/">Shop</a><a href="/gallery/">Gallery</a><a href="/about/">About</a><a href="/contact/">Contact</a><a class="gold" href="/booking/">Book now</a></nav></header><slot/><footer><div><b>THE ELITE SPA CENTRE</b><p>{B.address}</p><p>Daily · 7:00 AM – 2:00 AM</p><a href="tel:+919199561258">+91 9199561258</a> · <a href={B.maps}>Google Maps ↗</a></div><div>© {new Date().getFullYear()} The Elite Spa Centre · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></div></footer><div class="floating-actions"><a class="float-wa" href="https://wa.me/919199561258?text=Hello%20The%20Elite%20Spa%20Centre" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">☏ <span>WhatsApp</span></a><a class="float-call" href="tel:+919199561258" aria-label="Call The Elite Spa Centre">☎ <span>Call now</span></a></div></body></html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#18241d" />
+    <meta name="description" content={metaDescription} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={B.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header>
+      <a class="brand" href="/" aria-label="The Elite Spa Centre home">✧ THE ELITE <small>SPA CENTRE</small></a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/services/">Services</a>
+        <a href="/offers/">Offers</a>
+        <a href="/shop/">Shop</a>
+        <a href="/gallery/">Gallery</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a class="gold" href="/booking/">Book now</a>
+      </nav>
+    </header>
+    <slot />
+    <footer>
+      <div>
+        <b>THE ELITE SPA CENTRE</b>
+        <p>{B.address}</p>
+        <p>Daily · 7:00 AM – 2:00 AM</p>
+        <a href="tel:+919199561258">+91 9199561258</a> · <a href={B.maps}>Google Maps ↗</a>
+      </div>
+      <div>© {new Date().getFullYear()} The Elite Spa Centre · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></div>
+    </footer>
+    <div class="floating-actions">
+      <a class="float-wa" href="https://wa.me/919199561258?text=Hello%20The%20Elite%20Spa%20Centre" target="_blank" rel="noopener noreferrer" aria-label="Chat with The Elite Spa Centre on WhatsApp">☏ <span>WhatsApp</span></a>
+      <a class="float-call" href="tel:+919199561258" aria-label="Call The Elite Spa Centre">☎ <span>Call now</span></a>
+    </div>
+  </body>
+</html>

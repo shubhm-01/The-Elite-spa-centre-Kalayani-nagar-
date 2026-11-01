@@ -1,4 +1,21 @@
 ---
-import Base from '../../layouts/Base.astro';import Booking from '../../components/Booking.jsx';
+import Base from '../../layouts/Base.astro';
+import Booking from '../../components/Booking.jsx';
 ---
-<Base title="Book a Spa Appointment"><section class="page"><small>YOUR TIME · YOUR WAY</small><h1>Reserve your <i>escape.</i></h1><p>Open every day from 7:00 AM to 2:00 AM. Appointment requests are confirmed by our team.</p></section><main class="split"><div><h2>Let's find your moment.</h2><p>Choose a preferred date and time and send your enquiry on WhatsApp.</p></div><Booking client:load/></main></Base>
+<Base
+  title="Book a Spa Appointment"
+  description="Request a massage or spa appointment at The Elite Spa Centre, Kalyani Nagar, Pune. Choose a preferred date and time; our team confirms availability on WhatsApp."
+>
+  <section class="page">
+    <small>YOUR TIME · YOUR WAY</small>
+    <h1>Reserve your <i>escape.</i></h1>
+    <p>Open every day from 7:00 AM to 2:00 AM. Appointment requests are confirmed by our team.</p>
+  </section>
+  <main id="main-content" class="split">
+    <div>
+      <h2>Let's find your moment.</h2>
+      <p>Choose a preferred date and time and send your enquiry on WhatsApp. When you arrive from a treatment page, its name is carried into your request.</p>
+    </div>
+    <Booking client:load />
+  </main>
+</Base>

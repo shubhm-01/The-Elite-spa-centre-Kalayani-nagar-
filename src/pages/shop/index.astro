@@ -1,10 +1,181 @@
 ---
-import Base from '../../layouts/Base.astro';import {P} from '../../data/catalog.js';
-const groups=[...new Set(P.map(p=>p.category))];
+import Base from '../../layouts/Base.astro';
+import { P } from '../../data/catalog.js';
+const groups = [...new Set(P.map((product) => product.category))];
 ---
-<Base title="Spa Products Shop Pune"><section class="page"><small>THE ELITE WELLNESS SHOP</small><h1>Bring the ritual <i>home.</i></h1><p>Massage oils, essential oils, aromatherapy, skincare, bath & body, tools and gift sets.</p></section><main><div class="shop-top"><p class="notice">Prices shown are indicative; actual brand, size, stock, delivery and final price are confirmed before payment. Product photographs are representative category imagery, not confirmed pack shots.</p><label class="shop-search">Search products <input id="shop-search" type="search" placeholder="Search oils, skincare, bath salts…"/></label><div class="cart-bar"><b>Cart <span id="cart-count">0</span></b><button id="cart-checkout" class="btn">WhatsApp checkout ↗</button></div></div>{groups.map(g=><section class="shop-group"><h2>{g}</h2><div class="cards">{P.filter(p=>p.category===g).map(p=><article class="card product-card" data-name={p.name.toLowerCase()}><img class="card-image product-image" src={p.image} alt={p.name+' category photo'} loading="lazy"/><h3>{p.name}</h3><b>₹{p.price.toLocaleString('en-IN')}</b><p>{p.category} · Indicative price</p><button class="btn add-cart" data-name={p.name} data-price={p.price}>Add to cart +</button></article>)}</div></section>)}</main><script is:inline>
-const cart=new Map();const count=document.getElementById('cart-count');function draw(){count.textContent=[...cart.values()].reduce((n,x)=>n+x.qty,0);document.querySelectorAll('.add-cart').forEach(b=>{const x=cart.get(b.dataset.name);b.textContent=x?'Added · '+x.qty+' (add more +)':'Add to cart +';});}
-document.querySelectorAll('.add-cart').forEach(b=>b.addEventListener('click',()=>{const x=cart.get(b.dataset.name)||{price:Number(b.dataset.price),qty:0};x.qty++;cart.set(b.dataset.name,x);draw();}));
-document.getElementById('cart-checkout').addEventListener('click',()=>{if(!cart.size){alert('Please add products to your cart first.');return;}const rows=[...cart].map(([n,x])=>n+' × '+x.qty+' — ₹'+(x.price*x.qty)).join('\n');const total=[...cart.values()].reduce((n,x)=>n+x.price*x.qty,0);const msg='Hello The Elite Spa Centre, I would like to enquire/order:\n'+rows+'\nIndicative total: ₹'+total+'\nPlease confirm actual stock, brand, pack size, delivery and final price.';location.href='https://wa.me/919199561258?text='+encodeURIComponent(msg);});
-document.getElementById('shop-search').addEventListener('input',e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('.product-card').forEach(c=>c.hidden=!c.dataset.name.includes(q));document.querySelectorAll('.shop-group').forEach(g=>g.hidden=!g.querySelector('.product-card:not([hidden])'));});
-</script></Base>
+<Base
+  title="Spa Products Shop Pune"
+  description="Browse massage oils, essential oils, aromatherapy, bath and body care, skincare and wellness accessories from The Elite Spa Centre in Pune. Enquire about stock and current pricing on WhatsApp."
+>
+  <section class="page">
+    <small>THE ELITE WELLNESS SHOP</small>
+    <h1>Bring the ritual <i>home.</i></h1>
+    <p>Massage oils, essential oils, aromatherapy, skincare, bath &amp; body, tools and gift sets.</p>
+  </section>
+  <main id="main-content">
+    <div class="shop-top">
+      <p class="notice">Prices shown are indicative; actual brand, size, stock, delivery and final price are confirmed before payment. Product photographs are representative category imagery, not confirmed pack shots.</p>
+      <label class="shop-search" for="shop-search-input">Search products
+        <input id="shop-search-input" type="search" placeholder="Search oils, skincare, bath salts…" />
+      </label>
+      <p id="shop-results" class="shop-results" aria-live="polite">{P.length} products available to enquire about.</p>
+      <div class="cart-bar">
+        <b>Cart <span id="cart-count" aria-live="polite">0</span></b>
+        <div class="cart-actions">
+          <button id="clear-cart" class="btn outline-dark" type="button">Clear cart</button>
+          <button id="cart-checkout" class="btn" type="button">WhatsApp checkout ↗</button>
+        </div>
+      </div>
+      <div id="cart-items" class="cart-items" aria-live="polite"></div>
+    </div>
+    {groups.map((group) => (
+      <section class="shop-group">
+        <h2>{group}</h2>
+        <div class="cards">
+          {P.filter((product) => product.category === group).map((product) => (
+            <article class="card product-card" data-search={(product.name + ' ' + product.category).toLowerCase()}>
+              <img class="card-image product-image" src={product.image} alt={product.name + ' representative category photo'} loading="lazy" />
+              <h3>{product.name}</h3>
+              <b>₹{product.price.toLocaleString('en-IN')}</b>
+              <p>{product.category} · Indicative price</p>
+              <button class="btn add-cart" type="button" data-name={product.name} data-price={product.price} aria-label={'Add ' + product.name + ' to cart'}>Add to cart +</button>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+  </main>
+  <script is:inline>
+    const CART_KEY = 'elite-spa-cart-v1';
+    const cart = new Map();
+    const count = document.getElementById('cart-count');
+    const itemsEl = document.getElementById('cart-items');
+    const resultsEl = document.getElementById('shop-results');
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      if (Array.isArray(saved)) {
+        saved.forEach(([name, item]) => {
+          if (typeof name === 'string' && item && Number.isFinite(item.price) && Number.isInteger(item.qty) && item.qty > 0) {
+            cart.set(name, { price: item.price, qty: item.qty });
+          }
+        });
+      }
+    } catch (_) {
+      // The shop remains usable when browser storage is unavailable.
+    }
+
+    function saveCart() {
+      try {
+        localStorage.setItem(CART_KEY, JSON.stringify([...cart.entries()]));
+      } catch (_) {
+        resultsEl.textContent = 'Cart is active for this visit, but this browser could not save it between visits.';
+      }
+    }
+
+    function renderCart() {
+      const quantity = [...cart.values()].reduce((total, item) => total + item.qty, 0);
+      count.textContent = String(quantity);
+      itemsEl.replaceChildren();
+
+      if (!cart.size) {
+        const empty = document.createElement('p');
+        empty.textContent = 'Your cart is empty. Add products to prepare a WhatsApp enquiry.';
+        itemsEl.append(empty);
+        return;
+      }
+
+      for (const [name, item] of cart.entries()) {
+        const row = document.createElement('div');
+        row.className = 'cart-line';
+        const label = document.createElement('span');
+        label.textContent = name + ' · ₹' + (item.price * item.qty).toLocaleString('en-IN');
+        const minus = document.createElement('button');
+        minus.type = 'button';
+        minus.textContent = '−';
+        minus.dataset.action = 'minus';
+        minus.dataset.name = name;
+        minus.setAttribute('aria-label', 'Remove one ' + name);
+        const plus = document.createElement('button');
+        plus.type = 'button';
+        plus.textContent = '+';
+        plus.dataset.action = 'plus';
+        plus.dataset.name = name;
+        plus.setAttribute('aria-label', 'Add one ' + name);
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.textContent = 'Remove';
+        remove.dataset.action = 'remove';
+        remove.dataset.name = name;
+        remove.setAttribute('aria-label', 'Remove ' + name + ' from cart');
+        row.append(label, minus, document.createTextNode(' ' + item.qty + ' '), plus, remove);
+        itemsEl.append(row);
+      }
+
+      const total = [...cart.values()].reduce((sum, item) => sum + item.price * item.qty, 0);
+      const totalLine = document.createElement('p');
+      totalLine.className = 'cart-total';
+      totalLine.textContent = 'Indicative total: ₹' + total.toLocaleString('en-IN') + ' · Final price subject to confirmation.';
+      itemsEl.append(totalLine);
+    }
+
+    document.querySelectorAll('.add-cart').forEach((button) => {
+      button.addEventListener('click', () => {
+        const name = button.dataset.name;
+        const item = cart.get(name) || { price: Number(button.dataset.price), qty: 0 };
+        item.qty += 1;
+        cart.set(name, item);
+        saveCart();
+        renderCart();
+      });
+    });
+
+    itemsEl.addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-action]');
+      if (!button) return;
+      const name = button.dataset.name;
+      const item = cart.get(name);
+      if (!item) return;
+      if (button.dataset.action === 'plus') item.qty += 1;
+      if (button.dataset.action === 'minus') item.qty -= 1;
+      if (button.dataset.action === 'remove' || item.qty <= 0) cart.delete(name);
+      saveCart();
+      renderCart();
+    });
+
+    document.getElementById('clear-cart').addEventListener('click', () => {
+      cart.clear();
+      saveCart();
+      renderCart();
+    });
+
+    document.getElementById('cart-checkout').addEventListener('click', () => {
+      if (!cart.size) {
+        alert('Please add products to your cart first.');
+        return;
+      }
+      const rows = [...cart].map(([name, item]) => name + ' × ' + item.qty + ' — ₹' + (item.price * item.qty).toLocaleString('en-IN')).join('\n');
+      const total = [...cart.values()].reduce((sum, item) => sum + item.price * item.qty, 0);
+      const message = 'Hello The Elite Spa Centre, I would like to enquire about:\n' + rows +
+        '\nIndicative total: ₹' + total.toLocaleString('en-IN') +
+        '\nPlease confirm actual stock, brand, pack size, delivery and final price. This is an enquiry, not a paid order.';
+      window.location.assign('https://wa.me/919199561258?text=' + encodeURIComponent(message));
+    });
+
+    document.getElementById('shop-search-input').addEventListener('input', (event) => {
+      const query = event.target.value.trim().toLowerCase();
+      let visible = 0;
+      document.querySelectorAll('.product-card').forEach((card) => {
+        const match = card.dataset.search.includes(query);
+        card.hidden = !match;
+        if (match) visible += 1;
+      });
+      document.querySelectorAll('.shop-group').forEach((group) => {
+        group.hidden = !group.querySelector('.product-card:not([hidden])');
+      });
+      resultsEl.textContent = visible + ' matching product' + (visible === 1 ? '' : 's') + '.';
+    });
+
+    renderCart();
+  </script>
+</Base>

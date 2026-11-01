@@ -1,4 +1,30 @@
 ---
-import Base from '../../layouts/Base.astro';const offers=[['First Visit Welcome','Packages from ₹999','Introductory packages for new guests.'],['Online Enquiry Specials','Selected sessions from ₹599','Selected express rituals at introductory rates.'],['Couple Spa Packages','From ₹2,999','Shared relaxation for two, subject to availability.'],['Wellness Membership','Ask for a custom plan','Multi-session packages and gift vouchers.']];
+import Base from '../../layouts/Base.astro';
+const offers = [
+  ['First Visit Welcome', 'Packages from ₹999', 'Introductory packages for new guests.'],
+  ['Online Enquiry Specials', 'Selected sessions from ₹599', 'Selected express rituals at introductory rates.'],
+  ['Couple Spa Packages', 'From ₹2,999', 'Shared relaxation for two, subject to availability.'],
+  ['Wellness Membership', 'Ask for a custom plan', 'Multi-session packages and gift vouchers.']
+];
 ---
-<Base title="Spa Offers Pune"><section class="page"><small>THE ELITE PRIVILEGE</small><h1>Little luxuries.<br/><i>Lovely offers.</i></h1><p>Promotional rates are illustrative starting prices, not an unconditional discount.</p></section><main class="cards">{offers.map(o=><article class="card"><small>{o[0]}</small><h2>{o[1]}</h2><p>{o[2]}</p><a href={'https://wa.me/919199561258?text='+encodeURIComponent('Please share current terms for '+o[0])}>ASK FOR DETAILS ↗</a></article>)}</main><main><p class="notice">40% online-booking and 50% first-visit promotions are not advertised as active until the business confirms eligibility, dates, selected services and terms.</p></main></Base>
+<Base
+  title="Spa Offers Pune"
+  description="View current offer categories and introductory spa packages at The Elite Spa Centre, Kalyani Nagar, Pune. Confirm eligibility, dates and final price before booking."
+>
+  <section class="page">
+    <small>THE ELITE PRIVILEGE</small>
+    <h1>Little luxuries.<br /><i>Lovely offers.</i></h1>
+    <p>Promotional rates are illustrative starting prices, not an unconditional discount.</p>
+  </section>
+  <main id="main-content" class="cards">
+    {offers.map((offer) => (
+      <article class="card">
+        <small>{offer[0]}</small>
+        <h2>{offer[1]}</h2>
+        <p>{offer[2]}</p>
+        <a href={'https://wa.me/919199561258?text=' + encodeURIComponent('Please share current terms for ' + offer[0])}>ASK FOR DETAILS ↗</a>
+      </article>
+    ))}
+  </main>
+  <main><p class="notice">40% online-booking and 50% first-visit promotions are not advertised as active until the business confirms eligibility, dates, selected services and terms.</p></main>
+</Base>
