@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import { JOURNAL } from '../../data/journal.js';
+---
+<Base
+  title="Wellness Journal | Spa & Massage Guides in Pune"
+  description="Read practical spa visit guides, massage style explainers and comfort tips from The Elite Spa Centre in Kalyani Nagar, Pune."
+>
+  <section class="page">
+    <span class="eyebrow-light">THE ELITE WELLNESS JOURNAL</span>
+    <h1>Read, pause &amp; <i>reset.</i></h1>
+    <p>Simple guides to help you explore massage styles, plan a spa visit and communicate your comfort preferences.</p>
+  </section>
+  <main id="main-content">
+    <section class="journal-intro">
+      <span class="eyebrow">A LITTLE KNOWLEDGE BEFORE YOU UNWIND</span>
+      <h2>Thoughtful notes for <i>your next visit.</i></h2>
+      <p>Our journal is a practical starting point for questions you may want to ask the spa team. It is general information, not medical advice or a promise about treatment suitability.</p>
+    </section>
+    <section class="journal-grid journal-grid-full">
+      {JOURNAL.map((article, index) => (
+        <a class="journal-card" href={'/wellness-journal/' + article.slug + '/'}>
+          <span class="journal-number">0{index + 1}</span>
+          <span class="eyebrow">{article.category}</span>
+          <h2>{article.title}</h2>
+          <p>{article.excerpt}</p>
+          <b>READ ARTICLE ↗</b>
+        </a>
+      ))}
+    </section>
+    <section class="banner">
+      <span class="eyebrow">READY TO EXPLORE?</span>
+      <h2>Find your <i>ritual.</i></h2>
+      <p>Browse the full treatment menu or ask the team a question before requesting a time.</p>
+      <a class="btn" href="/services/">Explore treatments ↗</a>
+    </section>
+  </main>
+</Base>

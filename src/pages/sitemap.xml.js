@@ -1,4 +1,5 @@
 import { S } from '../data/catalog.js';
+import { JOURNAL } from '../data/journal.js';
 
 export const prerender = true;
 
@@ -12,12 +13,13 @@ const staticPaths = [
   '/about/',
   '/contact/',
   '/booking/',
+  '/wellness-journal/',
   '/privacy/',
   '/terms/'
 ];
 
 function escapeXml(value) {
-  return String(value).replace(/[<>&'"]/g, (character) => ({
+  return String(value).replace(/[<>&'\"]/g, (character) => ({
     '<': '&lt;',
     '>': '&gt;',
     '&': '&amp;',
@@ -27,7 +29,9 @@ function escapeXml(value) {
 }
 
 export function GET() {
-  const paths = staticPaths.concat(S.map((service) => '/services/' + service.slug + '/'));
+  const paths = staticPaths
+    .concat(S.map((service) => '/services/' + service.slug + '/'))
+    .concat(JOURNAL.map((article) => '/wellness-journal/' + article.slug + '/'));
   const entries = paths.map((path) => {
     const loc = escapeXml(new URL(path, site).href);
     return '<url><loc>' + loc + '</loc></url>';
