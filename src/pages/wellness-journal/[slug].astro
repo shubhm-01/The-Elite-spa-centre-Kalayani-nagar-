@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import { JOURNAL } from '../../data/journal.js';
+import { S } from '../../data/catalog.js';
+
+export function getStaticPaths() {
+  return JOURNAL.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const relatedServices = article.related.map((slug) => S.find((service) => service.slug === slug)).filter(Boolean);
+---
+<Base
+  title={article.title}
+  description={article.excerpt}
+>
+  <section class="page article-hero">
+    <span class="eyebrow-light">THE WELLNESS JOURNAL · {article.category}</span>
+    <h1>{article.title}</h1>
+    <p>{article.intro}</p>
+  </section>
+  <main id="main-content" class="article-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/wellness-journal/">Journal</a><span>/</span><span>{article.title}</span></nav>
+    <article class="article-body">
+      {article.sections.map((section) => (
+        <section>
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </section>
+      ))}
+      <p class="article-disclaimer">This article is general wellness information, not medical advice. Treatment availability and suitability should be discussed with the spa team; consult a qualified healthcare professional for medical concerns.</p>
+    </article>
+    <aside class="article-related">
+      <span class="eyebrow">KEEP EXPLORING</span>
+      <h2>Related <i>treatments.</i></h2>
+      {relatedServices.length > 0 ? relatedServices.map((service) => <a href={'/services/' + service.slug + '/'}>{service.name} ↗</a>) : null}
+      <a class="btn" href="/booking/">Ask the team on WhatsApp ↗</a>
+      <a class="text-link" href="/wellness-journal/">BACK TO THE JOURNAL ↗</a>
+    </aside>
+  </main>
+</Base>

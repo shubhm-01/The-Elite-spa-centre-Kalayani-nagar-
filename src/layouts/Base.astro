@@ -4,18 +4,21 @@ import { B } from '../data/catalog.js';
 
 const {
   title = 'Luxury Spa & Wellness in Kalyani Nagar, Pune',
-  description = 'Explore professional massage, spa and wellness experiences at The Elite Spa Centre in Kalyani Nagar, Pune. Enquire by phone or WhatsApp.'
+  description = 'Explore massage, spa and wellness experiences at The Elite Spa Centre in Kalyani Nagar, Pune. Enquire by phone or WhatsApp.',
+  image = 'https://images.pexels.com/photos/7031704/pexels-photo-7031704.jpeg?auto=compress&w=1260&h=750&dpr=1'
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const pageTitle = title + ' | ' + B.name;
 const metaDescription = description.length > 160 ? description.slice(0, 157).trimEnd() + '…' : description;
+const absoluteImage = image.startsWith('http') ? image : new URL(image, Astro.site).href;
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'DaySpa',
   name: B.name,
   telephone: B.phone,
   url: Astro.site,
+  image: absoluteImage,
   address: {
     '@type': 'PostalAddress',
     streetAddress: B.address,
@@ -32,47 +35,74 @@ const structuredData = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#18241d" />
+    <meta name="theme-color" content="#17261f" />
     <meta name="description" content={metaDescription} />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.pexels.com" />
     <title>{pageTitle}</title>
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={B.name} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={metaDescription} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteImage} />
+    <meta property="og:image:alt" content="Illustrative spa and wellness photography" />
     <meta property="og:locale" content="en_IN" />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={absoluteImage} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <header>
-      <a class="brand" href="/" aria-label="The Elite Spa Centre home">✧ THE ELITE <small>SPA CENTRE</small></a>
+      <a class="brand" href="/" aria-label="The Elite Spa Centre home">✧ THE ELITE <small>SPA CENTRE · KALYANI NAGAR</small></a>
       <nav aria-label="Main navigation">
         <a href="/">Home</a>
-        <a href="/services/">Services</a>
+        <a href="/services/">Treatments</a>
         <a href="/offers/">Offers</a>
-        <a href="/shop/">Shop</a>
+        <a href="/shop/">Wellness shop</a>
         <a href="/gallery/">Gallery</a>
+        <a href="/wellness-journal/">Journal</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
-        <a class="gold" href="/booking/">Book now</a>
+        <a class="gold nav-book" href="/booking/">Book now ↗</a>
       </nav>
     </header>
     <slot />
     <footer>
-      <div>
-        <b>THE ELITE SPA CENTRE</b>
-        <p>{B.address}</p>
-        <p>Daily · 7:00 AM – 2:00 AM</p>
-        <a href="tel:+919199561258">+91 9199561258</a> · <a href={B.maps}>Google Maps ↗</a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="/">✧ THE ELITE <small>SPA CENTRE</small></a>
+          <p>A place to slow down, explore wellness rituals and make a little space for yourself in Kalyani Nagar, Pune.</p>
+        </div>
+        <div>
+          <b>EXPLORE</b>
+          <a href="/services/">Treatments</a>
+          <a href="/offers/">Suggested bundles</a>
+          <a href="/shop/">Wellness shop</a>
+          <a href="/gallery/">Gallery</a>
+          <a href="/wellness-journal/">Wellness journal</a>
+        </div>
+        <div>
+          <b>PLAN A VISIT</b>
+          <p>{B.address}</p>
+          <p>Daily · 7:00 AM – 2:00 AM</p>
+          <a href={B.maps} target="_blank" rel="noopener noreferrer">View on Google Maps ↗</a>
+          <a href="tel:+919199561258">+91 91995 61258</a>
+          <a href="https://wa.me/919199561258?text=Hello%20The%20Elite%20Spa%20Centre" target="_blank" rel="noopener noreferrer">WhatsApp the team ↗</a>
+        </div>
       </div>
-      <div>© {new Date().getFullYear()} The Elite Spa Centre · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></div>
+      <div class="footer-bottom">
+        <span>© {new Date().getFullYear()} The Elite Spa Centre</span>
+        <span><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></span>
+        <span>Illustrative stock imagery is labelled where used.</span>
+      </div>
     </footer>
     <div class="floating-actions">
       <a class="float-wa" href="https://wa.me/919199561258?text=Hello%20The%20Elite%20Spa%20Centre" target="_blank" rel="noopener noreferrer" aria-label="Chat with The Elite Spa Centre on WhatsApp">☏ <span>WhatsApp</span></a>

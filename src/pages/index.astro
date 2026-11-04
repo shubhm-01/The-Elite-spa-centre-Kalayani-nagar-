@@ -2,100 +2,209 @@
 import Base from '../layouts/Base.astro';
 import { S, P } from '../data/catalog.js';
 import { OFFERS } from '../data/offers.js';
+import { JOURNAL } from '../data/journal.js';
+const featured = ['signature-relaxation', 'swedish', 'deep-tissue', 'aromatherapy', 'couples', 'foot-reflexology'].map((slug) => S.find((item) => item.slug === slug)).filter(Boolean);
+const categories = [
+  ['Massage', 'A range of massage styles, from flowing relaxation to focused pressure.'],
+  ['Couples', 'A shared ritual enquiry for two guests.'],
+  ['Express', 'Shorter sessions for a focused pause.'],
+  ['Body Care', 'Scrubs, wraps, polishing and foot-care rituals.'],
+  ['Skin Care', 'Facial and scalp-care enquiries.'],
+  ['Premium', 'Extended and specialist-format massage enquiries.']
+];
+const moodImage = 'https://images.pexels.com/photos/7031704/pexels-photo-7031704.jpeg?auto=compress&w=1260&h=750&dpr=1';
 ---
 <Base
-  title="Luxury Spa, Massage & Wellness Shop in Kalyani Nagar"
-  description="Discover spa treatments, suggested ritual bundles and a wellness shop at The Elite Spa Centre in Kalyani Nagar, Pune."
+  title="Luxury Spa & Massage in Kalyani Nagar, Pune"
+  description="Explore massage treatments, couples rituals, body care and a wellness shop at The Elite Spa Centre, Kalyani Nagar, Pune. Open daily 7 AM to 2 AM; enquire on WhatsApp."
+  image={moodImage}
 >
-  <section class="hero hero-video">
-    <video class="hero-film" autoplay muted loop playsinline poster="https://images.pexels.com/photos/5240675/pexels-photo-5240675.jpeg?w=1800" aria-hidden="true">
-      <source src="https://assets.mixkit.co/videos/52167/52167-720.mp4" type="video/mp4" />
-    </video>
+  <section class="hero hero-video" aria-labelledby="home-title">
+    <img class="hero-film" src={moodImage} alt="" fetchpriority="high" decoding="async" />
     <div class="hero-shade"></div>
     <div class="hero-copy">
-      <small>KALYANI NAGAR · PUNE</small>
-      <h1>Make space<br />for <i>yourself.</i></h1>
-      <p>Massage, restorative rituals and a wellness shop for the moments you want to keep for yourself.</p>
-      <a class="btn" href="/booking/">Reserve your escape ↗</a>
-      <a class="btn outline" href="/services/">Explore treatments</a>
-      <p class="hours">OPEN DAILY · 07:00 AM — 02:00 AM</p>
+      <span class="eyebrow-light">KALYANI NAGAR · PUNE</span>
+      <p class="hero-overline">A LITTLE SPACE TO RESET</p>
+      <h1 id="home-title">Make space<br />for <i>yourself.</i></h1>
+      <p>Massage, body-care rituals and thoughtful wellness essentials for the moments you want to keep for yourself.</p>
+      <div class="hero-actions">
+        <a class="btn" href="/booking/">Request an appointment ↗</a>
+        <a class="btn outline" href="/services/">Explore treatments</a>
+      </div>
+      <p class="hours"><span>OPEN DAILY</span> · 07:00 AM — 02:00 AM</p>
     </div>
+    <a class="hero-scroll" href="#discover">SCROLL TO DISCOVER ↓</a>
   </section>
-  <section class="home-commerce" aria-label="Shop and special offers">
-    <a class="commerce-feature commerce-shop" href="/shop/" style={'--commerce-image: url(' + P[12].image + ')'}>
-      <div class="commerce-copy">
-        <small>THE ELITE WELLNESS SHOP · {P.length} PRODUCTS</small>
-        <h2>Bring the ritual <i>home.</i></h2>
-        <p>Massage oils, aromatherapy, skin care, bath &amp; body essentials and gift sets.</p>
-        <span class="commerce-link">EXPLORE THE SHOP ↗</span>
-      </div>
-    </a>
-    <a class="commerce-feature commerce-offers" href="/offers/" style={'--commerce-image: url(' + OFFERS[0].image + ')'}>
-      <div class="commerce-copy">
-        <small>THE ELITE PRIVILEGE · 5 SUGGESTED BUNDLES</small>
-        <h2>More ritual.<br /><i>Less spend.</i></h2>
-        <p>Discover the {OFFERS[0].title} package at ₹{OFFERS[0].offerPrice.toLocaleString('en-IN')}.</p>
-        <span class="commerce-link">VIEW OFFERS ↗</span>
-      </div>
-    </a>
-  </section>
+
   <main id="main-content">
-    <section>
-      <small>THE TREATMENT EDIT</small>
-      <h2>Find your <i>ritual.</i></h2>
-      <div class="cards">
-        {S.slice(0, 9).map((service) => (
-          <a class="card" href={'/services/' + service.slug + '/'}>
-            <img class="card-image" src={service.image} alt={service.name + ' treatment visual'} loading="lazy" />
-            <h3>{service.name}</h3>
-            <p>{service.duration} · From ₹{service.price.toLocaleString('en-IN')}</p>
+    <section class="home-intro" id="discover">
+      <div class="intro-kicker"><span class="eyebrow">THE ELITE SPA CENTRE · PUNE</span><span class="intro-line"></span></div>
+      <div class="intro-grid">
+        <h2>A slower moment<br />in the middle of <i>your day.</i></h2>
+        <div>
+          <p class="lead">Find a treatment that fits the way you want to unwind. Explore the menu, share your preferences with our team and request a time that suits you.</p>
+          <a class="text-link" href="/about/">GET TO KNOW THE CENTRE ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="category-section">
+      <div class="section-heading">
+        <div><span class="eyebrow">EXPLORE BY MOOD</span><h2>What would feel <i>good today?</i></h2></div>
+        <a class="text-link" href="/services/">VIEW ALL TREATMENTS ↗</a>
+      </div>
+      <div class="category-grid">
+        {categories.map(([name, text]) => (
+          <a class="category-card" href={'/services/#' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
+            <span>{name}</span>
+            <p>{text}</p>
+            <b>EXPLORE ↗</b>
           </a>
         ))}
       </div>
-      <p><a class="text-link" href="/services/">VIEW ALL {S.length} TREATMENTS ↗</a></p>
     </section>
+
+    <section class="treatment-section">
+      <div class="section-heading">
+        <div><span class="eyebrow">THE TREATMENT EDIT</span><h2>Find your <i>ritual.</i></h2><p>Explore a few of the experiences on our treatment menu.</p></div>
+        <a class="text-link" href="/services/">ALL {S.length} TREATMENTS ↗</a>
+      </div>
+      <div class="cards service-cards">
+        {featured.map((service) => (
+          <a class="card" href={'/services/' + service.slug + '/'}>
+            <img class="card-image" src={service.image} alt={service.name + ' illustrative treatment photograph'} loading="lazy" />
+            <div class="card-body">
+              <span class="eyebrow">{service.category} · {service.duration}</span>
+              <h3>{service.name}</h3>
+              <p>From ₹{service.price.toLocaleString('en-IN')} · indicative starting price</p>
+              <span class="text-link">DISCOVER TREATMENT ↗</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="home-steps">
+      <div class="steps-intro">
+        <span class="eyebrow-light">A SIMPLE WAY TO BEGIN</span>
+        <h2>Your time.<br /><i>Your preferences.</i></h2>
+        <p>Appointments begin with a conversation. Tell us what you have in mind and our team can help confirm the details.</p>
+        <a class="btn" href="/booking/">Start an enquiry ↗</a>
+      </div>
+      <div class="steps-list">
+        <article><span>01</span><div><h3>Choose a treatment</h3><p>Browse the menu and shortlist the experience you would like to ask about.</p></div></article>
+        <article><span>02</span><div><h3>Share your preferences</h3><p>Let the team know your preferred date, time, pressure and any comfort considerations.</p></div></article>
+        <article><span>03</span><div><h3>Wait for confirmation</h3><p>Our team replies on WhatsApp to confirm availability and the final price. Your enquiry is not a confirmed booking.</p></div></article>
+      </div>
+    </section>
+
+    <section class="home-commerce" aria-label="Wellness shop and suggested offers">
+      <a class="commerce-feature commerce-shop" href="/shop/" style={'--commerce-image: url(' + P[12].image + ')'}>
+        <div class="commerce-copy">
+          <span class="eyebrow-light">THE ELITE WELLNESS SHOP · {P.length} PRODUCTS</span>
+          <h2>Bring the ritual <i>home.</i></h2>
+          <p>Browse massage oils, aromatherapy, skincare, bath &amp; body essentials and gift ideas.</p>
+          <span class="commerce-link">EXPLORE THE SHOP ↗</span>
+        </div>
+      </a>
+      <a class="commerce-feature commerce-offers" href="/offers/" style={'--commerce-image: url(' + OFFERS[0].image + ')'}>
+        <div class="commerce-copy">
+          <span class="eyebrow-light">THE ELITE PRIVILEGE · 5 SUGGESTED BUNDLES</span>
+          <h2>More ritual.<br /><i>Less spend.</i></h2>
+          <p>Explore suggested combinations, then ask the centre to confirm the details.</p>
+          <span class="commerce-link">VIEW SUGGESTED OFFERS ↗</span>
+        </div>
+      </a>
+    </section>
+
     <section class="home-offer-preview">
       <div class="section-heading">
-        <div><small>THE ELITE PRIVILEGE</small><h2>Offers worth <i>slowing down for.</i></h2></div>
+        <div><span class="eyebrow">THE ELITE PRIVILEGE</span><h2>Offers worth <i>slowing down for.</i></h2><p>Suggested bundles based on the current indicative catalogue.</p></div>
         <a class="text-link" href="/offers/">ALL OFFERS ↗</a>
       </div>
       <div class="offer-preview-grid">
         {OFFERS.slice(0, 3).map((offer) => (
           <a class="offer-preview" href="/offers/">
-            <img src={offer.image} alt={offer.title + ' package visual'} loading="lazy" />
+            <img src={offer.image} alt={offer.title + ' illustrative package visual'} loading="lazy" />
             <div>
-              <small>{offer.eyebrow}</small>
+              <span class="eyebrow">{offer.eyebrow}</span>
               <h3>{offer.title}</h3>
               <b>₹{offer.offerPrice.toLocaleString('en-IN')}</b>
-              <span>View package ↗</span>
+              <span>Suggested price · View bundle ↗</span>
             </div>
           </a>
         ))}
       </div>
-      <p class="small-print">Suggested package prices are subject to confirmation by the centre before booking.</p>
+      <p class="small-print">Suggested package prices are proposals and must be confirmed by the centre before booking.</p>
     </section>
+
+    <section class="home-gallery-preview">
+      <div class="section-heading">
+        <div><span class="eyebrow">A VISUAL MOODBOARD</span><h2>Take a moment to <i>unwind.</i></h2><p>Explore illustrative stock imagery for treatment and spa inspiration.</p></div>
+        <a class="text-link" href="/gallery/">EXPLORE THE GALLERY ↗</a>
+      </div>
+      <div class="mood-strip">
+        <img src="https://images.pexels.com/photos/11774389/pexels-photo-11774389.jpeg?auto=compress&w=900&h=1000&dpr=1" alt="Illustrative photograph of a quiet massage room" loading="lazy" />
+        <img src="https://images.pexels.com/photos/35546242/pexels-photo-35546242/free-photo-of-modern-spa-treatment-room-with-elegant-design.jpeg?auto=compress&w=900&h=1000&dpr=1" alt="Illustrative photograph of a modern spa treatment room" loading="lazy" />
+        <img src={moodImage} alt="Illustrative photograph of a contemporary spa interior" loading="lazy" />
+      </div>
+      <p class="image-disclaimer">These are third-party stock photographs for inspiration, not photographs of this centre, its staff or its facilities.</p>
+    </section>
+
     <section class="home-shop-preview">
       <div class="section-heading">
-        <div><small>SHOP THE SELF-CARE EDIT</small><h2>Little luxuries for <i>every day.</i></h2></div>
+        <div><span class="eyebrow">SHOP THE SELF-CARE EDIT</span><h2>Little luxuries for <i>every day.</i></h2><p>Representative product imagery; actual brands, sizes, stock and price require confirmation.</p></div>
         <a class="text-link" href="/shop/">SHOP ALL {P.length} PRODUCTS ↗</a>
       </div>
       <div class="cards">
-        {P.slice(0, 6).map((product) => (
+        {P.slice(0, 4).map((product) => (
           <a class="card product-card" href="/shop/">
-            <img class="card-image product-image" src={product.image} alt={product.name + ' representative product visual'} loading="lazy" />
-            <h3>{product.name}</h3>
-            <p>₹{product.price.toLocaleString('en-IN')} · Indicative</p>
-            <span class="text-link">ENQUIRE IN SHOP ↗</span>
+            <img class="card-image product-image" src={product.image} alt={product.name + ' representative product photograph'} loading="lazy" />
+            <div class="card-body">
+              <h3>{product.name}</h3>
+              <p>₹{product.price.toLocaleString('en-IN')} · Indicative</p>
+              <span class="text-link">ENQUIRE IN SHOP ↗</span>
+            </div>
           </a>
         ))}
       </div>
       <p class="shop-trust-line">Browse the range, build an enquiry cart and send your selection to our team on WhatsApp.</p>
     </section>
-    <section class="banner">
-      <small>YOUR NEXT MOMENT OF CALM</small>
+
+    <section class="journal-preview">
+      <div class="section-heading">
+        <div><span class="eyebrow">THE WELLNESS JOURNAL</span><h2>A little more about <i>wellbeing.</i></h2></div>
+        <a class="text-link" href="/wellness-journal/">READ THE JOURNAL ↗</a>
+      </div>
+      <div class="journal-grid">
+        {JOURNAL.slice(0, 3).map((article) => (
+          <a class="journal-card" href={'/wellness-journal/' + article.slug + '/'}>
+            <span class="eyebrow">{article.category}</span>
+            <h3>{article.title}</h3>
+            <p>{article.excerpt}</p>
+            <b>READ ARTICLE ↗</b>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <span class="eyebrow">GOOD TO KNOW</span>
+      <h2>A few things, <i>answered.</i></h2>
+      <div class="faq-list">
+        <details class="faq-item"><summary>How do I request an appointment?</summary><p>Choose a treatment and use the booking form. Your details open in WhatsApp so the team can check availability and confirm the appointment. Sending the form does not reserve a time.</p></details>
+        <details class="faq-item"><summary>What are the opening hours?</summary><p>The published hours are daily, 7:00 AM to 2:00 AM. Please confirm appointment availability with the team before visiting.</p></details>
+        <details class="faq-item"><summary>Are the prices final?</summary><p>Prices on the website are indicative starting prices. Confirm the treatment, duration, final rate and any bundle terms with the centre before booking or payment.</p></details>
+        <details class="faq-item"><summary>Are the gallery images photographs of this spa?</summary><p>No. The gallery identifies illustrative stock photographs and links to their original sources. They do not show the centre, its premises or its staff.</p></details>
+      </div>
+    </section>
+
+    <section class="banner home-final-cta">
+      <span class="eyebrow">YOUR NEXT MOMENT OF CALM</span>
       <h2>Make time for <i>you.</i></h2>
       <p>Explore treatments, ask about a suggested bundle or browse wellness essentials for home.</p>
       <a class="btn" href="/booking/">Plan your visit ↗</a>
+      <a class="text-link" href="/contact/">FIND US IN KALYANI NAGAR ↗</a>
     </section>
   </main>
 </Base>
