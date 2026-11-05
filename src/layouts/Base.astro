@@ -1,6 +1,6 @@
 ---
 import '../styles.css';
-import { B } from '../data/catalog.js';
+import { B, S } from '../data/catalog.js';
 
 const {
   title = 'Luxury Spa & Wellness in Kalyani Nagar, Pune',
@@ -11,6 +11,9 @@ const {
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const pageTitle = title + ' | ' + B.name;
 const metaDescription = description.length > 160 ? description.slice(0, 157).trimEnd() + '…' : description;
+const promoSlugs = ['signature-relaxation', 'swedish', 'deep-tissue', 'aromatherapy', 'hot-stone', 'couples', 'foot-reflexology', 'facial', 'balinese'];
+const promoServices = promoSlugs.map((slug) => S.find((service) => service.slug === slug)).filter(Boolean);
+const promoInitial = promoServices[0];
 const absoluteImage = image.startsWith('http') ? image : new URL(image, Astro.site).href;
 const structuredData = {
   '@context': 'https://schema.org',
@@ -75,6 +78,133 @@ const structuredData = {
       </nav>
     </header>
     <slot />
+
+    <dialog class="promo-dialog" id="promo-dialog" aria-labelledby="promo-title" aria-describedby="promo-description">
+      <div class="promo-shell">
+        <div class="promo-visual">
+          <img
+            id="promo-image"
+            src={promoInitial.image}
+            alt={promoInitial.name + ' illustrative treatment photograph'}
+            loading="eager"
+            decoding="async"
+          />
+          <span class="promo-visual-tag">THE ELITE SPOTLIGHT</span>
+          <span class="promo-visual-note">ILLUSTRATIVE TREATMENT IMAGE</span>
+        </div>
+        <div class="promo-content">
+          <button class="promo-close" id="promo-close" type="button" aria-label="Close promotion">×</button>
+          <div class="promo-topline">
+            <span class="eyebrow">A LITTLE TIME FOR YOURSELF</span>
+            <span class="promo-count" id="promo-count">01 / {String(promoServices.length).padStart(2, '0')}</span>
+          </div>
+          <span class="promo-category" id="promo-category">{promoInitial.category} · FEATURED TREATMENT</span>
+          <h2 id="promo-title">{promoInitial.name}</h2>
+          <div class="promo-meta">
+            <span id="promo-duration">{promoInitial.duration}</span>
+            <span id="promo-price">From ₹{promoInitial.price.toLocaleString('en-IN')}</span>
+          </div>
+          <p class="promo-description" id="promo-description">{promoInitial.description}</p>
+          <div class="promo-actions">
+            <a class="btn promo-book" id="promo-book" href={'/booking/?service=' + promoInitial.slug}>Book this treatment ↗</a>
+            <a class="promo-shop" href="/shop/">Explore wellness shop ↗</a>
+          </div>
+          <a class="promo-offers" href="/offers/">Discover offers &amp; bundles <span>↗</span></a>
+          <p class="promo-footnote" id="promo-footnote">Prices are indicative starting rates. The team confirms the final price and availability before an appointment is booked.</p>
+          <div class="promo-controls" aria-label="Promotion slides">
+            <button class="promo-arrow" id="promo-previous" type="button" aria-label="Previous featured treatment">←</button>
+            <div class="promo-dots" id="promo-dots" aria-label="Choose a featured treatment"></div>
+            <button class="promo-arrow" id="promo-next" type="button" aria-label="Next featured treatment">→</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+    <script define:vars={{ promoServices }}>
+      const promoDialog = document.getElementById('promo-dialog');
+      if (promoDialog && Array.isArray(promoServices) && promoServices.length) {
+        const promoImage = document.getElementById('promo-image');
+        const promoCategory = document.getElementById('promo-category');
+        const promoTitle = document.getElementById('promo-title');
+        const promoDuration = document.getElementById('promo-duration');
+        const promoPrice = document.getElementById('promo-price');
+        const promoDescription = document.getElementById('promo-description');
+        const promoBook = document.getElementById('promo-book');
+        const promoCount = document.getElementById('promo-count');
+        const promoDots = document.getElementById('promo-dots');
+        const promoClose = document.getElementById('promo-close');
+        const promoPrevious = document.getElementById('promo-previous');
+        const promoNext = document.getElementById('promo-next');
+
+        // Shuffle the treatment order on every full page visit; no dismissal is stored.
+        const slides = [...promoServices];
+        for (let i = slides.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [slides[i], slides[j]] = [slides[j], slides[i]];
+        }
+
+        let activeSlide = 0;
+        let paused = false;
+        let rotationTimer = null;
+
+        const renderSlide = (index) => {
+          activeSlide = (index + slides.length) % slides.length;
+          const slide = slides[activeSlide];
+          promoImage.src = slide.image;
+          promoImage.alt = slide.name + ' illustrative treatment photograph';
+          promoCategory.textContent = slide.category + ' · FEATURED TREATMENT';
+          promoTitle.textContent = slide.name;
+          promoDuration.textContent = slide.duration;
+          promoPrice.textContent = 'From ₹' + Number(slide.price).toLocaleString('en-IN');
+          promoDescription.textContent = slide.description;
+          promoBook.href = '/booking/?service=' + encodeURIComponent(slide.slug);
+          promoCount.textContent = String(activeSlide + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+          [...promoDots.children].forEach((dot, dotIndex) => {
+            dot.classList.toggle('is-active', dotIndex === activeSlide);
+            dot.setAttribute('aria-pressed', dotIndex === activeSlide ? 'true' : 'false');
+          });
+        };
+
+        slides.forEach((slide, index) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'promo-dot';
+          dot.setAttribute('aria-label', 'Show ' + slide.name);
+          dot.setAttribute('aria-pressed', 'false');
+          dot.addEventListener('click', () => renderSlide(index));
+          promoDots.append(dot);
+        });
+
+        promoClose?.addEventListener('click', () => promoDialog.close('dismissed'));
+        promoPrevious?.addEventListener('click', () => renderSlide(activeSlide - 1));
+        promoNext?.addEventListener('click', () => renderSlide(activeSlide + 1));
+        promoDialog.addEventListener('click', (event) => {
+          if (event.target === promoDialog) promoDialog.close('backdrop');
+        });
+        promoDialog.addEventListener('mouseenter', () => { paused = true; });
+        promoDialog.addEventListener('mouseleave', () => { paused = false; });
+        promoDialog.addEventListener('focusin', () => { paused = true; });
+        promoDialog.addEventListener('focusout', (event) => {
+          if (!promoDialog.contains(event.relatedTarget)) paused = false;
+        });
+        promoDialog.addEventListener('close', () => {
+          if (rotationTimer) window.clearInterval(rotationTimer);
+          rotationTimer = null;
+        });
+
+        renderSlide(0);
+        window.setTimeout(() => {
+          if (!promoDialog.open && typeof promoDialog.showModal === 'function') {
+            promoDialog.showModal();
+            rotationTimer = window.setInterval(() => {
+              if (!paused && document.visibilityState === 'visible' && promoDialog.open) {
+                renderSlide(activeSlide + 1);
+              }
+            }, 6200);
+          }
+        }, 1800);
+      }
+    </script>
+
     <footer>
       <div class="footer-grid">
         <div class="footer-brand">
