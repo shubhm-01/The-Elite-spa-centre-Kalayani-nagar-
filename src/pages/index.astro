@@ -20,7 +20,20 @@ const moodImage = 'https://images.pexels.com/photos/7031704/pexels-photo-7031704
   image={moodImage}
 >
   <section class="hero hero-video" aria-labelledby="home-title">
-    <img class="hero-film" src={moodImage} alt="" fetchpriority="high" decoding="async" />
+    <img class="hero-film hero-poster" src={moodImage} alt="" fetchpriority="high" decoding="async" />
+    <video
+      class="hero-film hero-motion"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster={moodImage}
+      aria-hidden="true"
+      tabindex="-1"
+    >
+      <source src="https://cdn.pixabay.com/video/2015/09/06/701-138504820_medium.mp4" type="video/mp4" />
+    </video>
     <div class="hero-shade"></div>
     <div class="hero-copy">
       <span class="eyebrow-light">KALYANI NAGAR · PUNE</span>
