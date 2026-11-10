@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { S, P } from '../data/catalog.js';
+import { B, S, P } from '../data/catalog.js';
 import { OFFERS } from '../data/offers.js';
 import { JOURNAL } from '../data/journal.js';
 const featured = ['signature-relaxation', 'swedish', 'deep-tissue', 'aromatherapy', 'couples', 'foot-reflexology'].map((slug) => S.find((item) => item.slug === slug)).filter(Boolean);
@@ -53,9 +53,9 @@ const moodImage = 'https://images.pexels.com/photos/7031704/pexels-photo-7031704
     <section class="home-intro" id="discover">
       <div class="intro-kicker"><span class="eyebrow">THE ELITE SPA CENTRE · PUNE</span><span class="intro-line"></span></div>
       <div class="intro-grid">
-        <h2>A slower moment<br />in the middle of <i>your day.</i></h2>
+        <h2>A massage spa in<br /><i>Kalyani Nagar.</i></h2>
         <div>
-          <p class="lead">Find a treatment that fits the way you want to unwind. Explore the menu, share your preferences with our team and request a time that suits you.</p>
+          <p class="lead">{B.name} is a massage spa in Kalyani Nagar, Pune, with massage treatments, couples sessions, express therapies and body-care services. Explore the service menu and contact our team to discuss your preferred treatment and appointment time.</p>
           <a class="text-link" href="/about/">GET TO KNOW THE CENTRE ↗</a>
         </div>
       </div>
