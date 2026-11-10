@@ -8,27 +8,91 @@ const {
   image = 'https://images.pexels.com/photos/7031704/pexels-photo-7031704.jpeg?auto=compress&w=1260&h=750&dpr=1'
 } = Astro.props;
 
+const siteUrl = new URL('/', Astro.site).href;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const pageTitle = title + ' | ' + B.name;
 const metaDescription = description.length > 160 ? description.slice(0, 157).trimEnd() + '…' : description;
 const absoluteImage = image.startsWith('http') ? image : new URL(image, Astro.site).href;
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumbItems = [{ name: 'Home', item: siteUrl }];
+
+if (pathSegments[0] === 'services' && pathSegments.length > 1) {
+  breadcrumbItems.push({ name: 'Services', item: new URL('/services/', Astro.site).href });
+} else if (pathSegments[0] === 'wellness-journal' && pathSegments.length > 1) {
+  breadcrumbItems.push({ name: 'Wellness Journal', item: new URL('/wellness-journal/', Astro.site).href });
+}
+if (pathSegments.length > 0) {
+  breadcrumbItems.push({ name: title, item: canonical });
+}
+
+const businessId = siteUrl + '#business';
+const websiteId = siteUrl + '#website';
+const webpageId = canonical + '#webpage';
+
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'DaySpa',
-  name: B.name,
-  telephone: B.phone,
-  url: Astro.site,
-  image: absoluteImage,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: B.address,
-    addressLocality: 'Pune',
-    addressRegion: 'Maharashtra',
-    postalCode: '411014',
-    addressCountry: 'IN'
-  },
-  openingHours: 'Mo-Su 07:00-02:00',
-  hasMap: B.maps
+  '@graph': [
+    {
+      '@type': 'DaySpa',
+      '@id': businessId,
+      name: B.name,
+      alternateName: 'The Elite spa centre | Kalyani Nagar',
+      url: siteUrl,
+      telephone: B.phone,
+      image: absoluteImage,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: B.address,
+        addressLocality: 'Pune',
+        addressRegion: 'Maharashtra',
+        postalCode: '411014',
+        addressCountry: 'IN'
+      },
+      openingHours: 'Mo-Su 07:00-02:00',
+      hasMap: B.maps,
+      sameAs: [B.maps],
+      areaServed: {
+        '@type': 'City',
+        name: 'Pune'
+      }
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: siteUrl,
+      name: B.name,
+      alternateName: 'The Elite Spa Centre Pune',
+      inLanguage: 'en-IN',
+      publisher: { '@id': businessId }
+    },
+    {
+      '@type': 'WebPage',
+      '@id': webpageId,
+      url: canonical,
+      name: pageTitle,
+      description: metaDescription,
+      inLanguage: 'en-IN',
+      isPartOf: { '@id': websiteId },
+      about: { '@id': businessId },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: absoluteImage
+      },
+      ...(pathSegments.length > 0 ? { breadcrumb: { '@id': canonical + '#breadcrumb' } } : {})
+    },
+    ...(pathSegments.length > 0
+      ? [{
+          '@type': 'BreadcrumbList',
+          '@id': canonical + '#breadcrumb',
+          itemListElement: breadcrumbItems.map((item, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: item.name,
+            item: item.item
+          }))
+        }]
+      : [])
+  ]
 };
 ---
 <html lang="en-IN">
@@ -36,9 +100,11 @@ const structuredData = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#17261f" />
+    <meta name="application-name" content={B.name} />
     <meta name="description" content={metaDescription} />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href={canonical} />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -64,7 +130,7 @@ const structuredData = {
       <a class="brand" href="/" aria-label="The Elite Spa Centre home">✧ THE ELITE <small>SPA CENTRE · KALYANI NAGAR</small></a>
       <nav aria-label="Main navigation">
         <a href="/">Home</a>
-        <a href="/services/">Treatments</a>
+        <a href="/services/">Services</a>
         <a href="/offers/">Offers</a>
         <a href="/shop/">Wellness shop</a>
         <a href="/gallery/">Gallery</a>
@@ -83,7 +149,7 @@ const structuredData = {
         </div>
         <div>
           <b>EXPLORE</b>
-          <a href="/services/">Treatments</a>
+          <a href="/services/">Services</a>
           <a href="/offers/">Suggested bundles</a>
           <a href="/shop/">Wellness shop</a>
           <a href="/gallery/">Gallery</a>
