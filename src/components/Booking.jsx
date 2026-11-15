@@ -57,7 +57,7 @@ export default function Booking({ service = 'Spa appointment' }) {
       'Booking enquiry for The Elite Spa Centre',
       'Treatment: ' + selectedService,
       ...(selectedItem ? ['Indicative price: ₹' + selectedItem.price.toLocaleString('en-IN') + ' (' + selectedItem.duration + ')'] : []),
-      'Pricing guide: standard sessions start at ₹' + SERVICE_PRICING.basePrice + ' for up to 60 minutes; each additional 30 minutes is ₹' + SERVICE_PRICING.additionalPrice + '.',
+      'Pricing guide: standard sessions start at ₹' + SERVICE_PRICING.basePrice + ' for up to 60 minutes; additional time is charged in 30-minute blocks at ₹' + SERVICE_PRICING.additionalPrice + ' per block.',
       'Name: ' + values.name.trim(),
       'Mobile: ' + values.phone.trim(),
       'Preferred date: ' + values.date,
@@ -85,7 +85,7 @@ export default function Booking({ service = 'Spa appointment' }) {
       <textarea id="booking-notes" name="notes" maxLength={500} rows={4} value={values.notes} onChange={update} />
       {error ? <p className="form-error" role="alert">{error}</p> : null}
       <button type="submit">Request booking on WhatsApp ↗</button>
-      <small id="booking-note">Standard sessions start at ₹999 for up to 60 minutes; each additional 30 minutes is ₹400. Couples and four-hand sessions are priced separately. The team confirms the final rate and availability; this form does not reserve an appointment.</small>
+      <small id="booking-note">Standard sessions start at ₹999 for up to 60 minutes; additional time is charged in 30-minute blocks at ₹400 per block. Couples and four-hand sessions are priced separately. The team confirms the final rate and availability; this form does not reserve an appointment.</small>
     </form>
   );
 }
