@@ -85,6 +85,24 @@ const serviceDescriptions = {
   'mini-reset': 'A 20-minute mini relaxation session for a shorter pause in your day. Tell the team which area you would like them to focus on and your preferred pressure.'
 };
 
+export const SERVICE_PRICING = {
+  basePrice: 999,
+  baseMinutes: 60,
+  additionalMinutes: 30,
+  additionalPrice: 400,
+  couplesBasePrice: 1999,
+  fourHandBasePrice: 1499
+};
+
+export function getServicePrice(slug, duration) {
+  const minutes = Number.parseInt(duration, 10) || SERVICE_PRICING.baseMinutes;
+  const extraBlocks = Math.ceil(Math.max(0, minutes - SERVICE_PRICING.baseMinutes) / SERVICE_PRICING.additionalMinutes);
+  const durationPrice = SERVICE_PRICING.basePrice + extraBlocks * SERVICE_PRICING.additionalPrice;
+  if (slug === 'couples') return SERVICE_PRICING.couplesBasePrice + extraBlocks * SERVICE_PRICING.additionalPrice;
+  if (slug === 'four-hand') return SERVICE_PRICING.fourHandBasePrice + extraBlocks * SERVICE_PRICING.additionalPrice;
+  return durationPrice;
+}
+
 export const S = [
   ['signature-relaxation', 'Signature Relaxation Massage', '60 min', 999, 'Massage', pex(5240675)],
   ['swedish', 'Swedish Massage', '60 min', 1499, 'Massage', uns('photo-1544161515-4ab6ce6db874')],
@@ -112,17 +130,27 @@ export const S = [
   ['candle', 'Warm Candle Oil Massage', '60 min', 1899, 'Massage', pex(7795767)],
   ['scalp', 'Scalp & Hair Spa Ritual', '45 min', 1199, 'Skin Care', uns('photo-1608248543803-ba4f8c70ae0b')],
   ['mini-reset', 'Mini Relaxation Session', '20 min', 499, 'Express', uns('photo-1544161515-4ab6ce6db874')]
-].map(([slug, name, duration, price, category, image]) => ({
-  slug,
-  name,
-  duration,
-  price,
-  category,
-  image: serviceImages[slug] || image,
-  video: serviceVideos[slug]?.src,
-  videoPoster: serviceImages[slug] || image,
-  description: serviceDescriptions[slug] || name + ' at The Elite Spa Centre in Kalyani Nagar, Pune. Discuss your preferences and suitability with the team before requesting an appointment.'
-}));
+].map(([slug, name, duration, _previousPrice, category, image]) => {
+  const price = getServicePrice(slug, duration);
+  const priceQualifier = slug === 'couples'
+    ? 'per couple'
+    : slug === 'four-hand'
+      ? '60 min · two therapists'
+      : 'listed duration';
+  return {
+    slug,
+    name,
+    duration,
+    price,
+    priceQualifier,
+    pricingNote: 'Additional 30 minutes: +₹400. Please confirm the final rate before booking.',
+    category,
+    image: serviceImages[slug] || image,
+    video: serviceVideos[slug]?.src,
+    videoPoster: serviceImages[slug] || image,
+    description: serviceDescriptions[slug] || name + ' at The Elite Spa Centre in Kalyani Nagar, Pune. Discuss your preferences and suitability with the team before requesting an appointment.'
+  };
+});
 
 const products = [
   ['Aromatherapy Massage Oil · 500 ml', 599, 'Massage Oils'],
