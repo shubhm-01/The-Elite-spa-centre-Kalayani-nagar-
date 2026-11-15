@@ -135,7 +135,7 @@ export const S = [
   const priceQualifier = slug === 'couples'
     ? 'per couple'
     : slug === 'four-hand'
-      ? '60 min · two therapists'
+      ? 'two therapists'
       : 'starting rate';
   return {
     slug,
