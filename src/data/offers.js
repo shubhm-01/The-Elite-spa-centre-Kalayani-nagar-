@@ -7,42 +7,42 @@ const product = (name) => P.find((item) => item.name === name);
 export const OFFERS = [
   {
     id: 'everyday-reset',
-    code: 'ELITE1499',
+    code: 'ELITE1699',
     title: 'The Everyday Reset',
     eyebrow: 'MOST-LOVED RESET',
     description: 'A full-body pause followed by a focused head, neck and shoulder ritual.',
     items: [service('signature-relaxation').name, service('head-shoulder').name],
-    regularPrice: 1698, offerPrice: 1499, savings: 199,
+    regularPrice: service('signature-relaxation').price + service('head-shoulder').price, offerPrice: 1699, savings: service('signature-relaxation').price + service('head-shoulder').price - 1699,
     image: service('signature-relaxation').image, kind: 'treatment'
   },
   {
     id: 'glow-ritual',
-    code: 'GLOW2499',
+    code: 'GLOW1699',
     title: 'The Glow Ritual',
     eyebrow: 'SKIN & BODY CARE',
     description: 'Pair a facial skincare ritual with a body scrub for a head-to-toe refresh.',
     items: [service('facial').name, service('body-scrub').name],
-    regularPrice: 2798, offerPrice: 2499, savings: 299,
+    regularPrice: service('facial').price + service('body-scrub').price, offerPrice: 1699, savings: service('facial').price + service('body-scrub').price - 1699,
     image: service('facial').image, kind: 'treatment'
   },
   {
     id: 'couple-retreat',
-    code: 'COUPLE4499',
+    code: 'COUPLE3499',
     title: 'The Couple Retreat',
     eyebrow: 'FOR TWO',
     description: 'A shared spa ritual plus two foot-spa sessions, subject to room and therapist availability.',
     items: [service('couples').name, 'Two ' + service('foot-spa').name + ' sessions'],
-    regularPrice: 4997, offerPrice: 4499, savings: 498,
+    regularPrice: service('couples').price + (2 * service('foot-spa').price), offerPrice: 3499, savings: service('couples').price + (2 * service('foot-spa').price) - 3499,
     image: service('couples').image, kind: 'treatment'
   },
   {
     id: 'deep-unwind',
-    code: 'UNWIND3299',
+    code: 'UNWIND2099',
     title: 'The Deep Unwind',
     eyebrow: 'LONGER SPA ESCAPE',
     description: 'A warm-stone ritual paired with aromatic-oil massage for a longer spa break.',
     items: [service('hot-stone').name, service('aromatherapy').name],
-    regularPrice: 3798, offerPrice: 3299, savings: 499,
+    regularPrice: service('hot-stone').price + service('aromatherapy').price, offerPrice: 2099, savings: service('hot-stone').price + service('aromatherapy').price - 2099,
     image: service('hot-stone').image, kind: 'treatment'
   },
   {
