@@ -136,7 +136,7 @@ export const S = [
     ? 'per couple'
     : slug === 'four-hand'
       ? '60 min · two therapists'
-      : 'listed duration';
+      : 'starting rate';
   return {
     slug,
     name,
