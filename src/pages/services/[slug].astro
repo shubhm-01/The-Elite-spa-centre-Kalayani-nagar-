@@ -31,6 +31,7 @@ const bookingHref = '/booking/?service=' + encodeURIComponent(service.slug);
         </div>
       ) : null}
       <h2>Starting at ₹{price}</h2>
+      <p class="service-price-note">{service.duration} · {service.priceQualifier}. Additional time is charged in 30-minute blocks: +₹400 per block.</p>
       <a class="btn" href={bookingHref}>Request this treatment</a>
     </div>
   </section>

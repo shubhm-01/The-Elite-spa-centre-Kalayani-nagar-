@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { S } from '../data/catalog.js';
+import { S, SERVICE_PRICING } from '../data/catalog.js';
 
 const initialValues = { name: '', phone: '', date: '', time: '', notes: '' };
 
@@ -15,6 +15,7 @@ export default function Booking({ service = 'Spa appointment' }) {
   const [selectedService, setSelectedService] = useState(service);
   const [today, setToday] = useState('');
   const [error, setError] = useState('');
+  const selectedItem = S.find((item) => item.name === selectedService);
 
   useEffect(() => {
     setToday(localDateTime().date);
@@ -55,6 +56,8 @@ export default function Booking({ service = 'Spa appointment' }) {
     const message = [
       'Booking enquiry for The Elite Spa Centre',
       'Treatment: ' + selectedService,
+      ...(selectedItem ? ['Indicative price: ₹' + selectedItem.price.toLocaleString('en-IN') + ' (' + selectedItem.duration + ')'] : []),
+      'Pricing guide: standard sessions start at ₹' + SERVICE_PRICING.basePrice + ' for up to 60 minutes; additional time is charged in 30-minute blocks at ₹' + SERVICE_PRICING.additionalPrice + ' per block.',
       'Name: ' + values.name.trim(),
       'Mobile: ' + values.phone.trim(),
       'Preferred date: ' + values.date,
@@ -69,7 +72,7 @@ export default function Booking({ service = 'Spa appointment' }) {
 
   return (
     <form className="form" onSubmit={submit}>
-      <p className="selected-service" aria-live="polite">Selected treatment: <strong>{selectedService}</strong></p>
+      <p className="selected-service" aria-live="polite">Selected treatment: <strong>{selectedService}</strong>{selectedItem ? <><br /><span>Indicative price: ₹{selectedItem.price.toLocaleString('en-IN')} · {selectedItem.duration}</span></> : null}</p>
       <label htmlFor="booking-name">Name</label>
       <input id="booking-name" name="name" autoComplete="name" maxLength={80} required value={values.name} onChange={update} />
       <label htmlFor="booking-phone">Mobile number</label>
@@ -82,7 +85,7 @@ export default function Booking({ service = 'Spa appointment' }) {
       <textarea id="booking-notes" name="notes" maxLength={500} rows={4} value={values.notes} onChange={update} />
       {error ? <p className="form-error" role="alert">{error}</p> : null}
       <button type="submit">Request booking on WhatsApp ↗</button>
-      <small id="booking-note">Your request opens WhatsApp. The spa must confirm availability and final pricing; no appointment is reserved by this form.</small>
+      <small id="booking-note">Standard sessions start at ₹999 for up to 60 minutes; additional time is charged in 30-minute blocks at ₹400 per block. Couples and four-hand sessions are priced separately. The team confirms the final rate and availability; this form does not reserve an appointment.</small>
     </form>
   );
 }

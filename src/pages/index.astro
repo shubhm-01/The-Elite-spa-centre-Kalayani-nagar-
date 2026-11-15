@@ -79,7 +79,7 @@ const moodImage = 'https://images.pexels.com/photos/7031704/pexels-photo-7031704
 
     <section class="treatment-section">
       <div class="section-heading">
-        <div><span class="eyebrow">THE TREATMENT EDIT</span><h2>Find your <i>ritual.</i></h2><p>Explore a few of the experiences on our treatment menu.</p></div>
+        <div><span class="eyebrow">THE TREATMENT EDIT</span><h2>Find your <i>ritual.</i></h2><p>Treatments start at ₹999 for up to 60 minutes. Extra time is ₹400 per 30-minute block.</p></div>
         <a class="text-link" href="/services/">ALL {S.length} TREATMENTS ↗</a>
       </div>
       <div class="cards service-cards">
@@ -89,7 +89,7 @@ const moodImage = 'https://images.pexels.com/photos/7031704/pexels-photo-7031704
             <div class="card-body">
               <span class="eyebrow">{service.category} · {service.duration}</span>
               <h3>{service.name}</h3>
-              <p>From ₹{service.price.toLocaleString('en-IN')} · indicative starting price</p>
+              <p>₹{service.price.toLocaleString('en-IN')} · {service.priceQualifier}</p>
               <span class="text-link">DISCOVER TREATMENT ↗</span>
             </div>
           </a>
