@@ -143,7 +143,7 @@ export const S = [
     duration,
     price,
     priceQualifier,
-    pricingNote: 'Additional 30 minutes: +₹400. Please confirm the final rate before booking.',
+    pricingNote: 'Additional time is charged in 30-minute blocks: +₹400 per block. Please confirm the final rate before booking.',
     category,
     image: serviceImages[slug] || image,
     video: serviceVideos[slug]?.src,
