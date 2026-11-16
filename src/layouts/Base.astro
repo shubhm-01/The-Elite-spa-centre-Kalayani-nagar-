@@ -5,7 +5,9 @@ import { B } from '../data/catalog.js';
 const {
   title = 'Luxury Spa & Wellness in Kalyani Nagar, Pune',
   description = 'Explore massage, spa and wellness experiences at The Elite Spa Centre in Kalyani Nagar, Pune. Enquire by phone or WhatsApp.',
-  image = 'https://images.pexels.com/photos/7031704/pexels-photo-7031704.jpeg?auto=compress&w=1260&h=750&dpr=1'
+  image = 'https://images.pexels.com/photos/7031704/pexels-photo-7031704.jpeg?auto=compress&w=1260&h=750&dpr=1',
+  imageAlt = 'Spa and wellness inspiration at The Elite Spa Centre in Kalyani Nagar, Pune',
+  extraStructuredData = []
 } = Astro.props;
 
 const siteUrl = new URL('/', Astro.site).href;
@@ -44,19 +46,37 @@ const structuredData = {
       logo: brandLogo,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: B.address,
+        streetAddress: B.streetAddress,
         addressLocality: 'Pune',
         addressRegion: 'Maharashtra',
-        postalCode: '411014',
+        postalCode: B.postalCode,
         addressCountry: 'IN'
       },
-      openingHours: 'Mo-Su 07:00-02:00',
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: B.latitude,
+        longitude: B.longitude
+      },
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '08:00',
+          closes: '23:59'
+        },
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '00:00',
+          closes: '03:00'
+        }
+      ],
       hasMap: B.maps,
       sameAs: [B.maps],
-      areaServed: {
-        '@type': 'City',
-        name: 'Pune'
-      }
+      areaServed: [
+        { '@type': 'Place', name: 'Kalyani Nagar, Pune' },
+        { '@type': 'City', name: 'Pune' }
+      ]
     },
     {
       '@type': 'WebSite',
@@ -93,7 +113,8 @@ const structuredData = {
             item: item.item
           }))
         }]
-      : [])
+      : []),
+    ...(Array.isArray(extraStructuredData) ? extraStructuredData : [])
   ]
 };
 ---
@@ -103,6 +124,7 @@ const structuredData = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#17261f" />
     <meta name="application-name" content={B.name} />
+    <meta name="author" content={B.name} />
     <meta name="google-site-verification" content="Y5xRYqZLRgu8vEVEo1Qgpv3PZiiriAjXYeESdLXu1yY" />
     <meta name="description" content={metaDescription} />
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -119,13 +141,14 @@ const structuredData = {
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={metaDescription} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={brandLogo} />
-    <meta property="og:image:alt" content="Elite Spa botanical logo with green leaves, spa stones and a white plumeria flower" />
+    <meta property="og:image" content={absoluteImage} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:locale" content="en_IN" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={metaDescription} />
-    <meta name="twitter:image" content={brandLogo} />
+    <meta name="twitter:image" content={absoluteImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
@@ -162,7 +185,7 @@ const structuredData = {
         <div>
           <b>PLAN A VISIT</b>
           <p>{B.address}</p>
-          <p>Daily · 7:00 AM – 2:00 AM</p>
+          <p>Daily · {B.hours}</p>
           <a href={B.maps} target="_blank" rel="noopener noreferrer">View on Google Maps ↗</a>
           <a href="tel:+919199561258">+91 91995 61258</a>
           <a href="https://wa.me/919199561258?text=Hello%20The%20Elite%20Spa%20Centre" target="_blank" rel="noopener noreferrer">WhatsApp the team ↗</a>
