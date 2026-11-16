@@ -3,8 +3,8 @@ import Base from '../../layouts/Base.astro';
 import { B } from '../../data/catalog.js';
 ---
 <Base
-  title="Contact The Elite Spa Centre"
-  description="Contact The Elite Spa Centre in Kalyani Nagar, Pune by phone or WhatsApp. Find the spa at Vascon Mariplex Mall and check opening hours before visiting."
+  title="Spa Location & Contact in Kalyani Nagar, Pune"
+  description="Find The Elite Spa Centre at Vascon Mariplex Mall, Kalyani Nagar, Pune. View directions, phone number and daily opening hours."
 >
   <section class="page">
     <small>WE'RE HERE FOR YOU</small>
@@ -14,8 +14,8 @@ import { B } from '../../data/catalog.js';
     <h2>{B.name}</h2>
     <p>{B.address}</p>
     <p>Phone &amp; WhatsApp: <a href="tel:+919199561258">+91 9199561258</a></p>
-    <p>Every day · 7:00 AM – 2:00 AM</p>
-    <a class="btn" href={B.maps}>Google Maps directions ↗</a>
-    <iframe title="Map showing the spa's location in Kalyani Nagar, Pune" src="https://www.google.com/maps?q=Vascon%20Mariplex%20Mall%20Kalyani%20Nagar%20Pune&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Every day · {B.hours}</p>
+    <a class="btn" href={B.maps} target="_blank" rel="noopener noreferrer">Google Maps directions ↗</a>
+    <iframe title="Map showing The Elite Spa Centre at Vascon Mariplex Mall, Kalyani Nagar, Pune" src={'https://www.google.com/maps?q=' + B.latitude + ',' + B.longitude + '&z=17&output=embed'} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </main>
 </Base>
