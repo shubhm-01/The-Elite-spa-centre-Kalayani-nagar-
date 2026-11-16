@@ -6,7 +6,7 @@ export const B = {
   postalCode: '411014',
   latitude: 18.5457,
   longitude: 73.9066,
-  hours: '8:00 AM – 3:00 AM',
+  hours: '8:00 AM – 3:00 AM the following day',
   maps: 'https://maps.google.com/maps?cid=684197034070702602'
 };
 
