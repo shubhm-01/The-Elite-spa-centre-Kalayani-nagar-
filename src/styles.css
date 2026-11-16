@@ -290,8 +290,8 @@ iframe{display:block;width:100%;min-height:360px;border:0;margin-top:25px}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #ad8449;outline-offset:4px}
 .hero a:focus-visible,.page a:focus-visible{outline-color:#f3ddb1}
 @media(max-width:1050px){
- header{align-items:flex-start;flex-direction:column;gap:11px}
- nav{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:7px;scrollbar-width:thin}
+ header{align-items:stretch;flex-direction:column;gap:11px}
+ nav{width:100%;overflow:visible;flex-wrap:wrap;padding:0;scrollbar-width:auto}
  nav a{font-size:9px}
  .service-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
  .home-steps{margin-inline:calc(clamp(22px,8vw,118px)*-1)}
@@ -308,8 +308,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
  .journal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:560px){
- header{padding:14px 18px}
+ header{padding:14px 18px;gap:9px}
  .brand{font-size:12px}
+ nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:7px}
+ nav a{display:flex;align-items:center;justify-content:center;min-height:32px;padding:7px 4px;text-align:center;white-space:normal;font-size:9px;line-height:1.3}
+ nav .nav-book{padding:7px 4px}
+ .floating-actions{display:none}
+ html{scroll-padding-top:190px}
  .hero{min-height:660px;padding:72px 23px 80px}
  .hero h1{font-size:58px;letter-spacing:-1.5px}
  .hero-copy>p:not(.hours):not(.hero-overline){font-size:14px}
