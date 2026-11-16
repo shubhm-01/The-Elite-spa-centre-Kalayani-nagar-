@@ -1,9 +1,13 @@
 export const B = {
   name: 'The Elite Spa Centre',
   phone: '+919199561258',
-  address: 'Ground Floor, Vascon Mariplex Mall, Cybage Tower Rd, next to Taco Bell, Marigold Complex, Kalyani Nagar, Pune, Maharashtra 411014',
-  hours: 'Every day · 7:00 AM – 2:00 AM',
-  maps: 'https://maps.app.goo.gl/8PpKLABUKdKyjYdv6'
+  streetAddress: 'Ground Floor, Vascon Mariplex Mall, Cybage Tower Road, next to Taco Bell, Marigold Complex, Kalyani Nagar',
+  address: 'Ground Floor, Vascon Mariplex Mall, Cybage Tower Road, next to Taco Bell, Marigold Complex, Kalyani Nagar, Pune, Maharashtra 411014',
+  postalCode: '411014',
+  latitude: 18.5457,
+  longitude: 73.9066,
+  hours: '8:00 AM – 3:00 AM',
+  maps: 'https://maps.google.com/maps?cid=684197034070702602'
 };
 
 const pex = (id) => 'https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?w=1200';
