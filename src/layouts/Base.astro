@@ -13,7 +13,9 @@ const {
 const siteUrl = new URL('/', Astro.site).href;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const pageTitle = title + ' | ' + B.name;
-const metaDescription = description.length > 160 ? description.slice(0, 157).trimEnd() + '…' : description;
+const metaDescription = description.length > 160
+  ? description.slice(0, 160).replace(/\s+\S*$/, '').trimEnd()
+  : description;
 const absoluteImage = image.startsWith('http') ? image : new URL(image, Astro.site).href;
 const brandLogo = new URL('/images/elite-spa-logo.webp', Astro.site).href;
 const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
