@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { S } from '../../data/catalog.js';
+import { S, whatsappUrl } from '../../data/catalog.js';
 
 export function getStaticPaths() {
   return S.map((service) => ({
@@ -9,9 +9,13 @@ export function getStaticPaths() {
   }));
 }
 
-const service = Astro.props.service;
+const { service } = Astro.props;
 const price = new Intl.NumberFormat('en-IN').format(service.price);
 const bookingHref = '/booking/?service=' + encodeURIComponent(service.slug);
+const waHref = whatsappUrl(
+  `Hello The Elite Spa Centre, I would like to book the ${service.name} (${service.duration}, starting at ₹${price}) at your Kalyani Nagar sanctuary.`
+);
+
 const serviceSchema = {
   '@type': 'Service',
   '@id': new URL('/services/' + service.slug + '/', Astro.site).href + '#service',
@@ -24,35 +28,102 @@ const serviceSchema = {
 ---
 <Base
   title={service.name + ' in Kalyani Nagar, Pune'}
-  description={service.description + ' Available by enquiry at The Elite Spa Centre, Kalyani Nagar, Pune.'}
+  description={service.description + ' Book at The Elite Spa Centre, Vascon Mariplex Mall, Kalyani Nagar, Pune.'}
+  image={service.image}
   extraStructuredData={[serviceSchema]}
 >
-  <section class="page service-hero">
-    <img class="service-detail-image" src={service.image} alt={service.name + ' representative treatment photograph'} />
-    <div>
-      <small>{service.category} · {service.duration}</small>
-      <h1>{service.name}</h1>
-      <p>{service.description}</p>
-      {service.video ? (
-        <div class="treatment-video">
-          <small>SEE A TREATMENT PREVIEW</small>
-          <video controls playsinline preload="none" poster={service.videoPoster} aria-label={service.name + ' treatment preview'}>
-            <source src={service.video} type="video/mp4" />
-            Your browser does not support embedded video.
-          </video>
-          <p class="media-caption">A visual preview of the treatment style.</p>
+  <section class="pt-32 pb-16 sm:pt-40 sm:pb-24 max-w-[1380px] mx-auto px-5 sm:px-8">
+    <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-xs text-[#B0AEA6] mb-8">
+      <a href="/" class="hover:text-[#D4AF37]">Home</a>
+      <span>/</span>
+      <a href="/services/" class="hover:text-[#D4AF37]">Rituals</a>
+      <span>/</span>
+      <span class="text-[#F5F5F0]">{service.name}</span>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      <div class="lg:col-span-6 space-y-6">
+        <div class="rounded-3xl overflow-hidden border border-[#D4AF37]/25 bg-[#121215] aspect-[4/3]">
+          <img
+            src={service.image}
+            alt={service.name}
+            referrerPolicy="no-referrer"
+            class="w-full h-full object-cover"
+          />
         </div>
-      ) : null}
-      <h2>Starting at ₹{price}</h2>
-      <p class="service-price-note">{service.duration} · {service.priceQualifier}. Additional time is charged in 30-minute blocks: +₹400 per block.</p>
-      <a class="btn" href={bookingHref}>Request this treatment</a>
+
+        {service.video ? (
+          <div class="rounded-3xl overflow-hidden border border-[#D4AF37]/20 bg-[#121215] p-4 space-y-3">
+            <span class="block text-[11px] font-semibold tracking-[0.16em] uppercase text-[#D4AF37]">
+              Ambient Ritual Preview
+            </span>
+            <video
+              controls
+              playsinline
+              preload="none"
+              poster={service.videoPoster}
+              aria-label={service.name + ' ambient preview'}
+              class="w-full rounded-2xl aspect-video object-cover bg-[#09090B]"
+            >
+              <source src={service.video} type="video/mp4" />
+            </video>
+          </div>
+        ) : null}
+      </div>
+
+      <div class="lg:col-span-6 glass-panel rounded-3xl p-7 sm:p-10 space-y-6">
+        <div class="flex items-center gap-3 text-xs font-semibold tracking-[0.16em] uppercase text-[#D4AF37]">
+          <span>{service.category}</span>
+          <span aria-hidden="true">·</span>
+          <span>{service.duration}</span>
+        </div>
+
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-medium text-[#F5F5F0] leading-[1.06]">
+          {service.name}
+        </h1>
+
+        <p class="text-base text-[#B0AEA6] leading-relaxed">
+          {service.description}
+        </p>
+
+        <div class="py-6 border-y border-[#F5F5F0]/10 flex flex-wrap items-baseline justify-between gap-4">
+          <div>
+            <span class="block text-xs tracking-[0.14em] uppercase text-[#B0AEA6] mb-1">
+              Starting Rate · {service.priceQualifier}
+            </span>
+            <strong class="font-serif text-5xl font-semibold text-[#D4AF37] tabular-nums">
+              ₹{price}
+            </strong>
+          </div>
+          <p class="text-xs text-[#B0AEA6] max-w-xs leading-relaxed">
+            {service.pricingNote}
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 pt-2">
+          <a
+            href={waHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta-gold-pulse flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-[#D4AF37] hover:bg-[#E8CB6D] text-[#09090B] text-xs font-bold tracking-[0.1em] uppercase transition-colors"
+          >
+            Book on WhatsApp ↗
+          </a>
+          <a
+            href={bookingHref}
+            class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-[#D4AF37]/40 hover:border-[#D4AF37] text-[#F5F5F0] text-xs font-semibold tracking-[0.1em] uppercase transition-colors"
+          >
+            Schedule Date &amp; Time
+          </a>
+        </div>
+
+        <div class="pt-4 space-y-2 text-xs text-[#B0AEA6]">
+          <p class="text-[#F5F5F0]/90 font-medium">The Elite Sanctuary Standard</p>
+          <p class="leading-relaxed">
+            Every ritual begins with a personal consultation on pressure, botanical oil blends, and target tension areas inside a private, hygienically prepared suite at Vascon Mariplex Mall, Kalyani Nagar. Open daily until 3:00 AM.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
-  <main id="main-content">
-    <h2>Your Elite experience</h2>
-    <p>Our team will discuss your preferences, pressure level and comfort considerations before the session. All treatments are professional, non-sexual wellness services for adults, with consent, appropriate draping and clear boundaries.</p>
-    <p>Final rate and appointment availability are confirmed on WhatsApp.</p>
-    <a class="btn" href={bookingHref}>Continue to booking</a>
-  </main>
-  <p class="media-note">Treatment visuals are illustrative. Please confirm the exact service setup, products and availability with the centre.</p>
 </Base>

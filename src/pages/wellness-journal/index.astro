@@ -3,36 +3,47 @@ import Base from '../../layouts/Base.astro';
 import { JOURNAL } from '../../data/journal.js';
 ---
 <Base
-  title="Wellness Journal | Spa & Massage Guides in Kalyani Nagar, Pune"
-  description="Read practical spa visit guides, massage style explainers and comfort tips from The Elite Spa Centre in Kalyani Nagar, Pune."
+  title="The Wellness Journal | Spa & Massage Guides, Pune"
+  description="Curated guides on massage rituals, pressure customization, couples spa evenings, and botanical self-care from The Elite Spa Centre in Kalyani Nagar, Pune."
 >
-  <section class="page">
-    <span class="eyebrow-light">THE ELITE WELLNESS JOURNAL</span>
-    <h1>Read, pause &amp; <i>reset.</i></h1>
-    <p>Simple guides to help you explore massage styles, plan a spa visit and communicate your comfort preferences.</p>
+  <section class="pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-[#D4AF37]/15 bg-gradient-to-b from-[#121215] to-[#09090B]">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8">
+      <p class="text-xs font-semibold tracking-[0.22em] uppercase text-[#D4AF37] mb-3">
+        The Wellness Journal
+      </p>
+      <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-medium text-[#F5F5F0] leading-[1.04] mb-5">
+        Read, Pause &amp; <em class="italic font-normal text-[#D4AF37]">Reset.</em>
+      </h1>
+      <p class="text-base sm:text-lg text-[#B0AEA6] max-w-2xl leading-relaxed">
+        Editorial notes on restorative bodywork, essential oil pairings, and getting the most out of every visit to our Kalyani Nagar sanctuary.
+      </p>
+    </div>
   </section>
-  <main id="main-content">
-    <section class="journal-intro">
-      <span class="eyebrow">A LITTLE KNOWLEDGE BEFORE YOU UNWIND</span>
-      <h2>Thoughtful notes for <i>your next visit.</i></h2>
-      <p>Our journal is a practical starting point for questions you may want to ask the spa team. It is general information, not medical advice or a promise about treatment suitability.</p>
-    </section>
-    <section class="journal-grid journal-grid-full">
+
+  <main class="max-w-[1380px] mx-auto px-5 sm:px-8 py-16 sm:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
       {JOURNAL.map((article, index) => (
-        <a class="journal-card" href={'/wellness-journal/' + article.slug + '/'}>
-          <span class="journal-number">0{index + 1}</span>
-          <span class="eyebrow">{article.category}</span>
-          <h2>{article.title}</h2>
-          <p>{article.excerpt}</p>
-          <b>READ ARTICLE ↗</b>
+        <a
+          href={`/wellness-journal/${article.slug}/`}
+          class="group glass-panel rounded-3xl p-8 flex flex-col justify-between hover:border-[#D4AF37]/60 transition-colors"
+        >
+          <div>
+            <div class="flex items-center justify-between text-xs tracking-[0.16em] uppercase text-[#D4AF37] mb-5">
+              <span>{article.category}</span>
+              <span class="font-serif text-xl text-[#D4AF37]/70">0{index + 1}</span>
+            </div>
+            <h2 class="font-serif text-3xl font-medium text-[#F5F5F0] group-hover:text-[#E8CB6D] transition-colors mb-3">
+              {article.title}
+            </h2>
+            <p class="text-sm text-[#B0AEA6] leading-relaxed mb-6">
+              {article.excerpt}
+            </p>
+          </div>
+          <span class="text-xs font-semibold tracking-[0.14em] uppercase text-[#D4AF37]">
+            Read Editorial ↗
+          </span>
         </a>
       ))}
-    </section>
-    <section class="banner">
-      <span class="eyebrow">READY TO EXPLORE?</span>
-      <h2>Find your <i>ritual.</i></h2>
-      <p>Browse the full treatment menu or ask the team a question before requesting a time.</p>
-      <a class="btn" href="/services/">Explore treatments ↗</a>
-    </section>
+    </div>
   </main>
 </Base>

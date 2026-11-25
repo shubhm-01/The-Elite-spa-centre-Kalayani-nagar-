@@ -1,19 +1,29 @@
 export const B = {
   name: 'The Elite Spa Centre',
   phone: '+919199561258',
+  phoneDisplay: '+91 91995 61258',
+  whatsappNumber: '919199561258',
   streetAddress: 'Ground Floor, Vascon Mariplex Mall, Cybage Tower Road, next to Taco Bell, Marigold Complex, Kalyani Nagar',
+  shortAddress: 'Vascon Mariplex Mall, Cybage Tower Road, next to Taco Bell, Kalyani Nagar, Pune 411014',
   address: 'Ground Floor, Vascon Mariplex Mall, Cybage Tower Road, next to Taco Bell, Marigold Complex, Kalyani Nagar, Pune, Maharashtra 411014',
   postalCode: '411014',
   latitude: 18.5457,
   longitude: 73.9066,
-  hours: '8:00 AM – 3:00 AM the following day',
-  maps: 'https://maps.google.com/maps?cid=684197034070702602'
+  hours: '8:00 AM – 3:00 AM',
+  hoursFull: 'Open Daily · 8:00 AM – 3:00 AM (Late Night Spa)',
+  maps: 'https://maps.google.com/maps?cid=684197034070702602',
+  heroPoster: 'https://images.pexels.com/photos/7031704/pexels-photo-7031704.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  heroVideos: [
+    'https://videos.pexels.com/video-files/5793219/5793219-uhd_2560_1440_25fps.mp4',
+    'https://videos.pexels.com/video-files/6750877/6750877-hd_1920_1080_25fps.mp4',
+    'https://cdn.pixabay.com/video/2015/09/06/701-138504820_medium.mp4'
+  ]
 };
 
-const pex = (id) => 'https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?w=1200';
-const uns = (id) => 'https://images.unsplash.com/' + id + '?auto=format&fit=crop&w=1200&q=85';
+export function whatsappUrl(message) {
+  return `https://wa.me/${B.whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
 
-// Individually selected Pexels photographs. These are illustrative stock images, not photographs of this venue.
 const serviceImages = {
   'signature-relaxation': 'https://images.pexels.com/photos/3881009/pexels-photo-3881009.jpeg?auto=compress&cs=tinysrgb&w=1200',
   'swedish': 'https://images.pexels.com/photos/3865792/pexels-photo-3865792.jpeg?auto=compress&cs=tinysrgb&w=1200',
@@ -43,7 +53,6 @@ const serviceImages = {
   'mini-reset': 'https://images.pexels.com/photos/6899538/pexels-photo-6899538.jpeg?auto=compress&cs=tinysrgb&w=1200'
 };
 
-// Treatment previews are free-to-use Pexels clips; only services with relevant footage receive a player.
 const serviceVideos = {
   'signature-relaxation': { src: 'https://videos.pexels.com/video-files/5793219/5793219-uhd_2560_1440_25fps.mp4' },
   'swedish': { src: 'https://videos.pexels.com/video-files/5793212/5793212-uhd_2560_1440_25fps.mp4' },
@@ -61,32 +70,32 @@ const serviceVideos = {
 };
 
 const serviceDescriptions = {
-  'signature-relaxation': 'A 60-minute relaxation massage enquiry in Kalyani Nagar, Pune, with flowing movements and time to settle into a calmer pace. Tell the team your preferred pressure and areas to avoid before the session.',
-  swedish: 'A 60-minute Swedish-style massage using familiar flowing massage movements. Discuss your pressure preference, comfort and any areas you would like the therapist to avoid when you request an appointment.',
-  'deep-tissue': 'A 60-minute focused massage enquiry for guests who prefer firmer pressure. Pressure should remain comfortable; share your preferences and any relevant injuries or health concerns with the spa team before booking.',
-  aromatherapy: 'A 60-minute aromatherapy massage enquiry combining a relaxing massage with aromatic oils. Ask which oils are available and mention any fragrance sensitivities or allergies before confirming.',
-  'hot-stone': 'A 75-minute warm-stone relaxation ritual. Ask the team about stone temperature and suitability, and let the therapist know immediately if any warmth feels uncomfortable.',
-  balinese: 'A 60-minute Balinese-inspired massage enquiry with flowing full-body movements. Your therapist can discuss pressure and comfort preferences before the session begins.',
-  thai: 'A 60-minute Thai-inspired massage enquiry that may include assisted stretching and compression. Tell the team about your mobility, comfort and pressure preferences before requesting a session.',
-  'sports-recovery': 'A 60-minute sports recovery massage enquiry for active guests. Share your activity level and preferred pressure; this is a wellness service and is not a substitute for assessment or treatment by a healthcare professional.',
-  couples: 'A 60-minute couples spa enquiry for two guests. Each guest can discuss individual pressure and comfort preferences; confirm room availability and the final package price with the team.',
-  'head-shoulder': 'A 30-minute head, neck and shoulder massage enquiry for a shorter wellness break. Tell the therapist about your pressure preference and any areas of discomfort before the session.',
-  'foot-reflexology': 'A 30-minute foot massage and reflexology-style wellness enquiry. Share any foot sensitivity, skin concerns or health conditions with the spa team before confirming suitability.',
-  'back-relief': 'A 30-minute back and neck massage enquiry focused on your preferred comfort and pressure. For persistent pain or an injury, seek advice from a qualified healthcare professional before booking.',
-  prenatal: 'A 45-minute prenatal wellness enquiry only. Please consult your maternity healthcare professional first and ask the spa to confirm therapist training, positioning and suitability before requesting an appointment.',
-  lymphatic: 'A 45-minute gentle lymphatic-style wellness enquiry. This service is not medical treatment; consult your healthcare professional and ask the spa to confirm qualifications and suitability before booking.',
-  'body-polish': 'A 60-minute body polishing ritual enquiry. Ask which products and exfoliation options are available, and mention sensitive skin or known ingredient allergies before your visit.',
-  'body-scrub': 'A 45-minute body scrub ritual enquiry using an exfoliating body-care product. Discuss skin sensitivity, preferred products and any ingredient allergies with the team before confirming.',
-  'body-wrap': 'A 60-minute hydrating body wrap enquiry. Ask about the products used and share any skin sensitivities or ingredient allergies before the session.',
-  'foot-spa': 'A 45-minute foot spa enquiry combining a relaxing foot-care ritual with time to unwind. Let the team know about skin sensitivity or foot concerns before confirming.',
-  facial: 'A 60-minute facial skincare ritual enquiry. Ask which products are used and share your skin type, sensitivities and known allergies with the team before the appointment.',
-  'four-hand': 'A 60-minute four-hand relaxation massage enquiry with two therapists. Confirm therapist availability and discuss pressure, draping and personal comfort preferences before booking.',
-  'executive-reset': 'A 45-minute executive reset enquiry for a focused wellness break. Tell the team which areas you would like prioritised and your preferred pressure before the session.',
-  abhyanga: 'A 60-minute Abhyanga-inspired oil massage enquiry drawing on a traditional wellness ritual. Ask which oils are available and mention allergies or sensitivities before confirming.',
-  'herbal-potli': 'A 60-minute herbal potli massage enquiry using warm herbal pouches. Confirm pouch temperature and ingredients with the team, and mention any allergies or skin sensitivities.',
-  candle: 'A 60-minute warm candle-oil massage enquiry. Ask which oils are used and confirm a comfortable temperature before the session; share any fragrance or ingredient sensitivities.',
-  scalp: 'A 45-minute scalp and hair spa ritual enquiry. Ask about the products available and mention scalp sensitivities, skin conditions or ingredient allergies before booking.',
-  'mini-reset': 'A 20-minute mini relaxation session for a shorter pause in your day. Tell the team which area you would like them to focus on and your preferred pressure.'
+  'signature-relaxation': 'Our signature full-body therapy using long, flowing strokes and warm botanical oils to dissolve fatigue and restore calm.',
+  'swedish': 'Classic European rhythmic kneading and gliding strokes tailored to your preferred pressure to boost circulation and ease everyday tension.',
+  'deep-tissue': 'Slow, deliberate myofascial work targeting stubborn knots, stiff shoulders, and deep muscular tension for lasting physical release.',
+  'aromatherapy': 'Sensory full-body massage infused with pure lavender, sandalwood, or eucalyptus essential oil blends to quiet a racing mind.',
+  'hot-stone': 'Heated smooth basalt stones glide along key energy meridians, melting away deeply held muscle stiffness with radiant warmth.',
+  'balinese': 'Traditional island technique blending gentle stretches, acupressure, and rich aromatic oils for total mind-body harmony.',
+  'thai': 'Assisted passive yoga stretching and rhythmic palm compressions designed to unlock joint mobility and revitalize energy flow.',
+  'sports-recovery': 'Focused recovery bodywork for athletes and active professionals to flush lactic build-up and accelerate post-workout repair.',
+  'couples': 'A private candlelit sanctuary for two, featuring synchronized side-by-side full-body therapies tailored to each guest’s pressure preference.',
+  'head-shoulder': 'Targeted upper-body relief focusing on the scalp, temples, neck, and trapezius to erase screen fatigue and desk tension.',
+  'foot-reflexology': 'Precision acupressure across key plantar reflex zones paired with warm aromatic oils to rejuvenate tired feet and calm the nervous system.',
+  'back-relief': 'Concentrated spinal and shoulder decompression crafted for busy schedules needing rapid upper-back tension release.',
+  'prenatal': 'Nurturing side-lying maternity bodywork with gentle cushion support to soothe lower-back strain and swelling.',
+  'lymphatic': 'Feather-light, rhythmic drainage strokes designed to reduce fluid retention, refresh circulation, and leave the body feeling lighter.',
+  'body-polish': 'Luxurious fine-grain exfoliation and botanical hydration ritual that reveals radiant, velvet-smooth skin from shoulder to toe.',
+  'body-scrub': 'Mineral-rich aromatic scrub therapy to buff away dullness, stimulate micro-circulation, and deeply soften skin texture.',
+  'body-wrap': 'Cocooning mineral and botanical body mask that replenishes moisture, calms stressed skin, and restores supple luminosity.',
+  'foot-spa': 'Warm herbal soak, mineral exfoliation, and restorative lower-leg massage for complete grounding and effortless lightness.',
+  'facial': 'Bespoke deep-cleanse, lymphatic facial sculpting, and botanical hydration mask tailored to revive natural luminosity.',
+  'four-hand': 'Two master therapists move in mirrored choreography, creating an enveloping sensory flow that suspends time.',
+  'executive-reset': 'A high-impact 45-minute recalibration of the back, neck, shoulders, and scalp tailored for late workdays and post-flight recovery.',
+  'abhyanga': 'Traditional warm herbal oil therapy inspired by Ayurvedic wellness rituals to deeply nourish tissues and ground restless energy.',
+  'herbal-potli': 'Warm hand-tied aromatic herbal poultices pressed rhythmically along tense muscles to soothe stiffness and infuse botanical warmth.',
+  'candle': 'Slow-melted warm botanical soy and shea butter candle oil poured gently over the skin for an ultra-silky, aromatic massage.',
+  'scalp': 'Deeply nourishing warm oil scalp massage and botanical hair ritual to release cranial tension and restore lustrous shine.',
+  'mini-reset': 'A crisp 30-minute express sanctuary pause focused on your chosen tension area whenever you need an immediate reset.'
 };
 
 export const SERVICE_PRICING = {
@@ -95,67 +104,196 @@ export const SERVICE_PRICING = {
   additionalMinutes: 30,
   additionalPrice: 400,
   couplesBasePrice: 1999,
-  fourHandBasePrice: 1499
+  fourHandBasePrice: 1499,
+  expressBasePrice: 699
 };
 
 export function getServicePrice(slug, duration) {
+  if (slug === 'couples') {
+    const minutes = Number.parseInt(duration, 10) || 60;
+    const extraBlocks = Math.ceil(Math.max(0, minutes - 60) / 30);
+    return SERVICE_PRICING.couplesBasePrice + extraBlocks * SERVICE_PRICING.additionalPrice;
+  }
+  if (slug === 'four-hand') {
+    const minutes = Number.parseInt(duration, 10) || 60;
+    const extraBlocks = Math.ceil(Math.max(0, minutes - 60) / 30);
+    return SERVICE_PRICING.fourHandBasePrice + extraBlocks * SERVICE_PRICING.additionalPrice;
+  }
+  if (['foot-reflexology', 'head-shoulder', 'back-relief', 'mini-reset'].includes(slug)) {
+    return SERVICE_PRICING.expressBasePrice;
+  }
   const minutes = Number.parseInt(duration, 10) || SERVICE_PRICING.baseMinutes;
   const extraBlocks = Math.ceil(Math.max(0, minutes - SERVICE_PRICING.baseMinutes) / SERVICE_PRICING.additionalMinutes);
-  const durationPrice = SERVICE_PRICING.basePrice + extraBlocks * SERVICE_PRICING.additionalPrice;
-  if (slug === 'couples') return SERVICE_PRICING.couplesBasePrice + extraBlocks * SERVICE_PRICING.additionalPrice;
-  if (slug === 'four-hand') return SERVICE_PRICING.fourHandBasePrice + extraBlocks * SERVICE_PRICING.additionalPrice;
-  return durationPrice;
+  return SERVICE_PRICING.basePrice + extraBlocks * SERVICE_PRICING.additionalPrice;
 }
 
-export const S = [
-  ['signature-relaxation', 'Signature Relaxation Massage', '60 min', 999, 'Massage', pex(5240675)],
-  ['swedish', 'Swedish Massage', '60 min', 1499, 'Massage', uns('photo-1544161515-4ab6ce6db874')],
-  ['deep-tissue', 'Deep Tissue Massage', '60 min', 1799, 'Massage', uns('photo-1600334129128-685c5582fd35')],
-  ['aromatherapy', 'Aromatherapy Massage', '60 min', 1599, 'Massage', pex(7795767)],
-  ['hot-stone', 'Hot Stone Massage', '75 min', 2199, 'Massage', 'https://images.pexels.com/photos/36593691/pexels-photo-36593691.jpeg?w=1200'],
-  ['balinese', 'Balinese Massage', '60 min', 1899, 'Massage', uns('photo-1519823551278-64ac92734fb1')],
-  ['thai', 'Thai Yoga Massage', '60 min', 1799, 'Massage', uns('photo-1571019613454-1cb2f99b2d8b')],
-  ['sports-recovery', 'Sports Recovery Massage', '60 min', 1999, 'Massage', uns('photo-1517836357463-d25dfeac3438')],
-  ['couples', 'Couple Spa Ritual', '60 min', 2999, 'Couples', uns('photo-1529636798458-92182e662485')],
-  ['head-shoulder', 'Head, Neck & Shoulder', '30 min', 699, 'Express', uns('photo-1599447421416-3414500d18a5')],
-  ['foot-reflexology', 'Foot Reflexology', '30 min', 599, 'Express', 'https://images.pexels.com/photos/6628700/pexels-photo-6628700.jpeg?w=1200'],
-  ['back-relief', 'Back & Neck Massage', '30 min', 799, 'Express', uns('photo-1600334129128-685c5582fd35')],
-  ['prenatal', 'Prenatal Wellness Massage', '45 min', 1499, 'Specialised', uns('photo-1531983412531-1f49a365ffed')],
-  ['lymphatic', 'Gentle Lymphatic Wellness', '45 min', 1499, 'Specialised', uns('photo-1570172619644-dfd03ed5d881')],
-  ['body-polish', 'Full Body Polish', '60 min', 1699, 'Body Care', uns('photo-1608248543803-ba4f8c70ae0b')],
-  ['body-scrub', 'Body Scrub Ritual', '45 min', 1299, 'Body Care', uns('photo-1601049541289-9b1b7bbbfe19')],
-  ['body-wrap', 'Hydrating Body Wrap', '60 min', 1899, 'Body Care', uns('photo-1596755389378-c31d21fd1273')],
-  ['foot-spa', 'Luxury Foot Spa', '45 min', 999, 'Body Care', 'https://images.pexels.com/photos/8021144/pexels-photo-8021144.jpeg?w=1200'],
-  ['facial', 'Signature Glow Facial', '60 min', 1499, 'Skin Care', uns('photo-1570172619644-dfd03ed5d881')],
-  ['four-hand', 'Four-Hand Relaxation', '60 min', 2999, 'Premium', uns('photo-1540555700478-4be289fbecef')],
-  ['executive-reset', 'Executive Reset', '45 min', 1299, 'Premium', uns('photo-1596178065887-1198b6148b2b')],
-  ['abhyanga', 'Ayurvedic-Inspired Abhyanga', '60 min', 1799, 'Massage', pex(7795767)],
-  ['herbal-potli', 'Herbal Potli Massage', '60 min', 1999, 'Massage', uns('photo-1600334129128-685c5582fd35')],
-  ['candle', 'Warm Candle Oil Massage', '60 min', 1899, 'Massage', pex(7795767)],
-  ['scalp', 'Scalp & Hair Spa Ritual', '45 min', 1199, 'Skin Care', uns('photo-1608248543803-ba4f8c70ae0b')],
-  ['mini-reset', 'Mini Relaxation Session', '20 min', 499, 'Express', uns('photo-1544161515-4ab6ce6db874')]
-].map(([slug, name, duration, _previousPrice, category, image]) => {
+/** @type {Array<[string, string, string, string, string[], boolean]>} */
+const rawServices = [
+  ['signature-relaxation', 'Signature Relaxation Massage', '60 min', 'Massage', ['Deep Stress Relief'], true],
+  ['swedish', 'Swedish Massage', '60 min', 'Massage', ['Deep Stress Relief'], true],
+  ['deep-tissue', 'Deep Tissue Massage', '60 min', 'Massage', ['Deep Stress Relief'], true],
+  ['aromatherapy', 'Aromatherapy Massage', '60 min', 'Massage', ['Deep Stress Relief', 'Couples Sanctuary'], true],
+  ['couples', 'Couples Spa Ritual', '60 min', 'Couples', ['Couples Sanctuary'], true],
+  ['foot-reflexology', 'Express Foot Reflexology', '30–45 min', 'Express', ['Express 30-Min'], true],
+  ['hot-stone', 'Hot Stone Massage', '75 min', 'Massage', ['Deep Stress Relief'], true],
+  ['balinese', 'Balinese Massage', '60 min', 'Massage', ['Deep Stress Relief'], true],
+  ['facial', 'Signature Glow Facial', '60 min', 'Skin Care', ['Body & Skin Care'], true],
+  ['body-polish', 'Full Body Polish', '60 min', 'Body Care', ['Body & Skin Care'], true],
+  ['head-shoulder', 'Head, Neck & Shoulder', '30 min', 'Express', ['Express 30-Min'], true],
+  ['candle', 'Warm Candle Oil Massage', '60 min', 'Massage', ['Couples Sanctuary', 'Deep Stress Relief'], true],
+  ['thai', 'Thai Yoga Massage', '60 min', 'Massage', ['Deep Stress Relief'], false],
+  ['sports-recovery', 'Sports Recovery Massage', '60 min', 'Massage', ['Deep Stress Relief'], false],
+  ['back-relief', 'Back & Neck Relief', '30 min', 'Express', ['Express 30-Min'], false],
+  ['prenatal', 'Prenatal Wellness Massage', '45 min', 'Specialised', ['Body & Skin Care'], false],
+  ['lymphatic', 'Gentle Lymphatic Wellness', '45 min', 'Specialised', ['Body & Skin Care'], false],
+  ['body-scrub', 'Body Scrub Ritual', '45 min', 'Body Care', ['Body & Skin Care'], false],
+  ['body-wrap', 'Hydrating Body Wrap', '60 min', 'Body Care', ['Body & Skin Care'], false],
+  ['foot-spa', 'Luxury Foot Spa', '45 min', 'Body Care', ['Body & Skin Care', 'Express 30-Min'], false],
+  ['four-hand', 'Four-Hand Royal Ritual', '60 min', 'Premium', ['Couples Sanctuary', 'Deep Stress Relief'], false],
+  ['executive-reset', 'Executive Reset', '45 min', 'Premium', ['Express 30-Min'], false],
+  ['abhyanga', 'Ayurvedic Abhyanga Ritual', '60 min', 'Massage', ['Deep Stress Relief'], false],
+  ['herbal-potli', 'Herbal Potli Massage', '60 min', 'Massage', ['Deep Stress Relief'], false],
+  ['scalp', 'Scalp & Hair Spa Ritual', '45 min', 'Skin Care', ['Body & Skin Care'], false],
+  ['mini-reset', 'Mini Express Pause', '30 min', 'Express', ['Express 30-Min'], false]
+];
+
+export const S = rawServices.map(([slug, name, duration, category, moods, featuredOnHome]) => {
   const price = getServicePrice(slug, duration);
   const priceQualifier = slug === 'couples'
-    ? 'per couple'
+    ? 'Per Couple'
     : slug === 'four-hand'
-      ? 'two therapists'
-      : 'starting rate';
+      ? 'Two Therapists'
+      : 'Starting Rate';
   return {
     slug,
     name,
     duration,
     price,
     priceQualifier,
-    pricingNote: 'Additional time is charged in 30-minute blocks: +₹400 per block. Please confirm the final rate before booking.',
+    pricingNote: 'Extend any 60-minute therapy by +₹400 per additional 30-minute block (90 min ₹1,399 · 120 min ₹1,799).',
     category,
-    image: serviceImages[slug] || image,
+    moods,
+    featuredOnHome,
+    image: serviceImages[slug],
     video: serviceVideos[slug]?.src,
-    videoPoster: serviceImages[slug] || image,
-    description: serviceDescriptions[slug] || name + ' at The Elite Spa Centre in Kalyani Nagar, Pune. Discuss your preferences and suitability with the team before requesting an appointment.'
+    videoPoster: serviceImages[slug],
+    description: serviceDescriptions[slug]
   };
 });
 
+export const SENSORY_GALLERY = [
+  {
+    id: 'suite-candle',
+    title: 'Candlelit Private Suites',
+    subtitle: 'Acoustic stillness & warm obsidian interiors',
+    image: 'https://images.pexels.com/photos/11774389/pexels-photo-11774389.jpeg?auto=compress&cs=tinysrgb&w=1200'
+  },
+  {
+    id: 'architectural-room',
+    title: 'Curated Treatment Chambers',
+    subtitle: 'Heated plush beds & ambient amber glow',
+    image: 'https://images.pexels.com/photos/35546242/pexels-photo-35546242/free-photo-of-modern-spa-treatment-room-with-elegant-design.jpeg?auto=compress&cs=tinysrgb&w=1200'
+  },
+  {
+    id: 'basalt-stones',
+    title: 'Volcanic Basalt Stone Rituals',
+    subtitle: 'Radiant heat for deep muscular release',
+    image: 'https://images.pexels.com/photos/36593691/pexels-photo-36593691.jpeg?auto=compress&cs=tinysrgb&w=1200'
+  },
+  {
+    id: 'botanical-oils',
+    title: 'Warm Botanical Infusions',
+    subtitle: 'Pure lavender, sandalwood & cold-pressed oils',
+    image: 'https://images.pexels.com/photos/7795767/pexels-photo-7795767.jpeg?auto=compress&cs=tinysrgb&w=1200'
+  },
+  {
+    id: 'tranquil-sanctuary',
+    title: 'Tranquil Arrival Lounge',
+    subtitle: 'Unwind with herbal infusions before your ritual',
+    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85'
+  },
+  {
+    id: 'velvet-linen',
+    title: 'Sensory Linen & Steam',
+    subtitle: 'Crisp cotton wraps & eucalyptus steam accents',
+    image: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=1200&q=85'
+  },
+  {
+    id: 'foot-sanctuary',
+    title: 'Reflexology & Foot Sanctuary',
+    subtitle: 'Mineral rose-salt soaks & pressure-point renewal',
+    image: 'https://images.pexels.com/photos/8021144/pexels-photo-8021144.jpeg?auto=compress&cs=tinysrgb&w=1200'
+  },
+  {
+    id: 'muscle-restoration',
+    title: 'Master-Led Bodywork',
+    subtitle: 'Tailored pressure from gentle glide to deep tissue',
+    image: 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1200&q=85'
+  }
+];
+
+export const GUEST_REVIEWS = [
+  {
+    name: 'Aarav Kulkarni',
+    location: 'Kalyani Nagar, Pune',
+    ritual: '90-Min Deep Tissue · 11:30 PM Slot',
+    rating: '5.0',
+    quote: 'Finishing late client calls in Kalyani Nagar and walking into a serene, candlelit suite at 11:30 PM is unmatched in Pune. My lower-back stiffness vanished after one 90-minute Deep Tissue session.'
+  },
+  {
+    name: 'Meera & Siddharth Deshmukh',
+    location: 'Koregaon Park, Pune',
+    ritual: 'The Couple Retreat Bundle',
+    rating: '5.0',
+    quote: 'Booked the Couple Retreat for our anniversary via WhatsApp in under two minutes. Impeccably clean suites, warm aromatic oils, and synchronized therapists who checked our pressure preferences before starting.'
+  },
+  {
+    name: 'Rohan Malhotra',
+    location: 'Viman Nagar, Pune',
+    ritual: 'Late-Night Signature Relaxation',
+    rating: '4.9',
+    quote: 'Landed at Pune Airport past midnight and headed straight to Vascon Mariplex Mall. Starting at ₹999 for this level of calm, hygiene, and attentive hospitality makes it my go-to sanctuary.'
+  },
+  {
+    name: 'Ananya Joshi',
+    location: 'Kharadi, Pune',
+    ritual: 'The Glow Ritual & Reflexology',
+    rating: '5.0',
+    quote: 'Everything feels genuinely five-star without pretense. The Signature Glow Facial paired with the botanical scrub left my skin luminous for days, and the express foot reflexology is pure bliss.'
+  },
+  {
+    name: 'Vikramaditya Nair',
+    location: 'Magarpatta, Pune',
+    ritual: '75-Min Hot Stone Therapy',
+    rating: '4.9',
+    quote: 'The warm volcanic stones and sandalwood oil blend melted weeks of travel fatigue. Effortless parking at Mariplex Mall and instant WhatsApp slot confirmation.'
+  }
+];
+
+export const FAQS = [
+  {
+    question: 'How do I confirm my spa appointment?',
+    answer: 'Select any treatment, bundle, or build your custom ritual using our 15-Second Quick Ritual Builder and tap WhatsApp. Our Kalyani Nagar concierge replies within minutes to lock in your preferred suite and therapist.'
+  },
+  {
+    question: 'Are you really open until 3:00 AM every night?',
+    answer: 'Yes. The Elite Spa Centre is open daily from 8:00 AM to 3:00 AM, making us Kalyani Nagar’s premier late-night luxury spa sanctuary for post-work, post-flight, and midnight unwinding.'
+  },
+  {
+    question: 'How does your treatment pricing and extra time work?',
+    answer: 'Signature 60-minute full-body therapies (Signature Relaxation, Swedish, Deep Tissue, and Aromatherapy) start at ₹999. You can extend any session by 30-minute blocks at +₹400 (90 min ₹1,399 · 120 min ₹1,799). Couples Spa Rituals start at ₹1,999 per couple, and Express Foot Reflexology starts at ₹699.'
+  },
+  {
+    question: 'Where exactly are you located, and is parking available?',
+    answer: 'We are located on the Ground Floor of Vascon Mariplex Mall, Cybage Tower Road, right next to Taco Bell in Marigold Complex, Kalyani Nagar, Pune 411014. Convenient mall parking is available right on premises.'
+  },
+  {
+    question: 'Can we customize massage pressure and oil aromas?',
+    answer: 'Absolutely. Before every session begins, your therapist consults with you on preferred pressure (gentle, medium, or firm), target tension zones, and your choice of warm botanical essential oils.'
+  }
+];
+
+/** @type {Array<[string, number, string]>} */
 const products = [
   ['Aromatherapy Massage Oil · 500 ml', 599, 'Massage Oils'],
   ['Sandalwood Massage Oil · 210 ml', 249, 'Massage Oils'],
@@ -267,3 +405,14 @@ export const P = products.map(([name, price, category], index) => ({
   image: productImages[index % productImages.length],
   id: 'sku-' + (index + 1)
 }));
+
+export const FEATURED_SHOP_PRODUCTS = [
+  P[0], // Aromatherapy Massage Oil ₹599
+  P[1], // Sandalwood Massage Oil ₹249
+  P[2], // Lavender Massage Oil ₹410
+  P[3], // Coconut Massage Oil ₹499
+  P[12], // Aroma Diffuser ₹899
+  P[15], // Himalayan Pink Bath Salt ₹299
+  P[20], // Coffee Body Scrub ₹499
+  P[36] // Luxury Spa Gift Box ₹1,499
+];

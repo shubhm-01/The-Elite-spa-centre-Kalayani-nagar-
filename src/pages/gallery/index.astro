@@ -1,84 +1,93 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { S } from '../../data/catalog.js';
-const ambience = [
-  {
-    title: 'A quiet massage room',
-    alt: 'Illustrative stock photograph of a calm massage room with soft natural light',
-    image: 'https://images.pexels.com/photos/11774389/pexels-photo-11774389.jpeg?auto=compress&w=1260&h=750&dpr=1',
-    photographer: 'Tugce Erten Barrett',
-    creator: 'https://www.pexels.com/@tugce-erten-barrett-211955335/',
-    source: 'https://www.pexels.com/photo/interior-design-of-a-massage-room-11774389/'
-  },
-  {
-    title: 'Spa interior inspiration',
-    alt: 'Illustrative stock photograph of a contemporary spa interior with loungers and greenery',
-    image: 'https://images.pexels.com/photos/7031704/pexels-photo-7031704.jpeg?auto=compress&w=1260&h=750&dpr=1',
-    photographer: 'Max Vakhtbovych',
-    creator: 'https://www.pexels.com/@artbovich/',
-    source: 'https://www.pexels.com/photo/interior-of-modern-luxury-spa-zone-with-loungers-and-bathtubs-7031704/'
-  },
-  {
-    title: 'Treatment room details',
-    alt: 'Illustrative stock photograph of a modern spa treatment room with ambient lighting',
-    image: 'https://images.pexels.com/photos/35546242/pexels-photo-35546242/free-photo-of-modern-spa-treatment-room-with-elegant-design.jpeg?auto=compress&w=1260&h=750&dpr=1',
-    photographer: 'Triệt Lông Club Hair Removal by TL',
-    creator: 'https://www.pexels.com/@tri-t-long-club-hair-removal-by-tl-2158697365/',
-    source: 'https://www.pexels.com/photo/modern-spa-treatment-room-with-elegant-design-35546242/'
-  }
-];
+import { S, SENSORY_GALLERY } from '../../data/catalog.js';
 ---
 <Base
-  title="Spa Gallery & Treatment Inspiration in Kalyani Nagar, Pune"
-  description="Browse treatment inspiration and spa ambience photography for The Elite Spa Centre in Kalyani Nagar, Pune. Stock images are credited and clearly labelled as illustrative, not actual venue photos."
+  title="The Sensory Gallery | The Elite Spa Centre, Kalyani Nagar"
+  description="Step inside the candlelit suites, volcanic stone therapies, botanical oil infusions, and tranquil ambience of The Elite Spa Centre in Kalyani Nagar, Pune."
 >
-  <section class="page page-gallery">
-    <span class="eyebrow-light">A GLIMPSE OF THE EXPERIENCE</span>
-    <h1>The art of <i>unwinding.</i></h1>
-    <p>Explore the treatment menu through a visual collection of massage, body-care, facial and spa-inspired photography.</p>
+  <section class="pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-[#D4AF37]/15 bg-gradient-to-b from-[#121215] to-[#09090B]">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8">
+      <p class="text-xs font-semibold tracking-[0.22em] uppercase text-[#D4AF37] mb-3">
+        The Sensory Gallery
+      </p>
+      <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-medium text-[#F5F5F0] leading-[1.04] mb-5">
+        The Art of <em class="italic font-normal text-[#D4AF37]">Unwinding.</em>
+      </h1>
+      <p class="text-base sm:text-lg text-[#B0AEA6] max-w-2xl leading-relaxed">
+        Candlelit private chambers, warm basalt stones, pure botanical infusions, and serene rituals curated for complete stillness in Kalyani Nagar.
+      </p>
+    </div>
   </section>
-  <main id="main-content">
-    <section class="gallery-intro">
-      <span class="eyebrow">THE VISUAL EDIT</span>
-      <h2>Spaces, textures &amp; <i>rituals.</i></h2>
-      <p>Some photographs are sourced from Pexels and are used as illustrative inspiration. They are not photographs of The Elite Spa Centre, its actual rooms, facilities, therapists or team.</p>
-    </section>
-    <section class="gallery-ambience-section">
-      <div class="gallery-ambience-grid">
-        {ambience.map((photo) => (
-          <figure class="gallery-item gallery-ambience">
-            <a href={photo.source} target="_blank" rel="noopener noreferrer">
-              <img src={photo.image} alt={photo.alt} loading="lazy" />
-            </a>
-            <figcaption>
-              <strong>{photo.title}</strong>
-              <span>Illustrative stock photo · {photo.photographer}</span>
-              <a href={photo.source} target="_blank" rel="noopener noreferrer">View original on Pexels ↗</a>
+
+  <main class="max-w-[1380px] mx-auto px-5 sm:px-8 py-16 sm:py-24 space-y-20">
+    <section>
+      <div class="mb-10">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[#D4AF37] mb-2">Sanctuary Ambience</p>
+        <h2 class="font-serif text-3xl sm:text-4xl font-medium text-[#F5F5F0]">
+          Spaces &amp; <em class="italic font-normal text-[#D4AF37]">Textures.</em>
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {SENSORY_GALLERY.map((item) => (
+          <figure class="group relative rounded-2xl overflow-hidden border border-[#D4AF37]/20 bg-[#121215] h-80">
+            <img
+              src={item.image}
+              alt={item.title}
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#09090B]/90 via-transparent to-transparent" />
+            <figcaption class="absolute bottom-0 inset-x-0 p-5">
+              <strong class="block font-serif text-xl text-[#F5F5F0]">{item.title}</strong>
+              <span class="block text-xs text-[#B0AEA6] mt-0.5">{item.subtitle}</span>
             </figcaption>
           </figure>
         ))}
       </div>
     </section>
-    <section class="gallery-treatment-section">
-      <div class="section-heading">
-        <div><span class="eyebrow">TREATMENT INSPIRATION</span><h2>Find the ritual that <i>speaks to you.</i></h2><p>Each image is a representative visual linked to its treatment information page.</p></div>
-        <a class="text-link" href="/services/">EXPLORE ALL TREATMENTS ↗</a>
+
+    <section>
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+        <div>
+          <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[#D4AF37] mb-2">Ritual Showcase</p>
+          <h2 class="font-serif text-3xl sm:text-4xl font-medium text-[#F5F5F0]">
+            Signature <em class="italic font-normal text-[#D4AF37]">Experiences.</em>
+          </h2>
+        </div>
+        <a href="/services/" class="text-xs font-semibold tracking-[0.14em] uppercase text-[#D4AF37] hover:text-[#E8CB6D]">
+          Explore All {S.length} Rituals ↗
+        </a>
       </div>
-      <div class="gallery">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {S.map((service) => (
-          <figure class="gallery-item">
-            <a href={'/services/' + service.slug + '/'}>
-              <img src={service.image} alt={service.name + ' representative treatment stock photograph'} loading="lazy" />
-            </a>
-            <figcaption>
-              <strong>{service.name}</strong>
-              <span>{service.duration} · {service.category} · Representative stock image</span>
-              <a href={'/services/' + service.slug + '/'}>View treatment ↗</a>
-            </figcaption>
-          </figure>
+          <a
+            href={`/services/${service.slug}/`}
+            class="group relative rounded-2xl overflow-hidden border border-[#F5F5F0]/10 hover:border-[#D4AF37]/45 bg-[#121215] h-72 block transition-colors"
+          >
+            <img
+              src={service.image}
+              alt={service.name}
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#09090B]/95 via-[#09090B]/20 to-transparent" />
+            <div class="absolute bottom-0 inset-x-0 p-5 flex items-end justify-between gap-3">
+              <div>
+                <span class="block text-[11px] tracking-[0.14em] uppercase text-[#D4AF37]">{service.duration}</span>
+                <strong class="block font-serif text-2xl text-[#F5F5F0] group-hover:text-[#E8CB6D] transition-colors">
+                  {service.name}
+                </strong>
+              </div>
+              <span class="font-serif text-xl font-semibold text-[#F5F5F0] tabular-nums shrink-0">
+                ₹{service.price.toLocaleString('en-IN')}
+              </span>
+            </div>
+          </a>
         ))}
       </div>
     </section>
-    <p class="image-disclaimer">Photography credit and source links are provided for the additional Pexels ambience photographs above. The images are visual references only and must not be read as a record of this particular business location.</p>
   </main>
 </Base>

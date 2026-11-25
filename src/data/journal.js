@@ -1,57 +1,111 @@
 export const JOURNAL = [
   {
     slug: 'first-spa-visit-kalyani-nagar',
-    category: 'VISITING THE SPA',
-    title: 'Your first spa visit: a simple guide',
-    excerpt: 'A few practical questions to consider before you request an appointment, from choosing a session to sharing comfort preferences.',
-    intro: 'A first spa visit can feel easier when you know what to ask and what information to share. Use this guide to prepare for a conversation with the spa team.',
+    category: 'Sanctuary Guide',
+    title: 'Your First Spa Ritual: A Curated Guide',
+    excerpt: 'Everything to know before stepping into our Kalyani Nagar sanctuary — from selecting your ideal duration to tailoring your pressure and aroma.',
+    intro: 'Arriving for a luxury spa ritual should feel effortless from the very first moment. Here is how to make the most of your visit at The Elite Spa Centre.',
     sections: [
-      { heading: 'Start with the experience you want', paragraphs: ['Think about whether you are looking for a shorter focused session, a longer relaxation massage, a couples enquiry or a body-care ritual. Reading the treatment descriptions can help you shortlist an option.', 'If you are unsure, ask the team to explain the session length, style and what is included before choosing.'] },
-      { heading: 'Share comfort preferences', paragraphs: ['Before an appointment, tell the team about your preferred pressure, areas you would like avoided, fragrance sensitivities, allergies or other comfort considerations. You can ask about draping and the session set-up too.'] },
-      { heading: 'Understand the booking process', paragraphs: ['At The Elite Spa Centre, the website form opens a WhatsApp enquiry. The team must reply to confirm the appointment time and final price. Sending an enquiry does not reserve a slot or take payment.'] },
-      { heading: 'Give yourself time', paragraphs: ['Arrive with enough time for the conversation and avoid feeling rushed. If you have a medical concern, injury, pregnancy-related question or skin condition, seek advice from an appropriate healthcare professional and confirm suitability with the spa before booking.'] }
+      {
+        heading: 'Choose the rhythm that matches your day',
+        paragraphs: [
+          'Whether you need a crisp 30-minute Express Foot Reflexology between meetings, a 60-minute Signature Relaxation therapy starting at ₹999, or a late-night 120-minute deep decompression, our menu adapts to your schedule.',
+          'Our concierge on WhatsApp is always happy to recommend the right therapy and oil blend based on how your body feels today.'
+        ]
+      },
+      {
+        heading: 'Personalise pressure & botanical oils',
+        paragraphs: [
+          'Before your session begins, your therapist consults with you on light, medium, or firm pressure, areas needing extra attention, and your preferred aromatic oil infusion.'
+        ]
+      },
+      {
+        heading: 'Late-night unwinding until 3:00 AM',
+        paragraphs: [
+          'Because we remain open daily from 8:00 AM to 3:00 AM, you never have to rush. Unwind after late-night flights, evening dinners in Kalyani Nagar, or extended workdays in total quiet.'
+        ]
+      }
     ],
-    related: ['signature-relaxation', 'swedish', 'booking']
+    related: ['signature-relaxation', 'swedish', 'deep-tissue']
   },
   {
     slug: 'swedish-vs-deep-tissue-massage',
-    category: 'TREATMENT NOTES',
-    title: 'Swedish or deep tissue massage: what is the difference?',
-    excerpt: 'A straightforward look at two familiar massage styles and how to describe your pressure preferences.',
-    intro: 'Swedish and deep tissue massage are often discussed together, but they are not the same experience. The right choice depends on your preference, comfort and the session the centre can provide.',
+    category: 'Therapy Notes',
+    title: 'Swedish vs. Deep Tissue: Finding Your Ideal Pressure',
+    excerpt: 'Understand how flowing rhythmic Swedish strokes compare with slow, focused Deep Tissue bodywork so you choose the right ritual.',
+    intro: 'Two timeless full-body therapies, each crafted for a distinct kind of restoration. Here is how to choose between Swedish and Deep Tissue bodywork.',
     sections: [
-      { heading: 'Swedish-style massage', paragraphs: ['Swedish massage is commonly associated with flowing strokes and a lighter-to-moderate pressure approach. Guests often ask about it when they want a familiar, general relaxation-style session.', 'Tell the therapist whether you prefer light, medium or firmer pressure. The session should remain comfortable and you can ask for an adjustment.'] },
-      { heading: 'Deep tissue massage', paragraphs: ['Deep tissue massage generally uses more focused, firmer pressure on selected muscle areas. Firmer pressure is not automatically better, and discomfort is not a goal.', 'Share any injury, pain, sensitivity or area you want avoided before the session. For persistent pain or a recent injury, seek advice from a qualified healthcare professional first.'] },
-      { heading: 'How to choose', paragraphs: ['If you are uncertain, ask the spa team to describe the exact session, typical pressure and available duration. You can discuss your preferences before confirming an appointment.'] }
+      {
+        heading: 'Swedish Massage for effortless calm',
+        paragraphs: [
+          'Built around sweeping, rhythmic effleurage and gentle kneading, Swedish massage calms the nervous system, elevates circulation, and melts away mental fatigue.',
+          'Ideal for first-time guests, evening wind-downs, or anyone seeking deep tranquil rest.'
+        ]
+      },
+      {
+        heading: 'Deep Tissue for stubborn knots & posture tension',
+        paragraphs: [
+          'Deep Tissue uses slow, deliberate strokes and sustained pressure to reach deeper layers of muscle and fascia across the shoulders, neck, and lower back.',
+          'Communication stays open throughout the session so pressure always feels deeply restorative and never overwhelming.'
+        ]
+      },
+      {
+        heading: 'Extend for complete release',
+        paragraphs: [
+          'Both 60-minute therapies start at ₹999, and guests seeking full-body plus focused knot work often opt for 90 minutes (₹1,399) or 120 minutes (₹1,799).'
+        ]
+      }
     ],
-    related: ['swedish', 'deep-tissue', 'booking']
+    related: ['swedish', 'deep-tissue', 'hot-stone']
   },
   {
     slug: 'planning-a-couples-spa-visit',
-    category: 'PLANNING TOGETHER',
-    title: 'Planning a couples spa visit in Pune',
-    excerpt: 'What to confirm before booking a shared spa experience, including room availability, timing and individual preferences.',
-    intro: 'A couples spa visit is easier to plan when both guests know what to expect. A few questions can help you confirm whether the available experience suits you both.',
+    category: 'Couples Sanctuary',
+    title: 'Planning a Private Couples Spa Evening in Pune',
+    excerpt: 'How to curate an unforgettable candlelit couples retreat in Kalyani Nagar with synchronized therapies and botanical add-ons.',
+    intro: 'Shared stillness is one of the rarest luxuries. Our private couples suites in Vascon Mariplex Mall are designed for two guests to unwind side by side.',
     sections: [
-      { heading: 'Confirm the room and timing', paragraphs: ['Ask whether a couples room is available for your preferred date and time, whether both sessions can begin together and how long the appointment will take. Availability can vary, so wait for the team to confirm before travelling.'] },
-      { heading: 'Share preferences separately', paragraphs: ['Each guest may prefer a different pressure level or have different areas to avoid. Share those preferences individually so the team can explain what can be accommodated.'] },
-      { heading: 'Ask what the package includes', paragraphs: ['Confirm the treatment duration, any add-ons, the final price and the cancellation or rescheduling terms. Website package prices are suggested only until the centre confirms them directly.'] },
-      { heading: 'Keep the enquiry simple', paragraphs: ['Use the booking form to send a WhatsApp enquiry with your preferred date and time. Wait for the centre to confirm both the appointment and the final terms.'] }
+      {
+        heading: 'Private candlelit ambience',
+        paragraphs: [
+          'Our Couples Spa Ritual (₹1,999 for 60 minutes per couple) unfolds in a hushed, softly lit private suite with two therapists working in calm synchronization.'
+        ]
+      },
+      {
+        heading: 'Individual pressure & aroma choices',
+        paragraphs: [
+          'One partner may prefer gentle lavender aromatherapy while the other chooses firm deep-tissue work on the shoulders. Each guest receives a bespoke experience together.'
+        ]
+      },
+      {
+        heading: 'Upgrade to The Couple Retreat',
+        paragraphs: [
+          'For anniversaries or weekend evenings, The Couple Retreat (₹3,499) combines the 60-minute Couples Spa Ritual with two 45-minute Luxury Foot Spa sessions.'
+        ]
+      }
     ],
-    related: ['couples', 'foot-spa', 'booking']
+    related: ['couples', 'candle', 'foot-spa']
   },
   {
     slug: 'how-to-communicate-massage-pressure',
-    category: 'COMFORT & WELLNESS',
-    title: 'How to communicate your massage pressure preferences',
-    excerpt: 'Simple ways to explain what feels comfortable, what should be avoided and when to ask for an adjustment.',
-    intro: 'A useful massage conversation starts before the session. Clear, simple feedback helps the therapist understand the experience you are comfortable with.',
+    category: 'Wellness Rituals',
+    title: 'The Art of Tailoring Your Massage Experience',
+    excerpt: 'Simple cues for communicating pressure, warmth, and focus zones so every minute on the table feels extraordinary.',
+    intro: 'Great bodywork is a quiet dialogue between guest and therapist. Sharing a few simple preferences ensures every session hits the exact mark.',
     sections: [
-      { heading: 'Use simple pressure words', paragraphs: ['You can describe your preference as light, medium or firm. If you are unsure, say that you would like to begin gently and adjust only if it feels comfortable.'] },
-      { heading: 'Mention areas to avoid', paragraphs: ['Tell the team about areas you do not want included, skin sensitivity, fragrance allergies or any known discomfort before the session begins. Do not feel you need to share more personal detail than is necessary for comfort and suitability.'] },
-      { heading: 'Speak up during the session', paragraphs: ['Ask for less pressure, a pause or a change of focus at any time. A treatment should not require you to tolerate pain or ignore discomfort.'] },
-      { heading: 'Check suitability first', paragraphs: ['If you have an injury, persistent pain, a medical condition, are pregnant or have a skin concern, consult a suitable healthcare professional and ask the centre whether the specific treatment is appropriate before booking.'] }
+      {
+        heading: 'Name your focus zones upfront',
+        paragraphs: [
+          'Whether it is tight calves from running, shoulder tension from long laptop hours, or a tired lower back, highlighting two priority areas lets your therapist pace the session purposefully.'
+        ]
+      },
+      {
+        heading: 'Adjust pressure anytime',
+        paragraphs: [
+          'Your comfort sets the standard. Simply let your therapist know if you prefer softer gliding strokes or firmer depth at any moment during the ritual.'
+        ]
+      }
     ],
-    related: ['signature-relaxation', 'deep-tissue', 'booking']
+    related: ['signature-relaxation', 'aromatherapy', 'foot-reflexology']
   }
 ];

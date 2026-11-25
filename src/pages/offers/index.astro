@@ -1,42 +1,91 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { OFFERS } from '../../data/offers.js';
+import { whatsappUrl } from '../../data/catalog.js';
 ---
 <Base
-  title="Spa Packages & Wellness Offers in Kalyani Nagar, Pune"
-  description="Explore suggested spa ritual bundles and an at-home wellness kit from The Elite Spa Centre in Kalyani Nagar, Pune. Ask the centre to confirm package availability and final pricing."
+  title="Curated Spa Bundles & Privilege Offers in Kalyani Nagar, Pune"
+  description="Discover curated spa packages at The Elite Spa Centre in Kalyani Nagar, Pune — including The Everyday Reset (₹1,699), The Glow Ritual (₹1,699), and The Couple Retreat (₹3,499)."
 >
-  <section class="page">
-    <small>THE ELITE PRIVILEGE</small>
-    <h1>Little luxuries.<br /><i>Lovely bundles.</i></h1>
-    <p>Thoughtful combinations for spa days and self-care at home.</p>
+  <section class="pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-[#D4AF37]/15 bg-gradient-to-b from-[#121215] to-[#09090B]">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8">
+      <p class="text-xs font-semibold tracking-[0.22em] uppercase text-[#D4AF37] mb-3">
+        The Elite Privilege
+      </p>
+      <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-medium text-[#F5F5F0] leading-[1.04] mb-5">
+        Curated <em class="italic font-normal text-[#D4AF37]">Ritual Bundles.</em>
+      </h1>
+      <p class="text-base sm:text-lg text-[#B0AEA6] max-w-2xl leading-relaxed">
+        Thoughtfully paired full-body therapies, facials, couples retreats, and apothecary essentials with exclusive bundle savings.
+      </p>
+    </div>
   </section>
-  <main id="main-content">
-    <div class="offers-intro">
-      <div><small>FIVE WAYS TO MAKE IT YOURS</small><h2>Choose your <i>kind of calm.</i></h2></div>
-      <p>Each package combines existing catalogue services or products. The package prices below are suggested launch prices; the centre must confirm the final offer, availability, eligibility and terms before booking or payment.</p>
-    </div>
-    <div class="offers-grid">
-      {OFFERS.map((offer) => (
-        <article class="offer-card">
-          <div class="offer-image-wrap">
-            <img src={offer.image} alt={offer.title + ' package visual'} loading="lazy" />
-            <span class="offer-save">SAVE ₹{offer.savings.toLocaleString('en-IN')}</span>
-          </div>
-          <div class="offer-body">
-            <small>{offer.eyebrow}</small>
-            <h2>{offer.title}</h2>
-            <p>{offer.description}</p>
-            <ul>{offer.items.map((item) => <li>{item}</li>)}</ul>
-            <div class="offer-price-row">
-              <div><span class="offer-was">₹{offer.regularPrice.toLocaleString('en-IN')}</span><strong>₹{offer.offerPrice.toLocaleString('en-IN')}</strong></div>
-              <span class="offer-price-note">Suggested<br />bundle price</span>
+
+  <main class="max-w-[1380px] mx-auto px-5 sm:px-8 py-16 sm:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {OFFERS.map((offer) => {
+        const waHref = whatsappUrl(
+          `Hello The Elite Spa Centre, I would like to book ${offer.title} (${offer.code}) at ₹${offer.offerPrice.toLocaleString('en-IN')}. Included: ${offer.items.join(' + ')}.`
+        );
+        return (
+          <article class="group rounded-3xl bg-[#121215] border border-[#D4AF37]/25 hover:border-[#D4AF37]/60 overflow-hidden flex flex-col justify-between transition-colors">
+            <div class="relative h-64 sm:h-72 overflow-hidden bg-[#1A1A1F]">
+              <img
+                src={offer.image}
+                alt={offer.title}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#121215] via-[#121215]/30 to-transparent" />
+              <span class="absolute top-5 right-5 px-4 py-1.5 rounded-full bg-[#D4AF37] text-[#09090B] text-xs font-bold tracking-wider uppercase tabular-nums">
+                Save ₹{offer.savings.toLocaleString('en-IN')}
+              </span>
             </div>
-            <a class="btn offer-enquire" href={'https://wa.me/919199561258?text=' + encodeURIComponent('Hello The Elite Spa Centre, please confirm availability and final terms for the ' + offer.title + ' (' + offer.code + ') suggested at ₹' + offer.offerPrice + '. Items: ' + offer.items.join(', ') + '.')}>ENQUIRE ABOUT THIS OFFER ↗</a>
-          </div>
-        </article>
-      ))}
+
+            <div class="p-7 sm:p-8 flex flex-col flex-1">
+              <span class="text-xs font-semibold tracking-[0.16em] uppercase text-[#D4AF37] mb-2">
+                {offer.eyebrow}
+              </span>
+              <h2 class="font-serif text-3xl sm:text-4xl font-medium text-[#F5F5F0] mb-3">
+                {offer.title}
+              </h2>
+              <p class="text-sm sm:text-base text-[#B0AEA6] leading-relaxed mb-5">
+                {offer.description}
+              </p>
+
+              <ul class="space-y-2 mb-7 text-sm text-[#F5F5F0]/85">
+                {offer.items.map((item) => (
+                  <li class="flex items-center gap-2.5">
+                    <span class="text-[#D4AF37]" aria-hidden="true">✦</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-auto pt-5 border-t border-[#F5F5F0]/10 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-baseline gap-3">
+                  <strong class="font-serif text-4xl font-semibold text-[#F5F5F0] tabular-nums">
+                    ₹{offer.offerPrice.toLocaleString('en-IN')}
+                  </strong>
+                  <span class="text-base text-[#B0AEA6] line-through tabular-nums">
+                    ₹{offer.regularPrice.toLocaleString('en-IN')}
+                  </span>
+                </div>
+
+                <a
+                  href={waHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-[#D4AF37] hover:bg-[#E8CB6D] text-[#09090B] text-xs font-bold tracking-[0.1em] uppercase transition-colors"
+                >
+                  Book Bundle on WhatsApp ↗
+                </a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
     </div>
-    <p class="notice offers-notice">Offer prices are proposals based on the current indicative catalogue prices, not confirmed discounts. The centre must approve promotional rates, validity dates, service availability, product stock and any exclusions before accepting an offer. Enquiries are not confirmed bookings or paid orders.</p>
   </main>
 </Base>
