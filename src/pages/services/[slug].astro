@@ -12,6 +12,16 @@ export function getStaticPaths() {
 const { service } = Astro.props;
 const price = new Intl.NumberFormat('en-IN').format(service.price);
 const bookingHref = '/booking/?service=' + encodeURIComponent(service.slug);
+const localAreaContext = service.slug === 'deep-tissue'
+  ? 'Travelling from Kharadi or EON IT Park? Our Deep Tissue Massage is offered at the Kalyani Nagar centre; check live directions to Vascon Mariplex Mall before travelling.'
+  : service.slug === 'couples'
+    ? 'Coming from Koregaon Park for a Couples Spa Ritual? Our centre is in Kalyani Nagar; check the live route to Vascon Mariplex Mall before setting out.'
+    : null;
+const pageDescription = service.slug === 'deep-tissue'
+  ? 'Deep Tissue Massage at The Elite Spa Centre, Kalyani Nagar, Pune. Guests from Kharadi and EON IT Park can check live directions to Vascon Mariplex Mall.'
+  : service.slug === 'couples'
+    ? 'Couples Spa Ritual at The Elite Spa Centre in Kalyani Nagar, Pune. Guests from Koregaon Park can check live directions to Vascon Mariplex Mall.'
+    : service.description + ' Book at The Elite Spa Centre, Vascon Mariplex Mall, Kalyani Nagar, Pune.'
 const waHref = whatsappUrl(
   `Hello The Elite Spa Centre, I would like to book the ${service.name} (${service.duration}, starting at ₹${price}) at your Kalyani Nagar sanctuary.`
 );
@@ -28,7 +38,7 @@ const serviceSchema = {
 ---
 <Base
   title={service.name + ' in Kalyani Nagar, Pune'}
-  description={service.description + ' Book at The Elite Spa Centre, Vascon Mariplex Mall, Kalyani Nagar, Pune.'}
+  description={pageDescription}
   image={service.image}
   extraStructuredData={[serviceSchema]}
 >
@@ -85,6 +95,11 @@ const serviceSchema = {
         <p class="text-base text-[#B0AEA6] leading-relaxed">
           {service.description}
         </p>
+        {localAreaContext ? (
+          <p class="text-sm text-[#B0AEA6] leading-relaxed border-l-2 border-[#D4AF37]/50 pl-4">
+            {localAreaContext}
+          </p>
+        ) : null}
 
         <div class="py-6 border-y border-[#F5F5F0]/10 flex flex-wrap items-baseline justify-between gap-4">
           <div>
