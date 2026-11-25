@@ -13,6 +13,7 @@ const staticPaths = [
   '/about/',
   '/contact/',
   '/booking/',
+  '/nearby-areas/',
   '/wellness-journal/',
   '/privacy/',
   '/terms/'
