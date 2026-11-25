@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import HomeExperience from '../components/HomeExperience.tsx';
 import { B } from '../data/catalog.js';
+import NearbyAreasPreview from '../components/NearbyAreasPreview.astro';
 ---
 <Base
   title="Luxury Late-Night Spa & Massage in Kalyani Nagar, Pune"
@@ -9,4 +10,5 @@ import { B } from '../data/catalog.js';
   image={B.heroPoster}
 >
   <HomeExperience client:load />
+  <NearbyAreasPreview />
 </Base>
