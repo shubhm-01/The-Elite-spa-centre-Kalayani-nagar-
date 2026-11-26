@@ -273,15 +273,15 @@ export const GUEST_REVIEWS = [
 export const FAQS = [
   {
     question: 'How do I confirm my spa appointment?',
-    answer: 'Select any treatment, bundle, or build your custom ritual using our 15-Second Quick Ritual Builder and tap WhatsApp. Our Kalyani Nagar concierge replies within minutes to lock in your preferred suite and therapist.'
+    answer: 'Choose a treatment and your preferred date and time on the booking page, then submit an enquiry. Our team checks the details and confirms appointment availability and the final rate on WhatsApp. Submitting an enquiry does not itself reserve an appointment.'
   },
   {
     question: 'Are you really open until 3:00 AM every night?',
-    answer: 'Yes. The Elite Spa Centre is open daily from 8:00 AM to 3:00 AM, making us Kalyani Nagar’s premier late-night luxury spa sanctuary for post-work, post-flight, and midnight unwinding.'
+    answer: 'The Elite Spa Centre lists its regular hours as 8:00 AM to 3:00 AM daily. Please send an enquiry so our team can confirm availability for your preferred date and time.'
   },
   {
     question: 'How does your treatment pricing and extra time work?',
-    answer: 'Signature 60-minute full-body therapies (Signature Relaxation, Swedish, Deep Tissue, and Aromatherapy) start at ₹999. You can extend any session by 30-minute blocks at +₹400 (90 min ₹1,399 · 120 min ₹1,799). Couples Spa Rituals start at ₹1,999 per couple, and Express Foot Reflexology starts at ₹699.'
+    answer: 'The website lists Signature Relaxation, Swedish, Deep Tissue and Aromatherapy Massage from ₹999 for 60 minutes. Many 60-minute therapies can be extended by 30-minute blocks at +₹400. Couples Spa Ritual is listed from ₹1,999 per couple, while Express Foot Reflexology is listed from ₹699. Prices are indicative; the centre confirms the final rate.'
   },
   {
     question: 'Where exactly are you located, and is parking available?',
@@ -289,7 +289,19 @@ export const FAQS = [
   },
   {
     question: 'Can we customize massage pressure and oil aromas?',
-    answer: 'Absolutely. Before every session begins, your therapist consults with you on preferred pressure (gentle, medium, or firm), target tension zones, and your choice of warm botanical essential oils.'
+    answer: 'Before the session, our team can discuss your preferred pressure and available oil options. Please mention fragrance sensitivities or other comfort considerations when you enquire.'
+  },
+  {
+    question: 'Do you have branches in Koregaon Park, Viman Nagar or Kharadi?',
+    answer: 'No. The Elite Spa Centre has one physical location at Vascon Mariplex Mall, Kalyani Nagar, Pune. Guests travelling from Koregaon Park, Viman Nagar, Kharadi and other Pune neighbourhoods can check live directions to this address.'
+  },
+  {
+    question: 'How long does it take to reach the Kalyani Nagar centre from another Pune area?',
+    answer: 'Journey time depends on your exact starting point, chosen route and current traffic. We do not promise a fixed travel time. Please open the live Google Maps directions from your starting point before travelling.'
+  },
+  {
+    question: 'Can I enquire about a late-night appointment when travelling from Kharadi or Yerwada?',
+    answer: 'Our listed regular hours are 8:00 AM to 3:00 AM daily. Select your treatment and preferred time on the booking page and send an enquiry. The centre will confirm whether that appointment is available.'
   }
 ];
 
