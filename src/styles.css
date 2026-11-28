@@ -15,7 +15,7 @@
 
 @layer base {
   html {
-    background-color: #0B0A09;
+    background-color: #0a0908;
     color: #F4EFE6;
     font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
     font-size: 16px;
@@ -27,7 +27,7 @@
 
   body {
     margin: 0;
-    background-color: #0B0A09;
+    background-color: #0a0908;
     color: #F4EFE6;
     font-size: 17px;
     line-height: 1.6;
@@ -256,7 +256,8 @@
 }
 
 .card-hover-zoom img {
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -265,11 +266,11 @@
   }
 
   .card-hover-zoom:hover img {
-    transform: scale(1.04);
+    transform: scale(1.05);
   }
 
   .card-hover-glow:hover {
-    border-color: rgba(212, 175, 122, 0.62);
+    border-color: rgba(245, 158, 11, 0.38);
   }
 }
 

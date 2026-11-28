@@ -24,7 +24,7 @@ export const OFFERS = [
     offerPrice: 3499,
     savings: 498,
     priceBreakup: '₹1,999 + ₹1,998 (2×₹999) = ₹3,997 → Bundle ₹3,499',
-    image: 'https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://images.pexels.com/photos/6663368/pexels-photo-6663368.jpeg?auto=compress&cs=tinysrgb&w=1400',
     kind: 'treatment'
   },
   {

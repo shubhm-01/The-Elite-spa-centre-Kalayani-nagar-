@@ -12,6 +12,8 @@ import {
   type GuestOption,
   type TimeSlotOption,
 } from '../utils/ritualPricing';
+import { LUXURY_EASE } from '../utils/motionHelpers';
+import { MagneticAnchor } from './LuxuryMotionPrimitives';
 
 function RollingPriceTicker({ amount }: { amount: number }) {
   const formatted = formatINR(amount);
@@ -28,7 +30,7 @@ function RollingPriceTicker({ amount }: { amount: number }) {
           initial={{ y: 24, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -24, opacity: 0 }}
-          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.35, ease: LUXURY_EASE }}
           className="inline-block"
         >
           {formatted}
@@ -68,9 +70,9 @@ export default function RitualBuilder() {
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-        className="glass-panel rounded-3xl p-7 sm:p-10 lg:p-14 relative overflow-hidden"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.85, ease: LUXURY_EASE }}
+        className="rounded-3xl bg-[#12100e]/90 backdrop-blur-xl border border-amber-500/15 p-7 sm:p-10 lg:p-14 relative overflow-hidden"
       >
         <div className="max-w-3xl mb-10">
           <p className="text-[15px] font-semibold tracking-[0.06em] uppercase text-[#D4AF7A] mb-3">
@@ -262,16 +264,16 @@ export default function RitualBuilder() {
                   <RollingPriceTicker amount={totalPrice} />
                 </div>
 
-                <a
+                <MagneticAnchor
                   href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   data-testid="ritual-builder-wa-cta"
-                  className="cta-shimmer w-full min-h-[56px] inline-flex items-center justify-center gap-2.5 py-4 px-7 rounded-full bg-[#E5C158] hover:bg-[#F0D58C] active:scale-[0.98] text-[#0B0A09] text-[16px] sm:text-[17px] font-semibold transition-all duration-200 text-center"
+                  className="cta-shimmer w-full min-h-[56px] inline-flex items-center justify-center gap-2.5 py-4 px-7 rounded-full bg-[#E5C158] hover:bg-[#F0D58C] active:scale-[0.98] text-[#0a0908] text-[16px] sm:text-[17px] font-semibold transition-colors duration-200 text-center"
                 >
                   <MessageCircle className="w-5 h-5 shrink-0" strokeWidth={1.75} aria-hidden="true" />
                   <span>Check Instant Availability on WhatsApp</span>
-                </a>
+                </MagneticAnchor>
               </div>
             </div>
           </div>

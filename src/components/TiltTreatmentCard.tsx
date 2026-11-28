@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { whatsappUrl } from '../data/catalog.js';
+import { SpotlightCard } from './LuxuryMotionPrimitives';
 
 export interface ServiceItem {
   slug: string;
@@ -19,50 +20,16 @@ interface TiltTreatmentCardProps {
 }
 
 export default function TiltTreatmentCard({ service }: TiltTreatmentCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
   const [imgError, setImgError] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = cardRef.current;
-    if (!el) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    // Strictly apply tilt/glow only on fine-pointer desktop devices
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    el.style.setProperty('--mouse-x', `${x}px`);
-    el.style.setProperty('--mouse-y', `${y}px`);
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -2.8;
-    const rotateY = ((x - centerX) / centerX) * 2.8;
-
-    el.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-3px)`;
-  };
-
-  const handleMouseLeave = () => {
-    const el = cardRef.current;
-    if (!el) return;
-    el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-  };
 
   const bookingMsg = `Hello The Elite Spa Centre, I would like to book ${service.name} (${service.duration} • ₹${service.price.toLocaleString('en-IN')}) at your Kalyani Nagar sanctuary.`;
 
   return (
-    <article
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="tilt-card card-hover-zoom card-hover-glow group relative rounded-3xl bg-[#161412] border border-[#D4AF7A]/22 overflow-hidden flex flex-col justify-between h-full active:scale-[0.985]"
-    >
+    <SpotlightCard className="card-hover-zoom flex flex-col justify-between h-full active:scale-[0.985]">
       {/* 1. Large High-Res Photo (aspect-[4/3]) */}
       <a
         href={`/services/${service.slug}/`}
-        className="relative block aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#1F1C19] via-[#161412] to-[#0B0A09]"
+        className="relative block aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#1F1C19] via-[#12100e] to-[#0a0908]"
         aria-label={`View details for ${service.name}`}
       >
         {!imgError ? (
@@ -75,11 +42,11 @@ export default function TiltTreatmentCard({ service }: TiltTreatmentCardProps) {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center p-8 text-center bg-gradient-to-br from-[#211C16] to-[#0B0A09]">
+          <div className="w-full h-full flex items-center justify-center p-8 text-center bg-gradient-to-br from-[#211C16] to-[#0a0908]">
             <span className="font-serif text-[28px] text-[#E5C158]">{service.name}</span>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#161412] via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#12100e] via-transparent to-transparent pointer-events-none" />
       </a>
 
       {/* Clean Spacious Card Content */}
@@ -108,13 +75,13 @@ export default function TiltTreatmentCard({ service }: TiltTreatmentCardProps) {
             href={whatsappUrl(bookingMsg)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 min-h-[48px] py-3 px-6 rounded-full bg-[#E5C158] hover:bg-[#F0D58C] active:scale-[0.98] text-[#0B0A09] text-[16px] font-semibold transition-all duration-200 whitespace-nowrap shrink-0"
+            className="inline-flex items-center justify-center gap-2 min-h-[48px] py-3 px-6 rounded-full bg-[#E5C158] hover:bg-[#F0D58C] active:scale-[0.98] text-[#0a0908] text-[16px] font-semibold transition-all duration-200 whitespace-nowrap shrink-0"
           >
             <span>Book</span>
             <ArrowRight className="w-4 h-4" strokeWidth={1.75} aria-hidden="true" />
           </a>
         </div>
       </div>
-    </article>
+    </SpotlightCard>
   );
 }
