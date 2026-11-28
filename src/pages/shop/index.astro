@@ -1,27 +1,23 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ShopCatalog from '../../components/ShopCatalog.tsx';
-import { P } from '../../data/catalog.js';
 ---
 <Base
-  title="The Elite Wellness Apothecary & Spa Shop in Kalyani Nagar, Pune"
+  title="The Wellness Apothecary & Spa Shop in Kalyani Nagar, Pune"
   description="Shop aromatic massage oils, sandalwood & lavender blends, Himalayan bath salts, botanical scrubs, and luxury gift hampers from The Elite Spa Centre, Pune."
 >
-  <section class="pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-[#D4AF37]/15 bg-gradient-to-b from-[#121215] to-[#09090B]">
+  <section class="pt-36 pb-20 sm:pt-44 sm:pb-24 border-b border-[#E5C158]/20 bg-gradient-to-b from-[#121215] to-[#09090B]">
     <div class="max-w-[1380px] mx-auto px-5 sm:px-8">
-      <p class="text-xs font-semibold tracking-[0.22em] uppercase text-[#D4AF37] mb-3">
-        The Elite Wellness Apothecary · {P.length} Essentials
-      </p>
-      <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-medium text-[#F5F5F0] leading-[1.04] mb-5">
-        Bring the Ritual <em class="italic font-normal text-[#D4AF37]">Home.</em>
+      <h1 class="font-serif text-[44px] sm:text-[56px] lg:text-[68px] font-medium text-[#F5F5F0] leading-[1.04] mb-5">
+        The Wellness <em class="italic font-normal text-[#E5C158]">Apothecary.</em>
       </h1>
-      <p class="text-base sm:text-lg text-[#B0AEA6] max-w-2xl leading-relaxed">
-        Pure aromatic massage oils, mineral bath soaks, botanical body scrubs, and curated spa gift boxes ready for pickup at Vascon Mariplex Mall or direct WhatsApp delivery.
+      <p class="text-[18px] text-[#F5F5F0]/90 max-w-2xl leading-[1.6]">
+        Pure aromatic massage oils, mineral bath soaks, botanical body scrubs, and curated spa gift boxes ready for pickup or direct WhatsApp delivery.
       </p>
     </div>
   </section>
 
-  <main class="max-w-[1380px] mx-auto px-5 sm:px-8 py-16 sm:py-24">
+  <main class="max-w-[1380px] mx-auto px-5 sm:px-8 py-20 sm:py-28">
     <ShopCatalog client:load />
   </main>
 </Base>

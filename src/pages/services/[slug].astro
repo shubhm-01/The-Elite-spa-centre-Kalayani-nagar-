@@ -12,18 +12,8 @@ export function getStaticPaths() {
 const { service } = Astro.props;
 const price = new Intl.NumberFormat('en-IN').format(service.price);
 const bookingHref = '/booking/?service=' + encodeURIComponent(service.slug);
-const localAreaContext = service.slug === 'deep-tissue'
-  ? 'Travelling from Kharadi or EON IT Park? Our Deep Tissue Massage is offered at the Kalyani Nagar centre; check live directions to Vascon Mariplex Mall before travelling.'
-  : service.slug === 'couples'
-    ? 'Coming from Koregaon Park for a Couples Spa Ritual? Our centre is in Kalyani Nagar; check the live route to Vascon Mariplex Mall before setting out.'
-    : null;
-const pageDescription = service.slug === 'deep-tissue'
-  ? 'Deep Tissue Massage at The Elite Spa Centre, Kalyani Nagar, Pune. Guests from Kharadi and EON IT Park can check live directions to Vascon Mariplex Mall.'
-  : service.slug === 'couples'
-    ? 'Couples Spa Ritual at The Elite Spa Centre in Kalyani Nagar, Pune. Guests from Koregaon Park can check live directions to Vascon Mariplex Mall.'
-    : service.description + ' Book at The Elite Spa Centre, Vascon Mariplex Mall, Kalyani Nagar, Pune.'
 const waHref = whatsappUrl(
-  `Hello The Elite Spa Centre, I would like to book the ${service.name} (${service.duration}, starting at ₹${price}) at your Kalyani Nagar sanctuary.`
+  `Hello The Elite Spa Centre, I would like to book ${service.name} (${service.duration} • ₹${price}) at your Kalyani Nagar sanctuary.`
 );
 
 const serviceSchema = {
@@ -38,22 +28,22 @@ const serviceSchema = {
 ---
 <Base
   title={service.name + ' in Kalyani Nagar, Pune'}
-  description={pageDescription}
+  description={service.description + ' Book at The Elite Spa Centre, Vascon Mariplex Mall, Kalyani Nagar, Pune.'}
   image={service.image}
   extraStructuredData={[serviceSchema]}
 >
-  <section class="pt-32 pb-16 sm:pt-40 sm:pb-24 max-w-[1380px] mx-auto px-5 sm:px-8">
-    <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-xs text-[#B0AEA6] mb-8">
-      <a href="/" class="hover:text-[#D4AF37]">Home</a>
+  <section class="pt-36 pb-20 sm:pt-44 sm:pb-28 max-w-[1380px] mx-auto px-5 sm:px-8">
+    <nav aria-label="Breadcrumb" class="flex items-center gap-3 text-[15px] text-[#F5F5F0]/85 mb-10">
+      <a href="/" class="hover:text-[#E5C158]">Home</a>
       <span>/</span>
-      <a href="/services/" class="hover:text-[#D4AF37]">Rituals</a>
+      <a href="/services/" class="hover:text-[#E5C158]">Rituals</a>
       <span>/</span>
-      <span class="text-[#F5F5F0]">{service.name}</span>
+      <span class="text-[#E5C158] font-medium">{service.name}</span>
     </nav>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-      <div class="lg:col-span-6 space-y-6">
-        <div class="rounded-3xl overflow-hidden border border-[#D4AF37]/25 bg-[#121215] aspect-[4/3]">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-6 space-y-8">
+        <div class="rounded-3xl overflow-hidden border border-[#E5C158]/25 bg-[#121215] aspect-[4/3]">
           <img
             src={service.image}
             alt={service.name}
@@ -63,9 +53,9 @@ const serviceSchema = {
         </div>
 
         {service.video ? (
-          <div class="rounded-3xl overflow-hidden border border-[#D4AF37]/20 bg-[#121215] p-4 space-y-3">
-            <span class="block text-[11px] font-semibold tracking-[0.16em] uppercase text-[#D4AF37]">
-              Ambient Ritual Preview
+          <div class="rounded-3xl overflow-hidden border border-[#E5C158]/22 bg-[#121215] p-5 space-y-4">
+            <span class="block text-[16px] font-semibold text-[#E5C158]">
+              Ritual Preview
             </span>
             <video
               controls
@@ -81,64 +71,44 @@ const serviceSchema = {
         ) : null}
       </div>
 
-      <div class="lg:col-span-6 glass-panel rounded-3xl p-7 sm:p-10 space-y-6">
-        <div class="flex items-center gap-3 text-xs font-semibold tracking-[0.16em] uppercase text-[#D4AF37]">
-          <span>{service.category}</span>
-          <span aria-hidden="true">·</span>
-          <span>{service.duration}</span>
-        </div>
-
-        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-medium text-[#F5F5F0] leading-[1.06]">
+      <div class="lg:col-span-6 glass-panel rounded-3xl p-8 sm:p-10 space-y-7">
+        <h1 class="font-serif text-[40px] sm:text-[52px] font-medium text-[#F5F5F0] leading-[1.08]">
           {service.name}
         </h1>
 
-        <p class="text-base text-[#B0AEA6] leading-relaxed">
+        <p class="text-[18px] text-[#F5F5F0]/90 leading-[1.6]">
           {service.description}
         </p>
-        {localAreaContext ? (
-          <p class="text-sm text-[#B0AEA6] leading-relaxed border-l-2 border-[#D4AF37]/50 pl-4">
-            {localAreaContext}
-          </p>
-        ) : null}
 
-        <div class="py-6 border-y border-[#F5F5F0]/10 flex flex-wrap items-baseline justify-between gap-4">
-          <div>
-            <span class="block text-xs tracking-[0.14em] uppercase text-[#B0AEA6] mb-1">
-              Starting Rate · {service.priceQualifier}
-            </span>
-            <strong class="font-serif text-5xl font-semibold text-[#D4AF37] tabular-nums">
-              ₹{price}
-            </strong>
-          </div>
-          <p class="text-xs text-[#B0AEA6] max-w-xs leading-relaxed">
+        <div class="py-6 border-y border-[#F5F5F0]/14 space-y-3">
+          <strong class="block text-[26px] sm:text-[32px] font-bold text-[#E5C158] tabular-nums">
+            {service.duration} • ₹{price}
+          </strong>
+          <p class="text-[16px] text-[#F5F5F0]/90 leading-[1.6]">
             {service.pricingNote}
           </p>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-3 pt-2">
+        <div class="flex flex-col sm:flex-row gap-4 pt-2">
           <a
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            class="cta-gold-pulse flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-[#D4AF37] hover:bg-[#E8CB6D] text-[#09090B] text-xs font-bold tracking-[0.1em] uppercase transition-colors"
+            class="cta-gold-pulse flex-1 inline-flex items-center justify-center py-4 px-7 rounded-full bg-[#E5C158] hover:bg-[#F2D77E] text-[#09090B] text-[16px] sm:text-[17px] font-semibold transition-colors whitespace-nowrap"
           >
-            Book on WhatsApp ↗
+            Book on WhatsApp →
           </a>
           <a
             href={bookingHref}
-            class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-[#D4AF37]/40 hover:border-[#D4AF37] text-[#F5F5F0] text-xs font-semibold tracking-[0.1em] uppercase transition-colors"
+            class="flex-1 inline-flex items-center justify-center py-4 px-7 rounded-full border border-[#E5C158]/50 hover:border-[#E5C158] text-[#F5F5F0] text-[16px] sm:text-[17px] font-semibold transition-colors whitespace-nowrap"
           >
             Schedule Date &amp; Time
           </a>
         </div>
 
-        <div class="pt-4 space-y-2 text-xs text-[#B0AEA6]">
-          <p class="text-[#F5F5F0]/90 font-medium">The Elite Sanctuary Standard</p>
-          <p class="leading-relaxed">
-            Every ritual begins with a personal consultation on pressure, botanical oil blends, and target tension areas inside a private, hygienically prepared suite at Vascon Mariplex Mall, Kalyani Nagar. Open daily until 3:00 AM.
-          </p>
-          <a href="/nearby-areas/" class="inline-flex items-center gap-2 pt-2 text-xs font-semibold tracking-[0.08em] text-[#D4AF37] hover:text-[#E8CB6D] transition-colors">Travelling from another part of Pune? View our Kalyani Nagar route guide ↗</a>
-        </div>
+        <p class="text-[17px] text-[#F5F5F0]/90 leading-[1.6] pt-2">
+          Every ritual begins with a personal consultation on pressure, botanical oil blends, and focus areas inside a private candlelit suite at Vascon Mariplex Mall, Kalyani Nagar.
+        </p>
       </div>
     </div>
   </section>

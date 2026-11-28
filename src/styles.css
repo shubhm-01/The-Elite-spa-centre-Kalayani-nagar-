@@ -4,21 +4,21 @@
 @theme {
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  --color-obsidian: #09090B;
-  --color-charcoal: #121215;
-  --color-charcoal-light: #1A1A1F;
-  --color-gold: #D4AF37;
-  --color-gold-light: #E8CB6D;
-  --color-gold-muted: #A3842B;
-  --color-pearl: #F5F5F0;
-  --color-pearl-muted: #B0AEA6;
+  --color-obsidian: #0B0A09;
+  --color-charcoal: #161412;
+  --color-charcoal-light: #1F1C19;
+  --color-gold: #D4AF7A;
+  --color-gold-bright: #E5C158;
+  --color-gold-light: #F0D58C;
+  --color-ivory: #F4EFE6;
 }
 
 @layer base {
   html {
-    background-color: #09090B;
-    color: #F5F5F0;
+    background-color: #0B0A09;
+    color: #F4EFE6;
     font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    font-size: 16px;
     scroll-behavior: smooth;
     scroll-padding-top: 96px;
     -webkit-font-smoothing: antialiased;
@@ -27,8 +27,10 @@
 
   body {
     margin: 0;
-    background-color: #09090B;
-    color: #F5F5F0;
+    background-color: #0B0A09;
+    color: #F4EFE6;
+    font-size: 17px;
+    line-height: 1.6;
     overflow-x: hidden;
   }
 
@@ -38,8 +40,8 @@
   }
 
   ::selection {
-    background: rgba(212, 175, 55, 0.3);
-    color: #F5F5F0;
+    background: rgba(212, 175, 122, 0.34);
+    color: #F4EFE6;
   }
 
   a:focus-visible,
@@ -48,41 +50,142 @@
   textarea:focus-visible,
   select:focus-visible,
   summary:focus-visible {
-    outline: 2px solid #D4AF37;
+    outline: 2px solid #E5C158;
     outline-offset: 3px;
   }
 }
 
-/* Luxury frosted glassmorphism surfaces */
+/* Warm Dark-Luxury Glassmorphism Surfaces */
 .glass-panel {
-  background: rgba(18, 18, 21, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 175, 55, 0.22);
+  background: rgba(22, 20, 18, 0.84);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(212, 175, 122, 0.24);
 }
 
 .glass-panel-subtle {
-  background: rgba(18, 18, 21, 0.56);
+  background: rgba(22, 20, 18, 0.68);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(245, 245, 240, 0.08);
+  border: 1px solid rgba(244, 239, 230, 0.12);
 }
 
-/* Champagne gold subtle pulse glow for primary CTAs */
-@keyframes goldPulse {
+/* Slow Ken Burns Effect (GPU-accelerated transform only, 18s smooth breathe) */
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate3d(0, -1%, 0);
+  }
+}
+
+.hero-ken-burns {
+  animation: kenBurns 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Aceternity-Style Soft Golden Radial Spotlight */
+.hero-spotlight {
+  background:
+    radial-gradient(64% 52% at 24% 30%, rgba(212, 175, 122, 0.22) 0%, rgba(212, 175, 122, 0.06) 44%, transparent 74%),
+    radial-gradient(48% 44% at 82% 24%, rgba(229, 193, 88, 0.12) 0%, transparent 68%);
+}
+
+/* Shiny Champagne Gold Text Highlight */
+@keyframes shinyGold {
+  0% {
+    background-position: 120% 50%;
+  }
+  100% {
+    background-position: -120% 50%;
+  }
+}
+
+.shiny-gold-text {
+  background-image: linear-gradient(
+    110deg,
+    #D4AF7A 18%,
+    #F7E3A8 46%,
+    #E5C158 54%,
+    #D4AF7A 82%
+  );
+  background-size: 240% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shinyGold 6.5s ease-in-out infinite;
+}
+
+/* Periodic 4-Second Gold Shimmer Sweep on Primary CTA (GPU-only transform) */
+@keyframes shimmerSweep {
+  0%, 62% {
+    transform: translate3d(-140%, 0, 0) skewX(-22deg);
+    opacity: 0;
+  }
+  70% {
+    opacity: 0.72;
+  }
+  96% {
+    transform: translate3d(260%, 0, 0) skewX(-22deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(260%, 0, 0) skewX(-22deg);
+    opacity: 0;
+  }
+}
+
+.cta-shimmer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cta-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 44%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 250, 236, 0.52),
+    transparent
+  );
+  pointer-events: none;
+  animation: shimmerSweep 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform, opacity;
+}
+
+/* Subtle 5-Second Breathing Glow on Sticky WhatsApp Button (GPU-only opacity/transform) */
+@keyframes waBreatheRing {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.42), 0 10px 30px -8px rgba(212, 175, 55, 0.38);
+    transform: scale(1);
+    opacity: 0.48;
   }
   50% {
-    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0), 0 14px 36px -6px rgba(212, 175, 55, 0.55);
+    transform: scale(1.12);
+    opacity: 0;
   }
 }
 
-.cta-gold-pulse {
-  animation: goldPulse 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+.wa-breathe-wrap {
+  position: relative;
 }
 
-/* Magic UI style infinite seamless marquee */
+.wa-breathe-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  border: 2px solid rgba(34, 197, 94, 0.72);
+  pointer-events: none;
+  animation: waBreatheRing 5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Infinite Luxury Marquee (40s smooth loop, pauses on hover & touch) */
 @keyframes marqueeScroll {
   0% {
     transform: translate3d(0, 0, 0);
@@ -95,18 +198,20 @@
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marqueeScroll 38s linear infinite;
+  animation: marqueeScroll 40s linear infinite;
+  will-change: transform;
 }
 
-.marquee-track:hover {
+.marquee-track:hover,
+.marquee-track:active {
   animation-play-state: paused;
 }
 
-/* Live pulsing status ring requested for 8 AM - 3 AM USP badge */
+/* Live pulsing ring for Open Daily till 3:00 AM badge */
 @keyframes liveBeacon {
   0% {
     transform: scale(0.95);
-    opacity: 0.85;
+    opacity: 0.9;
   }
   70% {
     transform: scale(2.1);
@@ -119,14 +224,13 @@
 }
 
 .live-beacon-ring {
-  animation: liveBeacon 2.2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  animation: liveBeacon 2.4s cubic-bezier(0.24, 0, 0.38, 1) infinite;
 }
 
-/* 3D Tilt Spotlight Card (21st.dev / Aceternity style) */
+/* Desktop-Only Hover States — Prevents Sticky Hover on Mobile Touchscreens */
 .tilt-card {
   position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.3s ease;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
   will-change: transform;
 }
 
@@ -137,45 +241,39 @@
   border-radius: inherit;
   padding: 1px;
   background: radial-gradient(
-    420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(212, 175, 55, 0.7),
-    rgba(212, 175, 55, 0.12) 45%,
-    transparent 75%
+    440px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(212, 175, 122, 0.76),
+    rgba(212, 175, 122, 0.14) 48%,
+    transparent 76%
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.28s ease;
   pointer-events: none;
   z-index: 2;
 }
 
-.tilt-card:hover::before {
-  opacity: 1;
+.card-hover-zoom img {
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tilt-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    360px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(212, 175, 55, 0.1),
-    transparent 65%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 1;
+@media (hover: hover) and (pointer: fine) {
+  .tilt-card:hover::before {
+    opacity: 1;
+  }
+
+  .card-hover-zoom:hover img {
+    transform: scale(1.04);
+  }
+
+  .card-hover-glow:hover {
+    border-color: rgba(212, 175, 122, 0.62);
+  }
 }
 
-.tilt-card:hover::after {
-  opacity: 1;
-}
-
-/* Custom sleek horizontal scrollbar hide */
+/* Sleek scrollbar hide */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -184,27 +282,23 @@
   scrollbar-width: none;
 }
 
-/* Dark luxury Google Maps embed treatment */
+/* Dark-Luxury Google Maps Embed Treatment */
 .dark-map-frame {
-  filter: grayscale(100%) invert(92%) contrast(94%) hue-rotate(180deg) saturate(70%);
+  filter: grayscale(100%) invert(92%) contrast(85%);
 }
 
-/* Smooth accordion details */
-details.luxury-faq summary::-webkit-details-marker {
-  display: none;
-}
-
-/* Skip link accessibility */
+/* Skip link */
 .skip-link {
   position: absolute;
   left: 16px;
   top: -80px;
   z-index: 100;
-  background: #D4AF37;
-  color: #09090B;
+  background: #E5C158;
+  color: #0B0A09;
+  font-size: 16px;
   font-weight: 700;
-  padding: 12px 18px;
-  border-radius: 6px;
+  padding: 12px 20px;
+  border-radius: 9999px;
   transition: top 0.2s ease;
 }
 
@@ -213,10 +307,19 @@ details.luxury-faq summary::-webkit-details-marker {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cta-gold-pulse,
+  .hero-ken-burns,
+  .shiny-gold-text,
+  .cta-shimmer::after,
+  .wa-breathe-wrap::before,
   .marquee-track,
   .live-beacon-ring {
     animation: none !important;
+  }
+  .shiny-gold-text {
+    background-image: none;
+    color: #E5C158;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
   }
   .tilt-card {
     transform: none !important;

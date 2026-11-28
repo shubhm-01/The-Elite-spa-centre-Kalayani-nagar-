@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MessageCircle, Calendar, Clock, Sparkles } from 'lucide-react';
+import { MessageCircle, Calendar, Clock } from 'lucide-react';
 import { S, getServicePrice, whatsappUrl } from '../data/catalog.js';
 
 const initialValues = { name: '', phone: '', date: '', time: '', duration: '60', notes: '' };
@@ -68,7 +68,7 @@ export default function Booking({ service = 'Signature Relaxation Massage' }) {
       return;
     }
 
-    const durationText = isExpress ? selectedItem.duration : `${values.duration} mins`;
+    const durationText = isExpress ? selectedItem.duration : `${values.duration} Mins`;
 
     const message = [
       'Reservation Request — The Elite Spa Centre (Kalyani Nagar)',
@@ -90,35 +90,24 @@ export default function Booking({ service = 'Signature Relaxation Massage' }) {
   return (
     <form
       onSubmit={submit}
-      className="glass-panel rounded-3xl p-6 sm:p-8 space-y-5"
+      className="glass-panel rounded-3xl p-7 sm:p-10 space-y-6"
     >
-      <div className="flex items-start justify-between gap-4 pb-5 border-b border-[#F5F5F0]/10">
-        <div>
-          <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.16em] uppercase text-[#D4AF37]">
-            <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-            Selected Sanctuary Ritual
-          </span>
-          <h3 className="font-serif text-2xl sm:text-3xl font-medium text-[#F5F5F0] mt-1">
-            {selectedItem.name}
-          </h3>
-        </div>
-        <div className="text-right shrink-0">
-          <span className="block text-[11px] text-[#B0AEA6]">Rate</span>
-          <strong className="font-serif text-2xl sm:text-3xl text-[#D4AF37] tabular-nums">
-            ₹{computedPrice.toLocaleString('en-IN')}
-          </strong>
-        </div>
+      <div className="flex flex-wrap items-baseline justify-between gap-4 pb-6 border-b border-[#F5F5F0]/14">
+        <h3 className="font-serif text-[28px] sm:text-[32px] font-medium text-[#F5F5F0]">
+          {selectedItem.name}
+        </h3>
+        <strong className="font-serif text-[32px] sm:text-[36px] font-bold text-[#E5C158] tabular-nums">
+          ₹{computedPrice.toLocaleString('en-IN')}
+        </strong>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <label className="block space-y-2">
-          <span className="text-xs font-semibold tracking-[0.12em] uppercase text-[#F5F5F0]/80">
-            Choose Ritual
-          </span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <label className="block space-y-2.5">
+          <span className="text-[16px] font-semibold text-[#F5F5F0]">Choose Ritual</span>
           <select
             value={selectedSlug}
             onChange={(e) => setSelectedSlug(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[#09090B] border border-[#F5F5F0]/15 focus:border-[#D4AF37] text-sm text-[#F5F5F0] outline-none"
+            className="w-full px-4 py-4 rounded-2xl bg-[#09090B] border border-[#F5F5F0]/20 focus:border-[#E5C158] text-[16px] text-[#F5F5F0] outline-none"
           >
             {S.map((item) => (
               <option key={item.slug} value={item.slug} className="bg-[#09090B] text-[#F5F5F0]">
@@ -129,44 +118,38 @@ export default function Booking({ service = 'Signature Relaxation Massage' }) {
         </label>
 
         {!isExpress ? (
-          <label className="block space-y-2">
-            <span className="text-xs font-semibold tracking-[0.12em] uppercase text-[#F5F5F0]/80">
-              Session Duration
-            </span>
+          <label className="block space-y-2.5">
+            <span className="text-[16px] font-semibold text-[#F5F5F0]">Duration</span>
             <select
               name="duration"
               value={values.duration}
               onChange={update}
-              className="w-full px-4 py-3 rounded-xl bg-[#09090B] border border-[#F5F5F0]/15 focus:border-[#D4AF37] text-sm text-[#F5F5F0] outline-none"
+              className="w-full px-4 py-4 rounded-2xl bg-[#09090B] border border-[#F5F5F0]/20 focus:border-[#E5C158] text-[16px] text-[#F5F5F0] outline-none"
             >
               <option value="60" className="bg-[#09090B]">
-                60 Mins (₹{getServicePrice(selectedItem.slug, '60 min').toLocaleString('en-IN')})
+                60 Mins • ₹{getServicePrice(selectedItem.slug, '60 min').toLocaleString('en-IN')}
               </option>
               <option value="90" className="bg-[#09090B]">
-                90 Mins (₹{getServicePrice(selectedItem.slug, '90 min').toLocaleString('en-IN')})
+                90 Mins • ₹{getServicePrice(selectedItem.slug, '90 min').toLocaleString('en-IN')}
               </option>
               <option value="120" className="bg-[#09090B]">
-                120 Mins (₹{getServicePrice(selectedItem.slug, '120 min').toLocaleString('en-IN')})
+                120 Mins • ₹{getServicePrice(selectedItem.slug, '120 min').toLocaleString('en-IN')}
               </option>
             </select>
           </label>
         ) : (
-          <div className="space-y-2">
-            <span className="text-xs font-semibold tracking-[0.12em] uppercase text-[#F5F5F0]/80">
-              Session Duration
-            </span>
-            <div className="px-4 py-3 rounded-xl bg-[#09090B]/60 border border-[#F5F5F0]/10 text-sm text-[#F5F5F0]">
-              {selectedItem.duration} · Express Session
+          <div className="space-y-2.5">
+            <span className="block text-[16px] font-semibold text-[#F5F5F0]">Duration</span>
+            <div className="px-4 py-4 rounded-2xl bg-[#09090B]/70 border border-[#F5F5F0]/15 text-[16px] text-[#F5F5F0]">
+              {selectedItem.duration}
             </div>
           </div>
         )}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <label className="block space-y-2">
-          <span className="text-xs font-semibold tracking-[0.12em] uppercase text-[#F5F5F0]/80">
-            Your Name
-          </span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <label className="block space-y-2.5">
+          <span className="text-[16px] font-semibold text-[#F5F5F0]">Your Name</span>
           <input
             id="booking-name"
             name="name"
@@ -176,14 +159,12 @@ export default function Booking({ service = 'Signature Relaxation Massage' }) {
             placeholder="Full name"
             value={values.name}
             onChange={update}
-            className="w-full px-4 py-3 rounded-xl bg-[#09090B] border border-[#F5F5F0]/15 focus:border-[#D4AF37] text-sm text-[#F5F5F0] placeholder:text-[#B0AEA6]/50 outline-none"
+            className="w-full px-4 py-4 rounded-2xl bg-[#09090B] border border-[#F5F5F0]/20 focus:border-[#E5C158] text-[16px] text-[#F5F5F0] placeholder:text-[#F5F5F0]/50 outline-none"
           />
         </label>
 
-        <label className="block space-y-2">
-          <span className="text-xs font-semibold tracking-[0.12em] uppercase text-[#F5F5F0]/80">
-            Mobile Number
-          </span>
+        <label className="block space-y-2.5">
+          <span className="text-[16px] font-semibold text-[#F5F5F0]">Mobile Number</span>
           <input
             id="booking-phone"
             name="phone"
@@ -195,15 +176,15 @@ export default function Booking({ service = 'Signature Relaxation Massage' }) {
             placeholder="+91 98XXX XXXXX"
             value={values.phone}
             onChange={update}
-            className="w-full px-4 py-3 rounded-xl bg-[#09090B] border border-[#F5F5F0]/15 focus:border-[#D4AF37] text-sm text-[#F5F5F0] placeholder:text-[#B0AEA6]/50 outline-none"
+            className="w-full px-4 py-4 rounded-2xl bg-[#09090B] border border-[#F5F5F0]/20 focus:border-[#E5C158] text-[16px] text-[#F5F5F0] placeholder:text-[#F5F5F0]/50 outline-none"
           />
         </label>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <label className="block space-y-2">
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-[0.12em] uppercase text-[#F5F5F0]/80">
-            <Calendar className="w-3.5 h-3.5 text-[#D4AF37]" aria-hidden="true" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <label className="block space-y-2.5">
+          <span className="inline-flex items-center gap-2 text-[16px] font-semibold text-[#F5F5F0]">
+            <Calendar className="w-4 h-4 text-[#E5C158]" aria-hidden="true" />
             Preferred Date
           </span>
           <input
@@ -214,13 +195,13 @@ export default function Booking({ service = 'Signature Relaxation Massage' }) {
             required
             value={values.date}
             onChange={update}
-            className="w-full px-4 py-3 rounded-xl bg-[#09090B] border border-[#F5F5F0]/15 focus:border-[#D4AF37] text-sm text-[#F5F5F0] outline-none [color-scheme:dark]"
+            className="w-full px-4 py-4 rounded-2xl bg-[#09090B] border border-[#F5F5F0]/20 focus:border-[#E5C158] text-[16px] text-[#F5F5F0] outline-none [color-scheme:dark]"
           />
         </label>
 
-        <label className="block space-y-2">
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-[0.12em] uppercase text-[#F5F5F0]/80">
-            <Clock className="w-3.5 h-3.5 text-[#D4AF37]" aria-hidden="true" />
+        <label className="block space-y-2.5">
+          <span className="inline-flex items-center gap-2 text-[16px] font-semibold text-[#F5F5F0]">
+            <Clock className="w-4 h-4 text-[#E5C158]" aria-hidden="true" />
             Preferred Time (8 AM – 3 AM)
           </span>
           <input
@@ -230,43 +211,43 @@ export default function Booking({ service = 'Signature Relaxation Massage' }) {
             required
             value={values.time}
             onChange={update}
-            className="w-full px-4 py-3 rounded-xl bg-[#09090B] border border-[#F5F5F0]/15 focus:border-[#D4AF37] text-sm text-[#F5F5F0] outline-none [color-scheme:dark]"
+            className="w-full px-4 py-4 rounded-2xl bg-[#09090B] border border-[#F5F5F0]/20 focus:border-[#E5C158] text-[16px] text-[#F5F5F0] outline-none [color-scheme:dark]"
           />
         </label>
       </div>
 
-      <label className="block space-y-2">
-        <span className="text-xs font-semibold tracking-[0.12em] uppercase text-[#F5F5F0]/80">
-          Pressure &amp; Aroma Preferences (Optional)
+      <label className="block space-y-2.5">
+        <span className="text-[16px] font-semibold text-[#F5F5F0]">
+          Pressure &amp; Oil Preferences (Optional)
         </span>
         <textarea
           id="booking-notes"
           name="notes"
           maxLength={500}
           rows={3}
-          placeholder="e.g., Medium-firm pressure on shoulders, lavender essential oil, couple suite..."
+          placeholder="Medium-firm pressure on shoulders, lavender oil, couple suite..."
           value={values.notes}
           onChange={update}
-          className="w-full px-4 py-3 rounded-xl bg-[#09090B] border border-[#F5F5F0]/15 focus:border-[#D4AF37] text-sm text-[#F5F5F0] placeholder:text-[#B0AEA6]/50 outline-none resize-none"
+          className="w-full px-4 py-4 rounded-2xl bg-[#09090B] border border-[#F5F5F0]/20 focus:border-[#E5C158] text-[16px] text-[#F5F5F0] placeholder:text-[#F5F5F0]/50 outline-none resize-none"
         />
       </label>
 
       {error ? (
-        <p className="text-xs font-medium text-red-400 bg-red-950/40 border border-red-500/30 rounded-xl px-4 py-3" role="alert">
+        <p className="text-[16px] font-medium text-red-300 bg-red-950/50 border border-red-400/40 rounded-2xl px-5 py-4" role="alert">
           {error}
         </p>
       ) : null}
 
       <button
         type="submit"
-        className="cta-gold-pulse w-full inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-full bg-[#D4AF37] hover:bg-[#E8CB6D] text-[#09090B] text-xs sm:text-sm font-bold tracking-[0.1em] uppercase transition-all cursor-pointer"
+        className="cta-gold-pulse w-full inline-flex items-center justify-center gap-2.5 py-4 px-7 rounded-full bg-[#E5C158] hover:bg-[#F2D77E] text-[#09090B] text-[17px] font-semibold transition-all cursor-pointer"
       >
-        <MessageCircle className="w-4 h-4" aria-hidden="true" />
-        <span>Confirm Instant Availability on WhatsApp</span>
+        <MessageCircle className="w-5 h-5" aria-hidden="true" />
+        <span>Check Instant Availability on WhatsApp</span>
       </button>
 
-      <p className="text-xs text-[#B0AEA6] text-center">
-        Open daily 8:00 AM – 3:00 AM · Vascon Mariplex Mall, Kalyani Nagar, Pune
+      <p className="text-[15px] text-[#F5F5F0]/90 text-center">
+        Open Daily 8:00 AM – 3:00 AM • Vascon Mariplex Mall, Kalyani Nagar
       </p>
     </form>
   );

@@ -17,7 +17,7 @@ export default function ServicesCatalog() {
       <div
         role="tablist"
         aria-label="Filter rituals by category"
-        className="flex items-center gap-2.5 overflow-x-auto no-scrollbar pb-4 mb-10"
+        className="flex items-center gap-3 overflow-x-auto no-scrollbar pb-4 mb-12"
       >
         {CATEGORIES.map((category) => {
           const active = selectedCategory === category;
@@ -28,10 +28,10 @@ export default function ServicesCatalog() {
               role="tab"
               aria-selected={active}
               onClick={() => setSelectedCategory(category)}
-              className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-[0.1em] uppercase whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+              className={`py-3.5 px-6 rounded-full text-[16px] sm:text-[17px] font-semibold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 active
-                  ? 'bg-[#D4AF37] text-[#09090B]'
-                  : 'bg-[#121215] text-[#F5F5F0]/80 border border-[#F5F5F0]/12 hover:border-[#D4AF37]/50'
+                  ? 'bg-[#E5C158] text-[#09090B]'
+                  : 'bg-[#121215] text-[#F5F5F0] border border-[#F5F5F0]/18 hover:border-[#E5C158]/60'
               }`}
             >
               {category}
@@ -40,7 +40,7 @@ export default function ServicesCatalog() {
         })}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {filtered.map((service) => (
           <TiltTreatmentCard key={service.slug} service={service} />
         ))}

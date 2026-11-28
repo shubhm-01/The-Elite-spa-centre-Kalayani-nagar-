@@ -60,9 +60,7 @@ export default function ShopCatalog() {
     persistCart(next);
   };
 
-  const clearCart = () => {
-    persistCart({});
-  };
+  const clearCart = () => persistCart({});
 
   const cartItems = Object.entries(cart);
   const totalCount = cartItems.reduce((sum, [, item]) => sum + item.qty, 0);
@@ -70,13 +68,13 @@ export default function ShopCatalog() {
 
   const checkoutWhatsApp = () => {
     if (!cartItems.length) {
-      setCartNotice('Add at least one item to your luxury basket before checking out.');
+      setCartNotice('Add an essential to your basket before placing your WhatsApp order.');
       return;
     }
     const rows = cartItems
       .map(([name, item]) => `• ${name} × ${item.qty} — ₹${(item.price * item.qty).toLocaleString('en-IN')}`)
       .join('\n');
-    const msg = `Hello The Elite Spa Centre, I would like to order from The Elite Wellness Shop:\n${rows}\n\nTotal: ₹${totalPrice.toLocaleString('en-IN')}`;
+    const msg = `Hello The Elite Spa Centre, I would like to order from The Wellness Apothecary:\n${rows}\n\nTotal: ₹${totalPrice.toLocaleString('en-IN')}`;
     window.location.assign(whatsappUrl(msg));
   };
 
@@ -90,33 +88,33 @@ export default function ShopCatalog() {
   }, [search, category]);
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-12">
       {/* Search + Basket Bar */}
-      <div className="glass-panel rounded-3xl p-5 sm:p-7 space-y-5">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 text-[#D4AF37] absolute left-4 top-1/2 -translate-y-1/2" aria-hidden="true" />
+      <div className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+          <div className="relative flex-1 max-w-lg">
+            <Search className="w-5 h-5 text-[#E5C158] absolute left-5 top-1/2 -translate-y-1/2" aria-hidden="true" />
             <input
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search massage oils, diffusers, bath salts..."
               aria-label="Search wellness products"
-              className="w-full pl-11 pr-4 py-3 rounded-full bg-[#09090B] border border-[#F5F5F0]/15 focus:border-[#D4AF37] text-sm text-[#F5F5F0] placeholder:text-[#B0AEA6]/60 outline-none"
+              className="w-full pl-13 pr-5 py-4 rounded-full bg-[#09090B] border border-[#F5F5F0]/20 focus:border-[#E5C158] text-[16px] text-[#F5F5F0] placeholder:text-[#F5F5F0]/55 outline-none"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#09090B] border border-[#D4AF37]/30 text-xs font-semibold text-[#F5F5F0]">
-              <ShoppingBag className="w-4 h-4 text-[#D4AF37]" aria-hidden="true" />
-              <span className="tabular-nums">{totalCount} Items · ₹{totalPrice.toLocaleString('en-IN')}</span>
+            <div className="inline-flex items-center gap-2.5 px-5 py-3.5 rounded-full bg-[#09090B] border border-[#E5C158]/35 text-[16px] font-semibold text-[#F5F5F0]">
+              <ShoppingBag className="w-5 h-5 text-[#E5C158]" aria-hidden="true" />
+              <span className="tabular-nums">{totalCount} Items • ₹{totalPrice.toLocaleString('en-IN')}</span>
             </div>
 
             {totalCount > 0 && (
               <button
                 type="button"
                 onClick={clearCart}
-                className="px-4 py-2.5 rounded-full border border-[#F5F5F0]/15 hover:border-[#F5F5F0]/40 text-xs font-medium text-[#B0AEA6] hover:text-[#F5F5F0] transition-colors cursor-pointer"
+                className="py-3.5 px-5 rounded-full border border-[#F5F5F0]/25 hover:border-[#F5F5F0]/60 text-[16px] font-medium text-[#F5F5F0] transition-colors cursor-pointer"
               >
                 Clear
               </button>
@@ -125,56 +123,56 @@ export default function ShopCatalog() {
             <button
               type="button"
               onClick={checkoutWhatsApp}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#D4AF37] hover:bg-[#E8CB6D] text-[#09090B] text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 py-3.5 px-6 rounded-full bg-[#E5C158] hover:bg-[#F2D77E] text-[#09090B] text-[16px] font-semibold transition-colors cursor-pointer"
             >
-              <MessageCircle className="w-3.5 h-3.5" aria-hidden="true" />
+              <MessageCircle className="w-5 h-5" aria-hidden="true" />
               <span>Order on WhatsApp</span>
             </button>
           </div>
         </div>
 
         {cartNotice && (
-          <p className="text-xs text-[#D4AF37]">{cartNotice}</p>
+          <p className="text-[16px] text-[#E5C158] font-medium">{cartNotice}</p>
         )}
 
         {cartItems.length > 0 && (
-          <div className="pt-4 border-t border-[#F5F5F0]/10 space-y-2.5">
+          <div className="pt-5 border-t border-[#F5F5F0]/14 space-y-3">
             {cartItems.map(([name, item]) => (
               <div
                 key={name}
-                className="flex flex-wrap items-center justify-between gap-3 py-2 border-b border-[#F5F5F0]/5 last:border-0 text-sm"
+                className="flex flex-wrap items-center justify-between gap-4 py-3 border-b border-[#F5F5F0]/8 last:border-0 text-[17px]"
               >
                 <span className="text-[#F5F5F0] font-medium">{name}</span>
-                <div className="flex items-center gap-3">
-                  <span className="text-[#D4AF37] font-serif text-lg tabular-nums">
+                <div className="flex items-center gap-4">
+                  <span className="text-[#E5C158] font-bold text-[20px] tabular-nums">
                     ₹{(item.price * item.qty).toLocaleString('en-IN')}
                   </span>
-                  <div className="inline-flex items-center gap-1 rounded-full border border-[#F5F5F0]/15 bg-[#09090B] px-1.5 py-1">
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-[#F5F5F0]/20 bg-[#09090B] px-2 py-1.5">
                     <button
                       type="button"
                       onClick={() => updateQty(name, -1)}
                       aria-label={`Decrease quantity of ${name}`}
-                      className="w-6 h-6 rounded-full hover:bg-[#1A1A1F] flex items-center justify-center text-[#F5F5F0] cursor-pointer"
+                      className="w-8 h-8 rounded-full hover:bg-[#1A1A1F] flex items-center justify-center text-[#F5F5F0] cursor-pointer"
                     >
-                      <Minus className="w-3 h-3" />
+                      <Minus className="w-4 h-4" />
                     </button>
-                    <span className="px-2 text-xs font-semibold tabular-nums">{item.qty}</span>
+                    <span className="px-2 text-[16px] font-semibold tabular-nums">{item.qty}</span>
                     <button
                       type="button"
                       onClick={() => updateQty(name, 1)}
                       aria-label={`Increase quantity of ${name}`}
-                      className="w-6 h-6 rounded-full hover:bg-[#1A1A1F] flex items-center justify-center text-[#F5F5F0] cursor-pointer"
+                      className="w-8 h-8 rounded-full hover:bg-[#1A1A1F] flex items-center justify-center text-[#F5F5F0] cursor-pointer"
                     >
-                      <Plus className="w-3 h-3" />
+                      <Plus className="w-4 h-4" />
                     </button>
                   </div>
                   <button
                     type="button"
                     onClick={() => updateQty(name, -item.qty)}
                     aria-label={`Remove ${name}`}
-                    className="text-[#B0AEA6] hover:text-red-400 transition-colors cursor-pointer"
+                    className="text-[#F5F5F0]/75 hover:text-red-400 transition-colors cursor-pointer"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-5 h-5" />
                   </button>
                 </div>
               </div>
@@ -183,8 +181,8 @@ export default function ShopCatalog() {
         )}
       </div>
 
-      {/* Category Filters */}
-      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
+      {/* Category Filter Pills (16px) */}
+      <div className="flex items-center gap-3 overflow-x-auto no-scrollbar pb-2">
         {CATEGORIES.map((cat) => {
           const active = category === cat;
           return (
@@ -192,10 +190,10 @@ export default function ShopCatalog() {
               key={cat}
               type="button"
               onClick={() => setCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-[0.08em] uppercase whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+              className={`py-3 px-6 rounded-full text-[16px] font-semibold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 active
-                  ? 'bg-[#D4AF37] text-[#09090B]'
-                  : 'bg-[#121215] text-[#F5F5F0]/75 border border-[#F5F5F0]/10 hover:border-[#D4AF37]/45'
+                  ? 'bg-[#E5C158] text-[#09090B]'
+                  : 'bg-[#121215] text-[#F5F5F0] border border-[#F5F5F0]/18 hover:border-[#E5C158]/55'
               }`}
             >
               {cat}
@@ -204,59 +202,56 @@ export default function ShopCatalog() {
         })}
       </div>
 
-      {/* Product Grid */}
+      {/* Clean Spacious Product Grid */}
       {filteredProducts.length === 0 ? (
-        <div className="text-center py-16 glass-panel-subtle rounded-2xl">
-          <p className="font-serif text-2xl text-[#F5F5F0] mb-2">No essentials matched your search.</p>
+        <div className="text-center py-16 glass-panel-subtle rounded-3xl space-y-4">
+          <p className="font-serif text-[28px] text-[#F5F5F0]">No essentials matched your search.</p>
           <button
             type="button"
             onClick={() => {
               setSearch('');
               setCategory('All Essentials');
             }}
-            className="text-xs font-semibold tracking-[0.14em] uppercase text-[#D4AF37] hover:underline cursor-pointer"
+            className="text-[16px] font-semibold text-[#E5C158] hover:underline cursor-pointer"
           >
             Reset Filters
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => {
             const directMsg = `Hello The Elite Spa Centre, I would like to order "${product.name}" (₹${product.price.toLocaleString('en-IN')}).`;
             return (
               <article
                 key={product.id}
-                className="group rounded-2xl bg-[#121215] border border-[#F5F5F0]/10 hover:border-[#D4AF37]/45 overflow-hidden flex flex-col justify-between transition-all duration-300"
+                className="group rounded-3xl bg-[#121215] border border-[#F5F5F0]/14 hover:border-[#E5C158]/50 overflow-hidden flex flex-col justify-between transition-colors"
               >
-                <div className="relative h-52 overflow-hidden bg-[#1A1A1F]">
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#1A1A1F]">
                   <img
                     src={product.image}
                     alt={product.name}
                     loading="lazy"
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#121215] via-transparent to-transparent" />
                 </div>
 
-                <div className="p-5 flex flex-col flex-1">
-                  <span className="text-[11px] tracking-[0.14em] uppercase text-[#D4AF37]/90 mb-1">
-                    {product.category}
-                  </span>
-                  <h3 className="font-serif text-xl font-medium text-[#F5F5F0] leading-snug mb-4">
+                <div className="p-7 flex flex-col flex-1 justify-between gap-6">
+                  <h3 className="font-serif text-[24px] sm:text-[26px] font-medium text-[#F5F5F0] leading-snug">
                     {product.name}
                   </h3>
 
-                  <div className="mt-auto pt-4 border-t border-[#F5F5F0]/10 flex items-center justify-between gap-2">
-                    <span className="font-serif text-2xl font-semibold text-[#F5F5F0] tabular-nums">
+                  <div className="pt-4 border-t border-[#F5F5F0]/12 flex items-center justify-between gap-3">
+                    <span className="text-[22px] sm:text-[24px] font-bold text-[#E5C158] tabular-nums">
                       ₹{product.price.toLocaleString('en-IN')}
                     </span>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2.5">
                       <button
                         type="button"
                         onClick={() => addItem(product.name, product.price)}
-                        className="px-3.5 py-2 rounded-full bg-[#D4AF37] hover:bg-[#E8CB6D] text-[#09090B] text-[11px] font-bold tracking-wider uppercase transition-colors cursor-pointer whitespace-nowrap"
+                        className="py-3 px-5 rounded-full bg-[#E5C158] hover:bg-[#F2D77E] text-[#09090B] text-[15px] font-semibold transition-colors cursor-pointer whitespace-nowrap"
                       >
                         Add +
                       </button>
@@ -265,10 +260,10 @@ export default function ShopCatalog() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Order ${product.name} on WhatsApp`}
-                        className="w-8 h-8 rounded-full border border-[#D4AF37]/40 hover:border-[#D4AF37] text-[#D4AF37] flex items-center justify-center transition-colors"
+                        className="w-11 h-11 rounded-full border border-[#E5C158]/45 hover:border-[#E5C158] text-[#E5C158] flex items-center justify-center transition-colors"
                         title="Order directly on WhatsApp"
                       >
-                        <MessageCircle className="w-3.5 h-3.5" />
+                        <MessageCircle className="w-5 h-5" />
                       </a>
                     </div>
                   </div>

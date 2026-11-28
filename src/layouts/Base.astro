@@ -123,14 +123,14 @@ const structuredData = {
   ]
 };
 
-const floatWaHref = whatsappUrl('Hello The Elite Spa Centre, I would like to book a spa session at your Kalyani Nagar sanctuary.');
+const floatWaHref = whatsappUrl('Hello The Elite Spa Centre, I would like to book a spa ritual at your Kalyani Nagar sanctuary.');
 ---
 <!doctype html>
 <html lang="en-IN" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#09090B" />
+    <meta name="theme-color" content="#0B0A09" />
     <meta name="application-name" content={B.name} />
     <meta name="author" content={B.name} />
     <meta name="google-site-verification" content="Y5xRYqZLRgu8vEVEo1Qgpv3PZiiriAjXYeESdLXu1yY" />
@@ -160,7 +160,7 @@ const floatWaHref = whatsappUrl('Hello The Elite Spa Centre, I would like to boo
     <meta name="twitter:image:alt" content={imageAlt} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
-  <body class="bg-[#09090B] text-[#F5F5F0] antialiased selection:bg-[#D4AF37]/30 selection:text-[#F5F5F0]">
+  <body class="bg-[#0B0A09] text-[#F4EFE6] antialiased selection:bg-[#D4AF7A]/30 selection:text-[#F4EFE6]">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <SmoothScrollProvider client:load />
     <LuxuryHeader currentPath={Astro.url.pathname} client:load />
@@ -169,85 +169,94 @@ const floatWaHref = whatsappUrl('Hello The Elite Spa Centre, I would like to boo
       <slot />
     </div>
 
-    <footer class="border-t border-[#D4AF37]/20 bg-[#09090B] pt-16 pb-28 sm:pb-12">
+    <!-- Clean Single-Line Local Proximity Note Above Footer -->
+    <div class="border-t border-[#D4AF7A]/18 bg-[#161412]/70 py-5">
+      <div class="max-w-[1380px] mx-auto px-5 sm:px-8 text-center">
+        <p class="text-[15px] sm:text-[16px] text-[#F4EFE6]/90 leading-[1.6]">
+          Conveniently located in Kalyani Nagar — minutes away from Koregaon Park, Viman Nagar, Kharadi &amp; Pune Airport.
+        </p>
+      </div>
+    </div>
+
+    <!-- Safe bottom clearance (pb-32 / 128px >= 80px) so floating bar never overlaps copyright or links -->
+    <footer class="border-t border-[#D4AF7A]/20 bg-[#0B0A09] pt-20 pb-32 sm:pb-24">
       <div class="max-w-[1380px] mx-auto px-5 sm:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-[#F5F5F0]/10">
-          <div class="md:col-span-5 space-y-4">
-            <a href="/" class="inline-block font-serif text-2xl sm:text-3xl tracking-[0.14em] uppercase text-[#F5F5F0] hover:text-[#D4AF37] transition-colors">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-14 border-b border-[#F4EFE6]/12">
+          <div class="md:col-span-5 space-y-5">
+            <a href="/" class="inline-block font-serif text-[28px] sm:text-[32px] tracking-[0.1em] uppercase text-[#F4EFE6] hover:text-[#D4AF7A] transition-colors">
               The Elite Spa Centre
             </a>
-            <p class="text-sm text-[#B0AEA6] leading-relaxed max-w-sm">
-              Kalyani Nagar’s dark-luxury sanctuary for restorative massage, candlelit couples suites, and pure botanical wellness — open daily until 3:00 AM.
+            <p class="text-[17px] text-[#F4EFE6]/90 leading-[1.6] max-w-md">
+              Kalyani Nagar’s candlelit dark-luxury sanctuary for restorative massage, private couples suites, and pure botanical wellness.
             </p>
-            <p class="text-xs font-semibold tracking-[0.16em] uppercase text-[#D4AF37] pt-1">
+            <p class="text-[16px] font-semibold text-[#E5C158] pt-1">
               Open Daily · 8:00 AM – 3:00 AM
             </p>
           </div>
 
-          <div class="md:col-span-3 space-y-3">
-            <h2 class="font-sans text-xs font-semibold tracking-[0.18em] uppercase text-[#D4AF37]">Explore</h2>
-            <ul class="space-y-2.5 text-sm text-[#B0AEA6]">
-              <li><a href="/services/" class="hover:text-[#F5F5F0] transition-colors">Curated Rituals</a></li>
-              <li><a href="/offers/" class="hover:text-[#F5F5F0] transition-colors">Privilege Bundles</a></li>
-              <li><a href="/shop/" class="hover:text-[#F5F5F0] transition-colors">Wellness Apothecary</a></li>
-              <li><a href="/gallery/" class="hover:text-[#F5F5F0] transition-colors">Sensory Gallery</a></li>
-              <li><a href="/wellness-journal/" class="hover:text-[#F5F5F0] transition-colors">Wellness Journal</a></li>
-              <li><a href="/nearby-areas/" class="hover:text-[#F5F5F0] transition-colors">Nearby Pune Areas</a></li>
-              <li><a href="/about/" class="hover:text-[#F5F5F0] transition-colors">Our Philosophy</a></li>
+          <div class="md:col-span-3 space-y-4">
+            <h2 class="font-sans text-[16px] font-semibold tracking-[0.06em] uppercase text-[#D4AF7A]">Sanctuary</h2>
+            <ul class="space-y-3 text-[16px] text-[#F4EFE6]/90">
+              <li><a href="/services/" class="hover:text-[#E5C158] transition-colors">Signature Rituals</a></li>
+              <li><a href="/offers/" class="hover:text-[#E5C158] transition-colors">Curated Bundles</a></li>
+              <li><a href="/gallery/" class="hover:text-[#E5C158] transition-colors">Sensory Gallery</a></li>
+              <li><a href="/shop/" class="hover:text-[#E5C158] transition-colors">Apothecary Shop</a></li>
+              <li><a href="/about/" class="hover:text-[#E5C158] transition-colors">About Us</a></li>
+              <li><a href="/wellness-journal/" class="hover:text-[#E5C158] transition-colors">Wellness Journal</a></li>
             </ul>
           </div>
 
-          <div class="md:col-span-4 space-y-3">
-            <h2 class="font-sans text-xs font-semibold tracking-[0.18em] uppercase text-[#D4AF37]">Sanctuary Concierge</h2>
-            <p class="text-sm text-[#B0AEA6] leading-relaxed">{B.address}</p>
-            <p class="text-xs text-[#B0AEA6] leading-relaxed pt-1">Guests travelling from Koregaon Park, Viman Nagar, Wadgaon Sheri, Kharadi or Yerwada are welcome at our Kalyani Nagar centre. Check the live route from your starting point before travelling.</p>
-            <a href="/nearby-areas/" class="inline-flex text-xs font-semibold text-[#D4AF37] hover:text-[#E8CB6D] transition-colors">View Pune area & route guide ↗</a>
-            <div class="pt-2 flex flex-col gap-2 text-sm">
-              <a href={`tel:${B.phone}`} class="text-[#F5F5F0] hover:text-[#D4AF37] font-medium transition-colors">
+          <div class="md:col-span-4 space-y-4">
+            <h2 class="font-sans text-[16px] font-semibold tracking-[0.06em] uppercase text-[#D4AF7A]">Concierge &amp; Directions</h2>
+            <p class="text-[17px] text-[#F4EFE6]/90 leading-[1.6]">{B.address}</p>
+            <div class="pt-2 flex flex-col gap-3 text-[16px]">
+              <a href={`tel:${B.phone}`} class="text-[#F4EFE6] hover:text-[#E5C158] font-semibold transition-colors">
                 {B.phoneDisplay}
               </a>
-              <a href={B.maps} target="_blank" rel="noopener noreferrer" class="text-[#D4AF37] hover:text-[#E8CB6D] transition-colors">
+              <a href={B.maps} target="_blank" rel="noopener noreferrer" class="text-[#E5C158] hover:text-[#F0D58C] font-medium transition-colors">
                 Get Directions on Google Maps ↗
               </a>
-              <a href={floatWaHref} target="_blank" rel="noopener noreferrer" class="text-[#F5F5F0]/80 hover:text-[#D4AF37] transition-colors">
-                WhatsApp Concierge ↗
+              <a href={floatWaHref} target="_blank" rel="noopener noreferrer" class="text-[#F4EFE6]/90 hover:text-[#E5C158] transition-colors">
+                Message Concierge on WhatsApp ↗
               </a>
             </div>
           </div>
         </div>
 
-        <div class="pt-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-[#B0AEA6]">
-          <span>© {new Date().getFullYear()} The Elite Spa Centre, Kalyani Nagar, Pune. All rights reserved.</span>
-          <div class="flex items-center gap-5">
-            <a href="/privacy/" class="hover:text-[#F5F5F0] transition-colors">Privacy Policy</a>
-            <a href="/terms/" class="hover:text-[#F5F5F0] transition-colors">Terms</a>
-            <a href="/booking/" class="hover:text-[#D4AF37] transition-colors">Book a Ritual</a>
+        <div class="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[15px] text-[#F4EFE6]/90">
+          <span>© {new Date().getFullYear()} The Elite Spa Centre, Kalyani Nagar, Pune.</span>
+          <div class="flex flex-wrap items-center gap-6">
+            <a href="/privacy/" class="hover:text-[#E5C158] transition-colors">Privacy Policy</a>
+            <a href="/terms/" class="hover:text-[#E5C158] transition-colors">Terms</a>
+            <a href="/booking/" class="text-[#E5C158] hover:text-[#F0D58C] font-medium transition-colors">Book a Ritual</a>
           </div>
         </div>
       </div>
     </footer>
 
-    <!-- Neatly Aligned Bottom-Right Floating Action Buttons (Zero Text Overlap) -->
+    <!-- Mobile Frosted Bottom Dock (< sm) + Sleek Compact Corner Actions (sm+) -->
     <div
-      class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 flex flex-row sm:flex-col items-center sm:items-end gap-2.5"
+      class="fixed bottom-0 inset-x-0 sm:inset-x-auto sm:bottom-5 sm:right-5 z-30 bg-[#0B0A09]/92 sm:bg-transparent backdrop-blur-xl sm:backdrop-blur-none border-t border-[#D4AF7A]/22 sm:border-t-0 px-4 py-3 sm:p-0 grid grid-cols-2 sm:flex sm:flex-col items-center sm:items-end gap-2.5"
       aria-label="Quick contact actions"
     >
-      <a
-        href={floatWaHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Book on WhatsApp"
-        class="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-[#15803D] hover:bg-[#16A34A] text-white text-xs font-semibold tracking-wide shadow-[0_8px_28px_rgba(0,0,0,0.45)] border border-white/15 transition-transform duration-200 hover:-translate-y-0.5 whitespace-nowrap"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-        <span>WhatsApp</span>
-      </a>
+      <div class="wa-breathe-wrap rounded-full w-full sm:w-auto">
+        <a
+          href={floatWaHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Book on WhatsApp"
+          class="relative z-10 w-full sm:w-auto inline-flex items-center justify-center gap-2 min-h-[48px] px-4 sm:px-5 py-2.5 rounded-full bg-[#15803D] hover:bg-[#16A34A] active:scale-[0.97] text-[#F4EFE6] text-[15px] font-semibold shadow-[0_8px_28px_rgba(0,0,0,0.55)] border border-white/15 transition-transform duration-200 whitespace-nowrap"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+      </div>
       <a
         href={`tel:${B.phone}`}
         aria-label="Call The Elite Spa Centre"
-        class="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-[#121215]/95 hover:bg-[#1A1A1F] backdrop-blur-md text-[#F5F5F0] text-xs font-semibold tracking-wide shadow-[0_8px_28px_rgba(0,0,0,0.45)] border border-[#D4AF37]/45 hover:border-[#D4AF37] transition-transform duration-200 hover:-translate-y-0.5 whitespace-nowrap"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 min-h-[48px] px-4 sm:px-5 py-2.5 rounded-full bg-[#161412]/95 hover:bg-[#1F1C19] active:scale-[0.97] backdrop-blur-md text-[#F4EFE6] text-[15px] font-semibold shadow-[0_8px_28px_rgba(0,0,0,0.55)] border border-[#D4AF7A]/50 hover:border-[#E5C158] transition-transform duration-200 whitespace-nowrap"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E5C158" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <span>Call Now</span>
       </a>
     </div>
